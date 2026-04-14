@@ -2,6 +2,7 @@
 
 // React is auto-imported in Next.js but we keep it for clarity
 import React, { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { tokens, media } from '../styles/tokens';
 import { clipBR, clipTLBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
@@ -23,6 +24,7 @@ const AUDIENCES = [
       'Karriereberatung inklusive',
     ],
     cta: 'Förderung prüfen',
+    href: '/arbeitssuchende',
     color: tokens.colors.mint,
     colorBg: tokens.colors.mintBg,
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662279/ai-hub/website/website_stock_images/EVENT-01.png',
@@ -37,6 +39,7 @@ const AUDIENCES = [
       'Netzwerk mit Experten',
     ],
     cta: 'Kurse entdecken',
+    href: '/berufstaetige',
     color: tokens.colors.navy,
     colorBg: tokens.colors.navyBg,
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662282/ai-hub/website/website_stock_images/EVENT-03.png',
@@ -51,6 +54,7 @@ const AUDIENCES = [
       'Change Management Support',
     ],
     cta: 'Beratung anfragen',
+    href: '/unternehmen',
     color: tokens.colors.orange,
     colorBg: tokens.colors.orangeBg,
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png',
@@ -278,7 +282,9 @@ export default function TargetAudience() {
               <FeatureList>
                 {a.features.map((f) => <Feature key={f} $color={a.color}>{f}</Feature>)}
               </FeatureList>
-              <CardCTA href="#newsletter" $color={a.color}>{a.cta}<ArrowSVG /></CardCTA>
+              <Link href={a.href} passHref legacyBehavior>
+                <CardCTA $color={a.color}>{a.cta}<ArrowSVG /></CardCTA>
+              </Link>
             </CardBody>
           </Card>
         ))}

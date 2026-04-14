@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { tokens, media } from '../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
@@ -8,12 +9,19 @@ import { clipBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
 const LOGO_URL = 'https://res.cloudinary.com/startplatz/image/upload/v1735664652/ai-hub/Logos/Logos%20-%20Regular/Logo-Black.png';
 
 const NAV_LINKS = [
-  { label: 'Weiterbildungen', href: '#weiterbildungen' },
-  { label: 'Für Unternehmen', href: '#unternehmen' },
-  { label: 'Events',          href: '#events' },
-  { label: 'Erfolge',         href: '#testimonials' },
-  { label: 'Wissen',          href: '#stories' },
-  { label: 'FAQ',             href: '#faq' },
+  {
+    label: 'Weiterbildungen',
+    href: '/arbeitssuchende',
+    children: [
+      { label: 'Für Arbeitssuchende', href: '/arbeitssuchende' },
+      { label: 'Für Berufstätige', href: '/berufstaetige' },
+    ],
+  },
+  { label: 'Für Unternehmen', href: '/unternehmen' },
+  { label: 'Experten', href: '/experten' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Events', href: '/#events' },
+  { label: 'FAQ', href: '/#faq' },
 ];
 
 const Header = styled.header`
@@ -47,6 +55,18 @@ const LogoWrap = styled.a`
   text-decoration: none;
   z-index: 2;
   padding: 4px;
+  cursor: pointer;
+
+  img { height: 34px; width: auto; }
+`;
+
+const LogoLink = styled(Link)`
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  z-index: 2;
+  padding: 4px;
 
   img { height: 34px; width: auto; }
 `;
@@ -65,6 +85,12 @@ const DesktopNav = styled.nav`
   ${media.lg} { display: flex; align-items: center; gap: ${tokens.spacing.xl}; }
 `;
 
+const NavItem = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
 const NavLink = styled.a`
   font-family: ${tokens.fonts.body};
   font-size: ${tokens.fontSizes.sm};
@@ -74,6 +100,9 @@ const NavLink = styled.a`
   position: relative;
   padding: ${tokens.spacing.xs} 0;
   transition: color ${tokens.transitions.fast};
+  display: flex;
+  align-items: center;
+  gap: ${tokens.spacing.xs};
 
   &::after {
     content: '';
@@ -87,6 +116,70 @@ const NavLink = styled.a`
   &:hover {
     color: ${tokens.colors.text};
     &::after { width: 100%; }
+  }
+`;
+
+const DropdownTrigger = styled.span`
+  display: inline-flex;
+  align-items: center;
+  font-size: ${tokens.fontSizes.xs};
+  margin-left: ${tokens.spacing.xs};
+  transition: transform ${tokens.transitions.base};
+  transform: rotate(0deg);
+
+  ${NavItem}:hover & {
+    transform: rotate(180deg);
+  }
+`;
+
+const Dropdown = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: ${tokens.spacing.sm};
+  background: ${tokens.colors.surface};
+  border: 1px solid ${tokens.colors.glassBorder};
+  box-shadow: ${tokens.shadows.lg};
+  border-radius: ${tokens.radii.md};
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity ${tokens.transitions.base}, visibility ${tokens.transitions.base}, transform ${tokens.transitions.base};
+  pointer-events: none;
+  z-index: ${tokens.zIndex.overlay};
+
+  ${NavItem}:hover & {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+`;
+
+const DropdownLink = styled.a`
+  display: block;
+  padding: ${tokens.spacing.md} ${tokens.spacing.lg};
+  font-family: ${tokens.fonts.body};
+  font-size: ${tokens.fontSizes.sm};
+  font-weight: ${tokens.fontWeights.medium};
+  color: ${tokens.colors.textMuted};
+  text-decoration: none;
+  transition: background ${tokens.transitions.fast}, color ${tokens.transitions.fast};
+
+  &:first-child {
+    border-top-left-radius: ${tokens.radii.md};
+    border-top-right-radius: ${tokens.radii.md};
+  }
+
+  &:last-child {
+    border-bottom-left-radius: ${tokens.radii.md};
+    border-bottom-right-radius: ${tokens.radii.md};
+  }
+
+  &:hover {
+    background: ${tokens.colors.primaryLighter};
+    color: ${tokens.colors.primary};
   }
 `;
 
@@ -192,6 +285,16 @@ const MobileCTA = styled.a`
   &:hover { background: ${tokens.colors.primaryHover}; color: #fff; }
 `;
 
+function handleHashNavigation(href) {
+  if (href.startsWith('/#')) {
+    const hash = href.slice(1);
+    const element = document.querySelector(hash);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
+
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -222,16 +325,52 @@ export default function Navigation() {
     <>
       <Header $scrolled={scrolled} role="banner">
         <Inner>
-          <LogoWrap href="#" aria-label="STARTPLATZ AI Hub">
+          <LogoLink href="/" aria-label="STARTPLATZ AI Hub">
             <img src={LOGO_URL} alt="STARTPLATZ AI Hub Logo" width="200" height="34" loading="eager" />
             <LogoCorner aria-hidden="true" />
-          </LogoWrap>
+          </LogoLink>
           <DesktopNav aria-label="Hauptnavigation">
-            {NAV_LINKS.map((l) => <NavLink key={l.href} href={l.href}>{l.label}</NavLink>)}
+            {NAV_LINKS.map((l) => (
+              <NavItem key={l.href}>
+                {l.children ? (
+                  <>
+                    <NavLink as="span">
+                      {l.label}
+                      <DropdownTrigger>▼</DropdownTrigger>
+                    </NavLink>
+                    <Dropdown>
+                      {l.children.map((child) => (
+                        <Link key={child.href} href={child.href} passHref legacyBehavior>
+                          <DropdownLink>{child.label}</DropdownLink>
+                        </Link>
+                      ))}
+                    </Dropdown>
+                  </>
+                ) : l.href.startsWith('/#') ? (
+                  <NavLink
+                    as="button"
+                    onClick={() => handleHashNavigation(l.href)}
+                    style={{ border: 'none', background: 'none', cursor: 'pointer', font: 'inherit' }}
+                  >
+                    {l.label}
+                  </NavLink>
+                ) : (
+                  <Link href={l.href} passHref legacyBehavior>
+                    <NavLink>{l.label}</NavLink>
+                  </Link>
+                )}
+              </NavItem>
+            ))}
           </DesktopNav>
           <CTABtnWrap>
             <CTAOffset aria-hidden="true" />
-            <CTAButton href="#newsletter">Beratung buchen</CTAButton>
+            <CTAButton
+              as="button"
+              onClick={() => handleHashNavigation('/#newsletter')}
+              style={{ border: 'none', cursor: 'pointer', font: 'inherit' }}
+            >
+              Beratung buchen
+            </CTAButton>
           </CTABtnWrap>
           <Burger $open={mobileOpen} onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? 'Menü schließen' : 'Menü öffnen'} aria-expanded={mobileOpen}>
@@ -241,8 +380,45 @@ export default function Navigation() {
       </Header>
       <MobileOverlay $open={mobileOpen} aria-hidden={!mobileOpen} role="dialog" aria-label="Navigation">
         <nav aria-label="Mobile Navigation">
-          {NAV_LINKS.map((l) => <MobileLink key={l.href} href={l.href} onClick={closeMobile} tabIndex={mobileOpen ? 0 : -1}>{l.label}</MobileLink>)}
-          <MobileCTA href="#newsletter" onClick={closeMobile} tabIndex={mobileOpen ? 0 : -1}>Beratung buchen</MobileCTA>
+          {NAV_LINKS.map((l) => {
+            if (l.children) {
+              return (
+                <React.Fragment key={l.href}>
+                  {l.children.map((child) => (
+                    <Link key={child.href} href={child.href} passHref legacyBehavior>
+                      <MobileLink onClick={closeMobile} tabIndex={mobileOpen ? 0 : -1}>{child.label}</MobileLink>
+                    </Link>
+                  ))}
+                </React.Fragment>
+              );
+            }
+            if (l.href.startsWith('/#')) {
+              return (
+                <MobileLink
+                  key={l.href}
+                  as="button"
+                  onClick={() => { handleHashNavigation(l.href); closeMobile(); }}
+                  tabIndex={mobileOpen ? 0 : -1}
+                  style={{ border: 'none', background: 'none', cursor: 'pointer', font: 'inherit' }}
+                >
+                  {l.label}
+                </MobileLink>
+              );
+            }
+            return (
+              <Link key={l.href} href={l.href} passHref legacyBehavior>
+                <MobileLink onClick={closeMobile} tabIndex={mobileOpen ? 0 : -1}>{l.label}</MobileLink>
+              </Link>
+            );
+          })}
+          <MobileCTA
+            as="button"
+            onClick={() => { handleHashNavigation('/#newsletter'); closeMobile(); }}
+            tabIndex={mobileOpen ? 0 : -1}
+            style={{ border: 'none', background: 'none', cursor: 'pointer', font: 'inherit' }}
+          >
+            Beratung buchen
+          </MobileCTA>
         </nav>
       </MobileOverlay>
     </>
