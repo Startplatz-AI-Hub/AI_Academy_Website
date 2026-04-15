@@ -105,7 +105,7 @@ export default function TeamSection() {
         <CyberCorners $color={tokens.colors.mint} $size={12} />
         <GroupImage
           src={GROUP_PHOTO}
-          alt="Das AI Hub Team – Gruppenfoto"
+          alt="Das AI Academy Team – Gruppenfoto"
           loading="eager"
           width="1400"
           height="600"

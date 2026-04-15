@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 import { tokens, media } from '../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
 
-const LOGO_URL = 'https://res.cloudinary.com/startplatz/image/upload/v1735664652/ai-hub/Logos/Logos%20-%20Regular/Logo-Black.png';
+const LOGO_URL = 'https://res.cloudinary.com/startplatz/image/upload/v1776212864/ai-hub/website/AI-Academy%20Logos/startplatz-ai-academy-logo-transparent-md.png';
 
 const NAV_LINKS = [
   {
@@ -19,9 +19,8 @@ const NAV_LINKS = [
   },
   { label: 'Für Unternehmen', href: '/unternehmen' },
   { label: 'Experten', href: '/experten' },
+  { label: 'Über Uns', href: '/ueber-uns' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Events', href: '/#events' },
-  { label: 'FAQ', href: '/#faq' },
 ];
 
 const Header = styled.header`
@@ -322,8 +321,8 @@ export default function Navigation() {
     <>
       <Header $scrolled={scrolled} role="banner">
         <Inner>
-          <LogoLink href="/" aria-label="STARTPLATZ AI Hub">
-            <img src={LOGO_URL} alt="STARTPLATZ AI Hub Logo" width="200" height="34" loading="eager" />
+          <LogoLink href="/" aria-label="STARTPLATZ AI Academy">
+            <img src={LOGO_URL} alt="STARTPLATZ AI Academy Logo" width="200" height="34" loading="eager" />
             <LogoCorner aria-hidden="true" />
           </LogoLink>
           <DesktopNav aria-label="Hauptnavigation">

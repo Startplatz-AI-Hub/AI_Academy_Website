@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────
    DESIGN SYSTEM – Barrel Export
-   STARTPLATZ AI Hub Component Library
+   STARTPLATZ AI Academy Component Library
 
    Usage:
    import { Button, PageHero, SectionBlock } from '@/components/ui';

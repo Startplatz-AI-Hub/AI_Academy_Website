@@ -19,7 +19,7 @@ const BLOG_CONTENT = {
     excerpt: 'Generative KI-Modelle transformieren die Kreativbranche. Von Design über Content Creation bis zur Fotografie – erfahren Sie, wie KI kreative Prozesse verändert und neue Möglichkeiten eröffnet.',
     publishedAt: '15 Apr 2026',
     readingTime: '8 min Lesezeit',
-    author: 'STARTPLATZ AI Hub',
+    author: 'STARTPLATZ AI Academy',
     content: `
       <h2>Einleitung</h2>
       <p>Die Kreativbranche steht an einem Wendepunkt. Generative Künstliche Intelligenz ist nicht mehr Science Fiction, sondern Realität. Tools wie DALL-E, Midjourney und Stable Diffusion ermöglichen es Kreativfachleuten, ihre Visionen schneller und effizienter zu realisieren. Gleichzeitig eröffnen diese Technologien völlig neue Möglichkeiten für Innovation und Experimentation.</p>
@@ -79,7 +79,7 @@ const BLOG_CONTENT = {
     excerpt: 'Welche Kompetenzen sind entscheidend für die Führung von KI-Projekten? Erfahren Sie, welche 5 Skills in der modernen KI-Wirtschaft unverzichtbar sind.',
     publishedAt: '12 Apr 2026',
     readingTime: '6 min Lesezeit',
-    author: 'STARTPLATZ AI Hub',
+    author: 'STARTPLATZ AI Academy',
     content: `
       <h2>Einleitung</h2>
       <p>Placeholder-Inhalte. Dieser Artikel wird ausführlich besprechen, welche Skills KI-Manager im Jahr 2026 und darüber hinaus benötigen, um erfolgreich Projekte zu leiten und Teams zu führen.</p>
@@ -110,7 +110,7 @@ const BLOG_CONTENT = {
     excerpt: 'Meistern Sie die Kunst, bessere Prompts zu schreiben. In diesem Guide lernen Sie, wie Sie das Beste aus KI-Modellen herausholen.',
     publishedAt: '10 Apr 2026',
     readingTime: '10 min Lesezeit',
-    author: 'STARTPLATZ AI Hub',
+    author: 'STARTPLATZ AI Academy',
     content: `
       <h2>Einleitung</h2>
       <p>Placeholder-Inhalte. Dieser umfassende Tutorial-Artikel wird Ihnen Schritt für Schritt zeigen, wie Sie effektive Prompts schreiben und versteckte Fähigkeiten von KI-Modellen freisetzen.</p>
@@ -141,7 +141,7 @@ const BLOG_CONTENT = {
     excerpt: 'Führende Experten teilen ihre Perspektive auf die zukünftige Arbeitswelt mit KI.',
     publishedAt: '08 Apr 2026',
     readingTime: '12 min Lesezeit',
-    author: 'STARTPLATZ AI Hub',
+    author: 'STARTPLATZ AI Academy',
     content: `
       <h2>Einleitung</h2>
       <p>Placeholder-Inhalte. Dieses exklusives Interview mit Branchenexperten diskutiert die Auswirkungen von KI auf verschiedene Branchen und Karrieren.</p>
@@ -172,7 +172,7 @@ const BLOG_CONTENT = {
     excerpt: 'Ein umfassender Vergleich der führenden Sprachmodelle und ihrer jeweiligen Stärken.',
     publishedAt: '05 Apr 2026',
     readingTime: '9 min Lesezeit',
-    author: 'STARTPLATZ AI Hub',
+    author: 'STARTPLATZ AI Academy',
     content: `
       <h2>Einleitung</h2>
       <p>Placeholder-Inhalte. In diesem Vergleich werden die Unterschiede, Stärken und Schwächen der führenden KI-Sprachmodelle analysiert.</p>
@@ -203,7 +203,7 @@ const BLOG_CONTENT = {
     excerpt: 'Erfahren Sie, wie Sie Bildungsgutscheine und andere Förderungen für KI-Weiterbildung nutzen können.',
     publishedAt: '02 Apr 2026',
     readingTime: '7 min Lesezeit',
-    author: 'STARTPLATZ AI Hub',
+    author: 'STARTPLATZ AI Academy',
     content: `
       <h2>Einleitung</h2>
       <p>Placeholder-Inhalte. Dieser Leitfaden unterstützt Sie dabei, verfügbare Fördermöglichkeiten und Bildungsgutscheine für KI-Kurse zu finden und zu nutzen.</p>
@@ -234,7 +234,7 @@ const BLOG_CONTENT = {
     excerpt: 'Verstehen Sie die Fundamentalprinzipien des Machine Learning und wenden Sie diese in praktischen Projekten an.',
     publishedAt: '31 Mär 2026',
     readingTime: '14 min Lesezeit',
-    author: 'STARTPLATZ AI Hub',
+    author: 'STARTPLATZ AI Academy',
     content: `
       <h2>Einleitung</h2>
       <p>Placeholder-Inhalte. Dieser tiefgreifende Artikel erklärt Machine Learning-Konzepte vom Anfänger bis zum fortgeschrittenen Niveau.</p>

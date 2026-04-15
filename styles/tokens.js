@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────
    DESIGN TOKENS  –  Single Source of Truth
-   STARTPLATZ AI Hub Relaunch
+   STARTPLATZ AI Academy Design Tokens
 
    Brand: Angular, sharp edges, bold.
    Logo: Black + vivid purple parallelogram.
