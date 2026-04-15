@@ -221,10 +221,10 @@ export default function UnternehmenPage() {
       </SectionBlock>
 
       <CTABanner title="Bereit für die <span>KI-Transformation</span>?">
-        <Button href="/#kontakt" variant="orange" size="lg" arrow>
+        <Button href="/#newsletter" variant="orange" size="lg" arrow>
           Gespräch Buchen
         </Button>
-        <Button href="/#download" variant="secondary" size="lg">
+        <Button href="/#weiterbildungen" variant="secondary" size="lg">
           Angebote Ansehen
         </Button>
       </CTABanner>

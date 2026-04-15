@@ -13,6 +13,9 @@ export default function SubpageLayout({ children }) {
   React.useEffect(() => {
     window.history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
+    // Remove the static preloader from layout.jsx (if present on direct page load)
+    const el = document.getElementById('preloader');
+    if (el) el.remove();
   }, []);
 
   return (

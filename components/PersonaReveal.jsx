@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styled, { css } from 'styled-components';
 import { tokens, media } from '../styles/tokens';
 import { CHAMFER } from '../styles/cyberpunk';
@@ -18,6 +19,7 @@ const PERSONAS = [
     subtitle: '100 % gefördert',
     description: 'Starte deine Karriere in der KI-Branche mit vollständig geförderten Weiterbildungen.',
     cta: 'Förderung prüfen',
+    href: '/arbeitssuchende',
     color: tokens.colors.mint,
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662279/ai-hub/website/website_stock_images/EVENT-01.png',
   },
@@ -27,6 +29,7 @@ const PERSONAS = [
     subtitle: 'Berufsbegleitend',
     description: 'Erweitere deine Skills und bleibe relevant in der digitalen Transformation.',
     cta: 'Kurse entdecken',
+    href: '/berufstaetige',
     color: tokens.colors.navy,
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662282/ai-hub/website/website_stock_images/EVENT-03.png',
   },
@@ -36,6 +39,7 @@ const PERSONAS = [
     subtitle: 'Inhouse-Training',
     description: 'Transformiere dein Team mit massgeschneiderten KI-Trainings.',
     cta: 'Beratung anfragen',
+    href: '/unternehmen',
     color: tokens.colors.orange,
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png',
   },
@@ -188,6 +192,7 @@ const ArrowSVG = () => (
 
 export default function PersonaReveal() {
   const [activeId, setActiveId] = useState(null);
+  const router = useRouter();
   const hasActive = activeId !== null;
 
   return (
@@ -201,7 +206,8 @@ export default function PersonaReveal() {
           <Panel key={p.id} $active={isActive} $hasActive={hasActive} $color={p.color} $pos={pos}
             onMouseEnter={() => setActiveId(p.id)} onMouseLeave={() => setActiveId(null)}
             onFocus={() => setActiveId(p.id)} onBlur={() => setActiveId(null)}
-            tabIndex={0} role="button" aria-label={`${p.title} – ${p.subtitle}`}>
+            onClick={() => router.push(p.href)}
+            tabIndex={0} role="link" aria-label={`${p.title} – ${p.subtitle}`}>
             <PanelImage $src={p.image} $active={isActive} />
             <Overlay $active={isActive} />
             <VerticalLabel $visible={showVertical}>{p.title}</VerticalLabel>

@@ -48,7 +48,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* Skip-to-content link */
   .skip-to-content {
-    position: absolute;
+    position: fixed;
     top: -100%;
     left: 50%;
     transform: translateX(-50%);
@@ -61,10 +61,14 @@ const GlobalStyles = createGlobalStyle`
     background: ${tokens.colors.primary};
     text-decoration: none;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
-    transition: top 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+    transition: top 0.2s ease, opacity 0.2s ease;
 
     &:focus {
       top: ${tokens.spacing.sm};
+      opacity: 1;
+      pointer-events: auto;
       outline: 2px solid #fff;
       outline-offset: 2px;
     }

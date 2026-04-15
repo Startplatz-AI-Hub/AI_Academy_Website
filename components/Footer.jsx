@@ -15,20 +15,20 @@ const LOGO_URL = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_au
 
 const LINK_GROUPS = [
   { title: 'Programme', links: [
-    { label: 'AI Bootcamp', href: '#' },
-    { label: 'Prompt Engineering', href: '#' },
-    { label: 'Business AI', href: '#' },
-    { label: 'Inhouse Training', href: '#' },
+    { label: 'Für Arbeitssuchende', href: '/arbeitssuchende' },
+    { label: 'Für Berufstätige', href: '/berufstaetige' },
+    { label: 'Für Unternehmen', href: '/unternehmen' },
+    { label: 'Experten & Dozenten', href: '/experten' },
   ]},
-  { title: 'Unternehmen', links: [
-    { label: 'Über Uns', href: '#team' },
-    { label: 'Team', href: '#team' },
-    { label: 'Karriere', href: '#' },
-    { label: 'Presse', href: '#' },
+  { title: 'Ressourcen', links: [
+    { label: 'Blog', href: '/blog' },
+    { label: 'Events', href: '/#events' },
+    { label: 'FAQ', href: '/#faq' },
+    { label: 'Team', href: '/#team' },
   ]},
   { title: 'Rechtliches', links: [
-    { label: 'Impressum', href: '#' },
-    { label: 'Datenschutz', href: '#' },
+    { label: 'Impressum', href: '/impressum' },
+    { label: 'Datenschutz', href: '/datenschutz' },
     { label: 'AGB', href: '#' },
   ]},
 ];

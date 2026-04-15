@@ -347,7 +347,7 @@ export default function EventsTimeline() {
       </ScrollWrapper>
 
       <Container>
-        <AllLink href="#">Alle Events <ArrowSVG /></AllLink>
+        <AllLink href="/blog">Alle Events <ArrowSVG /></AllLink>
       </Container>
     </Section>
   );

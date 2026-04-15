@@ -202,7 +202,7 @@ export default function Newsletter() {
                 <SubmitOffset aria-hidden="true" />
                 <SubmitBtn type="submit" disabled={!name || !email}>Jetzt abonnieren</SubmitBtn>
               </SubmitWrap>
-              <Privacy>Mit der Anmeldung akzeptierst du unsere <a href="#">Datenschutzerklärung</a>. Abmeldung jederzeit möglich.</Privacy>
+              <Privacy>Mit der Anmeldung akzeptierst du unsere <a href="/datenschutz">Datenschutzerklärung</a>. Abmeldung jederzeit möglich.</Privacy>
             </form>
           )}
         </FormCard>

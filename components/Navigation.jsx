@@ -89,6 +89,8 @@ const NavItem = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  padding: 20px 0;
+  margin: -20px 0;
 `;
 
 const NavLink = styled.a`
@@ -135,17 +137,14 @@ const DropdownTrigger = styled.span`
 const Dropdown = styled.div`
   position: absolute;
   top: 100%;
-  left: 0;
-  margin-top: ${tokens.spacing.sm};
-  background: ${tokens.colors.surface};
-  border: 1px solid ${tokens.colors.glassBorder};
-  box-shadow: ${tokens.shadows.lg};
-  border-radius: ${tokens.radii.md};
-  min-width: 200px;
+  left: -${tokens.spacing.md};
+  padding-top: 4px;
+  background: transparent;
+  min-width: 220px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-8px);
-  transition: opacity ${tokens.transitions.base}, visibility ${tokens.transitions.base}, transform ${tokens.transitions.base};
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
   pointer-events: none;
   z-index: ${tokens.zIndex.overlay};
 
@@ -157,6 +156,14 @@ const Dropdown = styled.div`
   }
 `;
 
+const DropdownInner = styled.div`
+  background: ${tokens.colors.surface};
+  border: 1px solid ${tokens.colors.glassBorder};
+  box-shadow: ${tokens.shadows.lg};
+  border-radius: ${tokens.radii.md};
+  overflow: hidden;
+`;
+
 const DropdownLink = styled.a`
   display: block;
   padding: ${tokens.spacing.md} ${tokens.spacing.lg};
@@ -166,16 +173,6 @@ const DropdownLink = styled.a`
   color: ${tokens.colors.textMuted};
   text-decoration: none;
   transition: background ${tokens.transitions.fast}, color ${tokens.transitions.fast};
-
-  &:first-child {
-    border-top-left-radius: ${tokens.radii.md};
-    border-top-right-radius: ${tokens.radii.md};
-  }
-
-  &:last-child {
-    border-bottom-left-radius: ${tokens.radii.md};
-    border-bottom-right-radius: ${tokens.radii.md};
-  }
 
   &:hover {
     background: ${tokens.colors.primaryLighter};
@@ -339,11 +336,13 @@ export default function Navigation() {
                       <DropdownTrigger>▼</DropdownTrigger>
                     </NavLink>
                     <Dropdown>
-                      {l.children.map((child) => (
-                        <Link key={child.href} href={child.href} passHref legacyBehavior>
-                          <DropdownLink>{child.label}</DropdownLink>
-                        </Link>
-                      ))}
+                      <DropdownInner>
+                        {l.children.map((child) => (
+                          <Link key={child.href} href={child.href} passHref legacyBehavior>
+                            <DropdownLink>{child.label}</DropdownLink>
+                          </Link>
+                        ))}
+                      </DropdownInner>
                     </Dropdown>
                   </>
                 ) : l.href.startsWith('/#') ? (
