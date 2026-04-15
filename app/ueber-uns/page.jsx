@@ -140,7 +140,6 @@ const GroupPhoto = styled.div`
 
 export default function UeberUnsPage() {
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
     { label: 'Über Uns', href: '/ueber-uns', active: true },
   ];
 
@@ -233,7 +232,6 @@ export default function UeberUnsPage() {
         subtitle="Seit 2017 gestalten wir die KI-Bildungslandschaft in NRW. Unsere Reise von einem kleinen Meetup zum offiziellen KI-Kompetenzzentrum Nordrhein-Westfalens."
         breadcrumbs={breadcrumbs}
         accentColor={tokens.colors.primaryLighter}
-        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1771197824/ai-hub/website/website_stock_images/gruppenfoto.png"
       />
 
       {/* Unsere Story */}

@@ -20,10 +20,10 @@ const Section = styled.section`
 
 const Inner = styled.div`
   position: relative;
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 ${tokens.spacing.lg};
-  ${media.xl} { padding: 0 ${tokens.spacing['2xl']}; }
+  ${media.lg} { padding: 0 ${tokens.spacing['2xl']}; }
 `;
 
 const Card = styled.div`

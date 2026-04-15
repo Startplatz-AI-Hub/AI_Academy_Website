@@ -27,7 +27,6 @@ const Grid = styled.div`
 
 export default function ExpertenPage() {
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
     { label: 'Experten', href: '/experten', active: true },
   ];
 

@@ -163,11 +163,11 @@ const GlobalStyles = createGlobalStyle`
   /* ── Utility ─────────────────────────────── */
   .container {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 ${tokens.spacing.lg};
 
-    ${media.xl} {
+    ${media.lg} {
       padding: 0 ${tokens.spacing['2xl']};
     }
   }

@@ -76,10 +76,10 @@ const VideoBg = styled.div`
 const Container = styled.div`
   position: relative;
   z-index: 1;
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 ${tokens.spacing.lg};
-  ${media.xl} { padding: 0 ${tokens.spacing['2xl']}; }
+  ${media.lg} { padding: 0 ${tokens.spacing['2xl']}; }
 `;
 
 const SectionBadge = styled.span`
@@ -99,10 +99,11 @@ const SectionBadge = styled.span`
 
 const SectionTitle = styled.h2`
   font-family: ${tokens.fonts.display};
-  font-size: clamp(${tokens.fontSizes['3xl']}, 4vw, ${tokens.fontSizes['5xl']});
-  font-weight: ${tokens.fontWeights.bold};
+  font-size: clamp(${tokens.fontSizes['4xl']}, 6vw, ${tokens.fontSizes['7xl']});
+  font-weight: ${tokens.fontWeights.black};
   color: ${tokens.colors.darkText};
-  line-height: ${tokens.lineHeights.snug};
+  line-height: ${tokens.lineHeights.tight};
+  letter-spacing: -0.02em;
   margin-bottom: ${tokens.spacing.md};
   text-transform: uppercase;
 
@@ -150,7 +151,7 @@ const ScrollRow = styled.div`
 
 const EventCard = styled.article`
   flex: 0 0 auto;
-  width: 280px;
+  width: 340px;
   position: relative;
   background: rgba(20, 20, 20, 0.75);
   backdrop-filter: blur(16px);
@@ -168,19 +169,19 @@ const EventCard = styled.article`
   }
 
   ${({ $featured }) => $featured && css`
-    width: 380px;
-    border-color: rgba(124, 58, 237, 0.2);
+    width: 440px;
+    border-color: rgba(124, 58, 237, 0.3);
   `}
 `;
 
 const CardImageWrap = styled.div`
-  height: 160px;
+  height: 200px;
   overflow: hidden;
   img { width: 100%; height: 100%; object-fit: cover; }
 `;
 
 const CardBody = styled.div`
-  padding: ${tokens.spacing.lg};
+  padding: ${tokens.spacing.xl};
 `;
 
 const DateBadge = styled.span`
@@ -214,10 +215,11 @@ const Tag = styled.span`
 
 const EventTitle = styled.h3`
   font-family: ${tokens.fonts.display};
-  font-size: ${tokens.fontSizes.lg};
+  font-size: ${tokens.fontSizes.xl};
   font-weight: ${tokens.fontWeights.bold};
   color: ${tokens.colors.darkText};
   margin-bottom: ${tokens.spacing.xs};
+  line-height: ${tokens.lineHeights.tight};
 `;
 
 const EventDesc = styled.p`
@@ -253,21 +255,39 @@ const EventCTA = styled.a`
   svg { width: 14px; height: 14px; }
 `;
 
+const AllEventsCTAWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: ${tokens.spacing['2xl']};
+`;
+
 const AllLink = styled.a`
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-top: ${tokens.spacing.xl};
-  font-size: ${tokens.fontSizes.sm};
+  gap: ${tokens.spacing.sm};
+  padding: 16px 32px;
+  font-family: ${tokens.fonts.body};
+  font-size: ${tokens.fontSizes.base};
   font-weight: ${tokens.fontWeights.semi};
-  color: ${tokens.colors.primaryLight};
+  color: #fff;
+  background: ${tokens.colors.primary};
+  ${clipBR(CHAMFER.sm)}
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  &:hover { color: #fff; }
+  letter-spacing: 0.04em;
+  transition: background ${tokens.transitions.fast}, transform ${tokens.transitions.fast};
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.35);
 
-  svg { width: 14px; height: 14px; transition: transform ${tokens.transitions.fast}; }
-  &:hover svg { transform: translateX(3px); }
+  &:hover {
+    background: ${tokens.colors.primaryHover};
+    transform: translateY(-2px);
+    color: #fff;
+    box-shadow: 0 12px 40px rgba(124, 58, 237, 0.55);
+  }
+
+  svg { width: 16px; height: 16px; transition: transform ${tokens.transitions.fast}; }
+  &:hover svg { transform: translateX(4px); }
 `;
 
 const ArrowSVG = () => (
@@ -347,7 +367,9 @@ export default function EventsTimeline() {
       </ScrollWrapper>
 
       <Container>
-        <AllLink href="/blog">Alle Events <ArrowSVG /></AllLink>
+        <AllEventsCTAWrap>
+          <AllLink href="/blog">Alle Events entdecken <ArrowSVG /></AllLink>
+        </AllEventsCTAWrap>
       </Container>
     </Section>
   );

@@ -37,7 +37,6 @@ const GridTwoCol = styled.div`
 
 export default function ArbeitssuchendePage() {
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
     { label: 'Arbeitssuchende', href: '/arbeitssuchende', active: true },
   ];
 
@@ -134,7 +133,7 @@ export default function ArbeitssuchendePage() {
         subtitle="Mit unserem Bildungsgutschein-Programm erhältst du intensive KI-Ausbildung komplett kostenlos. Vollständig bezahlt durch Agentur für Arbeit und BAMF."
         breadcrumbs={breadcrumbs}
         accentColor={tokens.colors.mintBg}
-        image="https://res.cloudinary.com/startplatz/image/upload/c_fill,w_600,h_400,q_auto/EVENT-01"
+        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662279/ai-hub/website/website_stock_images/EVENT-01.png"
       />
 
       <SectionBlock

@@ -45,10 +45,10 @@ const SlashAccent = styled.div`
 const Inner = styled.div`
   position: relative;
   z-index: 2;
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 ${tokens.spacing.lg};
-  ${media.xl} { padding: 0 ${tokens.spacing['2xl']}; }
+  ${media.lg} { padding: 0 ${tokens.spacing['2xl']}; }
 `;
 
 const Badge = styled.span`
@@ -69,13 +69,14 @@ const Badge = styled.span`
 
 const Title = styled.h1`
   font-family: ${tokens.fonts.display};
-  font-size: clamp(${tokens.fontSizes['4xl']}, 6vw, ${tokens.fontSizes['6xl']});
+  font-size: clamp(${tokens.fontSizes['4xl']}, 7.5vw, ${tokens.fontSizes['7xl']});
   font-weight: ${tokens.fontWeights.black};
   line-height: ${tokens.lineHeights.tight};
   color: ${({ $variant }) => $variant === 'dark' ? tokens.colors.darkText : tokens.colors.text};
   letter-spacing: -0.03em;
   margin-bottom: ${tokens.spacing.xl};
   text-transform: uppercase;
+  max-width: 960px;
 
   span {
     background: linear-gradient(135deg, ${tokens.colors.primary}, ${tokens.colors.primaryMuted});

@@ -37,7 +37,6 @@ const GridTwoCol = styled.div`
 
 export default function UnternehmenPage() {
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
     { label: 'Unternehmen', href: '/unternehmen', active: true },
   ];
 
@@ -139,7 +138,7 @@ export default function UnternehmenPage() {
         badgeColor={tokens.colors.orange}
         badgeBg={tokens.colors.orangeBg}
         title="KI-Transformation für <span>Ihr Unternehmen</span>"
-        subtitle="Maßgeschneiderte Trainings und Bootcamps, die dein Team befähigen, KI produktiv einzusetzen. Vom Workshop bis zum intensiven Bootcamp – wir gestalten die KI-Kompetenzen, die dein Unternehmen morgen braucht."
+        subtitle="Maßgeschneiderte Trainings und Bootcamps – vom Workshop bis zum Bootcamp für dein gesamtes Team."
         breadcrumbs={breadcrumbs}
         accentColor={tokens.colors.orangeBg}
         image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png"

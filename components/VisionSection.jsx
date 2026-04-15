@@ -88,6 +88,24 @@ const CertGrid = styled.div`
   }
 `;
 
+const CertBadgeText = styled.span`
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  font-weight: ${tokens.fontWeights.semi};
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${tokens.colors.mint};
+  background: ${tokens.colors.mintBg};
+  border: 1px solid rgba(5, 150, 105, 0.25);
+  ${clipTLBR(CHAMFER.xs)}
+  opacity: 0.75;
+  transition: opacity ${tokens.transitions.fast};
+  &:hover { opacity: 1; }
+`;
+
 const QuoteMark = styled.div`
   position: absolute;
   top: ${tokens.spacing.xl};
@@ -122,13 +140,15 @@ export default function VisionSection() {
           <CardBadge>Zertifikate</CardBadge>
           <CardTitle>Anerkannte Abschlüsse</CardTitle>
           <CardText>
-            Unsere Programme sind durch führende Technologieunternehmen zertifiziert
-            und von der Agentur für Arbeit anerkannt.
+            Unsere Programme sind durch führende Technologieunternehmen zertifiziert,
+            von der Agentur für Arbeit anerkannt (AZAV) und die Personenzertifizierung
+            erfolgt nach <strong>Cert-IT</strong> (DIN EN ISO/IEC 17024).
           </CardText>
           <CertGrid>
             {CERTS.map((c) => (
               <img key={c.alt} src={c.src} alt={c.alt} width={c.w} height="26" loading="lazy" />
             ))}
+            <CertBadgeText aria-label="Cert-IT zertifiziert">Cert&#8209;IT</CertBadgeText>
           </CertGrid>
         </GlassCard>
       </Grid>

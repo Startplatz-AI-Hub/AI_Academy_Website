@@ -8,6 +8,7 @@ import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
 
 /* ─────────────────────────────────────────────
    IMPRESSUM – Rechtlich verbindlich nach § 5 TMG
+   und § 18 Abs. 2 MStV
    ───────────────────────────────────────────── */
 
 const Section = styled.section`
@@ -72,6 +73,16 @@ const Link = styled.a`
   &:hover { text-decoration: underline; }
 `;
 
+const Pending = styled.span`
+  display: inline-block;
+  padding: 2px 8px;
+  background: ${tokens.colors.primaryLighter};
+  color: ${tokens.colors.primary};
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  border-radius: 4px;
+`;
+
 export default function ImpressumPage() {
   return (
     <SubpageLayout>
@@ -86,9 +97,10 @@ export default function ImpressumPage() {
           <Card>
             <CyberCorners $color={tokens.colors.primary} $size={10} />
 
-            <SectionTitle>Angaben gem. § 5 TMG</SectionTitle>
+            <SectionTitle>Angaben gemäß § 5 TMG</SectionTitle>
             <Text>
-              STARTPLATZ AI Academy<br />
+              <strong>STARTPLATZ AI Academy</strong><br />
+              ein Angebot der STARTPLATZ GmbH &amp; Co. KG<br />
               Im Mediapark 5<br />
               50670 Köln<br />
               Deutschland
@@ -96,39 +108,65 @@ export default function ImpressumPage() {
 
             <SectionTitle>Vertreten durch</SectionTitle>
             <Text>
-              Jakow Smirin (Geschäftsführer)
+              Geschäftsführung: Lorenz Gräf, Matthias Gräf<br />
+              Persönlich haftende Gesellschafterin: STARTPLATZ Verwaltungs GmbH<br />
+              Sitz der Gesellschaft: Köln
+            </Text>
+
+            <SectionTitle>Leitung STARTPLATZ AI Academy</SectionTitle>
+            <Text>
+              Jakow Smirin (CEO AI Academy)
             </Text>
 
             <SectionTitle>Kontakt</SectionTitle>
             <Text>
-              E-Mail: <Link href="mailto:hello@ai-hub.startplatz.de">hello@ai-hub.startplatz.de</Link><br />
-              Telefon: +49 221 123 456 (Platzhalter)<br />
-              Website: <Link href="https://ai-hub.startplatz.de">ai-hub.startplatz.de</Link>
-            </Text>
-
-            <SectionTitle>Umsatzsteuer-Identifikationsnummer</SectionTitle>
-            <Text>
-              Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
-              [wird ergänzt]
+              E-Mail: <Link href="mailto:academy@startplatz.de">academy@startplatz.de</Link><br />
+              Telefon: <Pending>wird ergänzt</Pending><br />
+              Website: <Link href="https://ai-academy.startplatz.de">ai-academy.startplatz.de</Link>
             </Text>
 
             <SectionTitle>Handelsregister</SectionTitle>
             <Text>
-              [Registergericht und Registernummer werden ergänzt]
+              Registergericht: Amtsgericht Köln<br />
+              Registernummer: <Pending>HRA wird ergänzt</Pending>
             </Text>
 
-            <SectionTitle>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</SectionTitle>
+            <SectionTitle>Umsatzsteuer-Identifikationsnummer</SectionTitle>
+            <Text>
+              USt-IdNr. gemäß § 27 a Umsatzsteuergesetz:<br />
+              <Pending>DE… wird ergänzt</Pending>
+            </Text>
+
+            <SectionTitle>Zuständige Aufsichtsbehörde (AZAV)</SectionTitle>
+            <Text>
+              Unsere Weiterbildungsmaßnahmen sind AZAV-zertifiziert. Fachkundige Stelle: <Pending>Zertifizierer wird ergänzt</Pending>.
+              Zuständige Aufsichtsbehörde nach § 36 GewO: Industrie- und Handelskammer zu Köln, Unter Sachsenhausen 10–26, 50667 Köln.
+            </Text>
+
+            <SectionTitle>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</SectionTitle>
             <Text>
               Jakow Smirin<br />
+              c/o STARTPLATZ GmbH &amp; Co. KG<br />
               Im Mediapark 5<br />
               50670 Köln
             </Text>
 
-            <SectionTitle>Haftungsausschluss (Disclaimer)</SectionTitle>
+            <SectionTitle>EU-Streitschlichtung</SectionTitle>
+            <Text>
+              Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <Link href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</Link>.
+              Unsere E-Mail-Adresse finden Sie oben im Impressum.
+            </Text>
+
+            <SectionTitle>Verbraucherstreitbeilegung/Universalschlichtungsstelle</SectionTitle>
+            <Text>
+              Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+            </Text>
+
+            <SectionTitle>Haftungsausschluss</SectionTitle>
 
             <Text><strong>Haftung für Inhalte</strong></Text>
             <Text>
-              Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+              Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
             </Text>
 
             <Text><strong>Haftung für Links</strong></Text>
@@ -139,11 +177,6 @@ export default function ImpressumPage() {
             <Text><strong>Urheberrecht</strong></Text>
             <Text>
               Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
-            </Text>
-
-            <SectionTitle>Streitschlichtung</SectionTitle>
-            <Text>
-              Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <Link href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</Link>. Unsere E-Mail-Adresse finden Sie oben im Impressum. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
             </Text>
           </Card>
         </Container>

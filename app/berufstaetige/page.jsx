@@ -37,7 +37,6 @@ const GridTwoCol = styled.div`
 
 export default function BerufstaettigePage() {
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
     { label: 'Berufstätige', href: '/berufstaetige', active: true },
   ];
 
@@ -137,7 +136,7 @@ export default function BerufstaettigePage() {
         subtitle="Intensive, flexible KI-Kurse speziell für Professionals. Abends, Wochenends oder online – du entscheidest deinen Lernrhythmus."
         breadcrumbs={breadcrumbs}
         accentColor={tokens.colors.navyBg}
-        image="https://res.cloudinary.com/startplatz/image/upload/c_fill,w_600,h_400,q_auto/EVENT-03"
+        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662282/ai-hub/website/website_stock_images/EVENT-03.png"
       />
 
       <SectionBlock

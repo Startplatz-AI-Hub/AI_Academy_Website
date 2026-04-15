@@ -28,7 +28,6 @@ const Header = styled.header`
   top: 0; left: 0; width: 100%;
   z-index: ${tokens.zIndex.nav};
   transition: background ${tokens.transitions.base}, box-shadow ${tokens.transitions.base};
-  padding: 0 ${tokens.spacing.lg};
 
   ${({ $scrolled }) => $scrolled && css`
     background: rgba(255, 255, 255, 0.88);
@@ -39,12 +38,17 @@ const Header = styled.header`
 `;
 
 const Inner = styled.div`
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 0 ${tokens.spacing.lg};
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 72px;
+
+  ${media.lg} {
+    padding: 0 ${tokens.spacing['2xl']};
+  }
 `;
 
 const LogoWrap = styled.a`

@@ -329,11 +329,12 @@ export default function Hero() {
             <CyberCorners $color={tokens.colors.mint} $size={8} />
           </Badge>
 
-          <Headline id="hero-headline">
+          <Headline id="hero-headline" aria-label="Starte deine Karriere jetzt.">
             {['STARTE', 'DEINE', 'KARRIERE', 'JETZT.'].map((word, i) => (
               <HeadlineWord
                 key={word}
                 data-hero-word={i}
+                aria-hidden="true"
                 className={`${i === 2 ? 'highlight' : ''} ${i === 3 ? 'dim' : ''}`}
                 style={{ transform: `translate(${x * depths[i]}px, ${y * depths[i]}px)` }}
               >

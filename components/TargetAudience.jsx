@@ -13,6 +13,16 @@ import PlanetSection from './PlanetSection';
    Chamfered corners, corner accents, HUD details
    ───────────────────────────────────────────── */
 
+/* Softer variants that don't clash with the strong purple primary */
+const SOFT = {
+  teal:     '#14B8A6',   // softer than mint
+  tealBg:   '#ECFDF5',
+  sky:      '#5CB5F2',   // softer than navy
+  skyBg:    '#E0F2FE',
+  coral:    '#FF9947',   // softer than orange
+  coralBg:  '#FFF4EB',
+};
+
 const AUDIENCES = [
   {
     badge: '100 % Gefördert',
@@ -25,8 +35,8 @@ const AUDIENCES = [
     ],
     cta: 'Förderung prüfen',
     href: '/arbeitssuchende',
-    color: tokens.colors.mint,
-    colorBg: tokens.colors.mintBg,
+    color: SOFT.teal,
+    colorBg: SOFT.tealBg,
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662279/ai-hub/website/website_stock_images/EVENT-01.png',
   },
   {
@@ -40,14 +50,14 @@ const AUDIENCES = [
     ],
     cta: 'Kurse entdecken',
     href: '/berufstaetige',
-    color: tokens.colors.navy,
-    colorBg: tokens.colors.navyBg,
+    color: SOFT.sky,
+    colorBg: SOFT.skyBg,
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662282/ai-hub/website/website_stock_images/EVENT-03.png',
   },
   {
     badge: 'Inhouse',
     title: 'Unternehmen',
-    description: 'Transformiere dein Team mit massgeschneiderten KI-Trainings.',
+    description: 'Transformiere dein Team mit maßgeschneiderten KI-Trainings.',
     features: [
       'Individuelle Curricula',
       'Inhouse-Trainings',
@@ -55,8 +65,8 @@ const AUDIENCES = [
     ],
     cta: 'Beratung anfragen',
     href: '/unternehmen',
-    color: tokens.colors.orange,
-    colorBg: tokens.colors.orangeBg,
+    color: SOFT.coral,
+    colorBg: SOFT.coralBg,
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png',
   },
 ];
@@ -157,29 +167,22 @@ const Feature = styled.li`
   gap: ${tokens.spacing.sm};
   font-size: ${tokens.fontSizes.sm};
   color: ${tokens.colors.textSoft};
+  position: relative;
 
+  /* Box with integrated checkmark – single element, checkmark centered inside */
   &::before {
     content: '';
-    display: block;
+    display: inline-block;
     width: 18px;
     height: 18px;
     ${clipBR(4)}
-    background: ${({ $color }) => `${$color}15`};
-    border: 1.5px solid ${({ $color }) => `${$color}40`};
+    background: ${({ $color }) => $color};
     flex-shrink: 0;
-    position: relative;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    margin-left: -14px;
-    margin-top: 1px;
-    width: 5px;
-    height: 8px;
-    border-right: 1.5px solid ${({ $color }) => $color};
-    border-bottom: 1.5px solid ${({ $color }) => $color};
-    transform: rotate(45deg);
+    /* SVG checkmark rendered via background */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'><path d='M3.5 8.5l3 3 6-7' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px 14px;
   }
 `;
 
