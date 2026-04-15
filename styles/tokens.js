@@ -17,13 +17,15 @@ export const tokens = {
     primaryDark:   '#5B21B6',
     primaryMuted:  '#8B5CF6',
 
-    // Accent – persona-coded
-    mint:   '#059669',
+    // Accent – persona-coded (soft palette, aligned with "Dein Weg in die KI-Zukunft")
+    // Keys keep their original names to avoid breaking existing usages,
+    // but values have been softened so purple remains the dominant primary.
+    mint:   '#14B8A6',   // teal – Arbeitssuchende
     mintBg: '#ECFDF5',
-    navy:   '#2563EB',
-    navyBg: '#EFF6FF',
-    orange: '#EA580C',
-    orangeBg: '#FFF7ED',
+    navy:   '#5CB5F2',   // sky – Berufstätige
+    navyBg: '#E0F2FE',
+    orange: '#FF9947',   // coral – Unternehmen
+    orangeBg: '#FFF4EB',
 
     coral:  '#E11D48',
     teal:   '#0D9488',
@@ -54,9 +56,9 @@ export const tokens = {
 
     // Glow
     glow:       'rgba(124, 58, 237, 0.10)',
-    glowMint:   'rgba(5, 150, 105, 0.08)',
-    glowNavy:   'rgba(37, 99, 235, 0.08)',
-    glowOrange: 'rgba(234, 88, 12, 0.08)',
+    glowMint:   'rgba(20, 184, 166, 0.10)',
+    glowNavy:   'rgba(92, 181, 242, 0.12)',
+    glowOrange: 'rgba(255, 153, 71, 0.10)',
   },
 
   fonts: {
