@@ -230,7 +230,7 @@ const CTAOffset = styled.div`
 
 const Burger = styled.button`
   display: flex; flex-direction: column; gap: 5px;
-  padding: ${tokens.spacing.sm}; z-index: 2;
+  padding: ${tokens.spacing.sm}; z-index: ${tokens.zIndex.nav + 2};
   ${media.lg} { display: none; }
 
   span {
@@ -262,7 +262,7 @@ const MobileOverlay = styled.div`
   position: fixed;
   inset: 0;
   background: ${tokens.colors.dark};
-  z-index: 1;
+  z-index: ${tokens.zIndex.nav + 1};
   display: flex;
   flex-direction: column;
   justify-content: center;
