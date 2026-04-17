@@ -1,80 +1,402 @@
 'use client';
 
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useCallback, useEffect } from 'react';
+import styled, { css, keyframes } from 'styled-components';
 import { tokens, media } from '../styles/tokens';
+import { clipBR, clipTLBR, CHAMFER } from '../styles/cyberpunk';
 import PlanetSection from './PlanetSection';
-import DomeGallery from './DomeGallery';
 
 /* ─────────────────────────────────────────────
-   TESTIMONIALS – DomeGallery presentation
-   Uses reactbits.dev DomeGallery for 3D hemisphere
+   TESTIMONIALS – PersonaReveal-style panel strip
+   B/W panels → expand + colorize on hover.
+   YouTube popup on click.
+   Same visual language as Hero PersonaReveal.
    ───────────────────────────────────────────── */
 
-const TESTIMONIAL_IMAGES = [
+const VIDEOS = [
   {
-    src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80&auto=format',
-    alt: 'Thomas – Vom Lehrer zum KI-Entwickler',
+    title: 'Thomas',
+    subtitle: 'Vom Lehrer zum KI-Entwickler',
+    youtubeId: 'dQw4w9WgXcQ',
+    color: tokens.colors.mint,
+    thumb: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80&auto=format',
   },
   {
-    src: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80&auto=format',
-    alt: 'Sarah – Mein Weg ins Tech-Startup',
+    title: 'Sarah',
+    subtitle: 'Mein Weg ins Tech-Startup',
+    youtubeId: 'dQw4w9WgXcQ',
+    color: tokens.colors.navy,
+    thumb: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80&auto=format',
   },
   {
-    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format',
-    alt: 'Michael – Warum sich der Kurs lohnt',
+    title: 'Michael',
+    subtitle: 'Warum sich der Kurs lohnt',
+    youtubeId: 'dQw4w9WgXcQ',
+    color: tokens.colors.primary,
+    thumb: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format',
   },
   {
-    src: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80&auto=format',
-    alt: 'Julia – KI im Marketing nutzen',
+    title: 'Julia',
+    subtitle: 'KI im Marketing nutzen',
+    youtubeId: 'dQw4w9WgXcQ',
+    color: tokens.colors.orange,
+    thumb: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80&auto=format',
   },
   {
-    src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80&auto=format',
-    alt: 'Prompt Engineering Workshop',
+    title: 'Workshop',
+    subtitle: 'Prompt Engineering Basics',
+    youtubeId: 'dQw4w9WgXcQ',
+    color: tokens.colors.mint,
+    thumb: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80&auto=format',
   },
   {
-    src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80&auto=format',
-    alt: 'Campus Tour Köln',
+    title: 'Campus Tour',
+    subtitle: 'STARTPLATZ Köln',
+    youtubeId: 'dQw4w9WgXcQ',
+    color: tokens.colors.navy,
+    thumb: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80&auto=format',
   },
 ];
 
-const DomeContainer = styled.div`
+/* ── Animations ──────────────────────────── */
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to   { opacity: 1; }
+`;
+
+const scaleIn = keyframes`
+  from { opacity: 0; transform: scale(0.94) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+`;
+
+/* ── Panel Strip Container ───────────────── */
+
+const C = CHAMFER.lg;
+
+const Strip = styled.div`
   position: relative;
   width: 100%;
-  height: 420px;
-  margin-top: ${tokens.spacing.lg};
+  height: 360px;
+  display: flex;
+  gap: 3px;
+  overflow: hidden;
+  margin-top: ${tokens.spacing.xl};
 
   ${media.md} {
-    height: 520px;
+    height: 440px;
   }
 
   ${media.lg} {
-    height: 600px;
+    height: 520px;
   }
 `;
 
+/* ── Individual Panel ────────────────────── */
+
+/* Clip-path: first panel gets TL chamfer, last gets BR chamfer */
+const panelClip = {
+  first: css`
+    clip-path: polygon(
+      ${C}px 0, 100% 0,
+      100% 100%,
+      0 100%, 0 ${C}px
+    );
+  `,
+  last: css`
+    clip-path: polygon(
+      0 0, 100% 0,
+      100% calc(100% - ${C}px),
+      calc(100% - ${C}px) 100%,
+      0 100%
+    );
+  `,
+};
+
+const Panel = styled.div`
+  position: relative;
+  flex: ${({ $active, $hasActive }) => $active ? '3' : $hasActive ? '0.5' : '1'};
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+
+  ${({ $pos }) => $pos === 'first' && panelClip.first}
+  ${({ $pos }) => $pos === 'last' && panelClip.last}
+
+  /* Color accent bar top */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    z-index: 4;
+    background: ${({ $color, $active }) => ($active ? $color : 'transparent')};
+    transition: background 0.5s ease;
+  }
+`;
+
+const PanelImage = styled.div`
+  position: absolute;
+  inset: 0;
+  background-image: url(${({ $src }) => $src});
+  background-size: cover;
+  background-position: center top;
+  filter: ${({ $active }) => ($active ? 'saturate(1.1) brightness(1)' : 'saturate(0) brightness(0.45)')};
+  transform: ${({ $active }) => ($active ? 'scale(1)' : 'scale(1.08)')};
+  transition: filter 0.65s ease, transform 0.8s ease;
+`;
+
+const PanelOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: ${({ $active }) =>
+    $active
+      ? 'linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.65) 100%)'
+      : 'linear-gradient(180deg, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0.85) 100%)'};
+  transition: background 0.65s ease;
+`;
+
+/* Vertical rotated label when collapsed */
+const VerticalLabel = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  z-index: 3;
+  font-family: ${tokens.fonts.display};
+  font-size: 11px;
+  font-weight: ${tokens.fontWeights.bold};
+  color: #fff;
+  white-space: nowrap;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: ${({ $visible }) => ($visible ? 0.85 : 0)};
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+`;
+
+/* Content area when expanded */
+const Content = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: ${tokens.spacing.xl} ${tokens.spacing.lg};
+  transform: translateY(${({ $active }) => ($active ? '0' : '20px')});
+  opacity: ${({ $active }) => ($active ? 1 : 0)};
+  transition: transform 0.5s ease 0.1s, opacity 0.5s ease 0.1s;
+`;
+
+const ContentTitle = styled.h3`
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes['2xl']};
+  font-weight: ${tokens.fontWeights.bold};
+  color: #fff;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+`;
+
+const ContentSub = styled.span`
+  display: block;
+  font-family: ${tokens.fonts.mono};
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: ${({ $color }) => $color};
+  margin-bottom: ${tokens.spacing.md};
+`;
+
+/* Play button */
+const PlayCTA = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: ${tokens.fonts.body};
+  font-size: ${tokens.fontSizes.sm};
+  font-weight: ${tokens.fontWeights.semi};
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 8px 16px;
+  background: rgba(124, 58, 237, 0.7);
+  ${clipBR(CHAMFER.xs)}
+  transition: background 200ms ease;
+
+  &:hover {
+    background: ${tokens.colors.primary};
+  }
+`;
+
+const PlayTriangle = styled.span`
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 9px;
+  border-color: transparent transparent transparent #fff;
+`;
+
+/* ── YouTube Popup ────────────────────────── */
+
+const PopupBackdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.90);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: pointer;
+  animation: ${fadeIn} 0.2s ease;
+`;
+
+const PopupFrame = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 1060px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  ${clipBR(CHAMFER.lg)}
+  overflow: hidden;
+  cursor: default;
+  animation: ${scaleIn} 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.25),
+    0 32px 80px rgba(0, 0, 0, 0.5),
+    0 0 120px rgba(124, 58, 237, 0.08);
+`;
+
+const CloseBtn = styled.button`
+  position: absolute;
+  top: -52px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  ${clipBR(CHAMFER.xs)}
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 200ms, transform 200ms;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+  }
+`;
+
+const PopupLabel = styled.p`
+  position: absolute;
+  bottom: -44px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes.sm};
+  font-weight: ${tokens.fontWeights.medium};
+  color: rgba(255, 255, 255, 0.55);
+`;
+
+/* ── Component ───────────────────────────── */
+
 export default function Testimonials() {
+  const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [popup, setPopup] = useState(null);
+
+  const hasActive = hoveredIdx !== null;
+
+  const openPopup = useCallback((v) => setPopup(v), []);
+  const closePopup = useCallback(() => setPopup(null), []);
+
+  /* Close popup on Escape */
+  useEffect(() => {
+    if (!popup) return;
+    const onKey = (e) => { if (e.key === 'Escape') closePopup(); };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [popup, closePopup]);
+
   return (
     <PlanetSection
       id="testimonials"
       badge="Was Teilnehmer sagen"
       title="Echte <span>Erfolgsgeschichten</span>"
+      subtitle="Von unseren Absolventen – echte Einblicke in den Kursalltag, Karrierewege und praktische KI-Anwendungen."
     >
-      <DomeContainer>
-        <DomeGallery
-          images={TESTIMONIAL_IMAGES}
-          overlayBlurColor={tokens.colors.pageBg}
-          imageBorderRadius="6px"
-          openedImageBorderRadius="8px"
-          openedImageWidth="300px"
-          openedImageHeight="400px"
-          grayscale={false}
-          segments={35}
-          fit={0.5}
-          minRadius={400}
-          dragDampening={2}
-        />
-      </DomeContainer>
+      <Strip role="group" aria-label="Testimonial Videos">
+        {VIDEOS.map((v, i) => {
+          const isActive = hoveredIdx === i;
+          const showVertical = hasActive && !isActive;
+          const pos = i === 0 ? 'first' : i === VIDEOS.length - 1 ? 'last' : 'mid';
+
+          return (
+            <Panel
+              key={v.title}
+              $active={isActive}
+              $hasActive={hasActive}
+              $color={v.color}
+              $pos={pos}
+              onMouseEnter={() => setHoveredIdx(i)}
+              onMouseLeave={() => setHoveredIdx(null)}
+              onFocus={() => setHoveredIdx(i)}
+              onBlur={() => setHoveredIdx(null)}
+              onClick={() => openPopup(v)}
+              tabIndex={0}
+              role="button"
+              aria-label={`${v.title} – ${v.subtitle} (Video abspielen)`}
+            >
+              <PanelImage $src={v.thumb} $active={isActive} />
+              <PanelOverlay $active={isActive} />
+              <VerticalLabel $visible={showVertical}>{v.title}</VerticalLabel>
+              <Content $active={isActive}>
+                <ContentTitle>{v.title}</ContentTitle>
+                <ContentSub $color={v.color}>{v.subtitle}</ContentSub>
+                <PlayCTA>
+                  <PlayTriangle aria-hidden="true" />
+                  Video ansehen
+                </PlayCTA>
+              </Content>
+            </Panel>
+          );
+        })}
+      </Strip>
+
+      {/* ── YouTube Popup ──────────────── */}
+      {popup && (
+        <PopupBackdrop onClick={closePopup}>
+          <PopupFrame onClick={(e) => e.stopPropagation()}>
+            <CloseBtn onClick={closePopup} aria-label="Video schließen">✕</CloseBtn>
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${popup.youtubeId}?autoplay=1&rel=0`}
+              title={`${popup.title} – ${popup.subtitle}`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                border: 'none',
+              }}
+            />
+            <PopupLabel>{popup.title} – {popup.subtitle}</PopupLabel>
+          </PopupFrame>
+        </PopupBackdrop>
+      )}
     </PlanetSection>
   );
 }

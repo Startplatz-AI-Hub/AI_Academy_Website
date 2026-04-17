@@ -99,7 +99,7 @@ const jsonLd = [
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="de">
+    <html lang="de" suppressHydrationWarning>
       <head>
         {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -170,7 +170,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <div className="preloader" id="preloader">
           <div className="preloader-ring" />
         </div>

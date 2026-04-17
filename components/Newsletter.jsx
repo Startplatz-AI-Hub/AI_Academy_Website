@@ -1,15 +1,54 @@
 'use client';
 
-// React is auto-imported in Next.js but we keep it for clarity
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { tokens, media } from '../styles/tokens';
 import { clipBR, clipTLBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
 import PlanetSection from './PlanetSection';
 
+/* ── Inline section header (inside grid, not above) ── */
+
+const SectionBadge = styled.span`
+  display: inline-block;
+  padding: 5px 14px;
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  font-weight: ${tokens.fontWeights.medium};
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: ${tokens.colors.primary};
+  background: ${tokens.colors.primaryLighter};
+  border: 1px solid rgba(99,102,241,0.12);
+  ${clipBR(CHAMFER.xs)}
+  margin-bottom: ${tokens.spacing.md};
+`;
+
+const SectionTitle = styled.h2`
+  font-family: ${tokens.fonts.display};
+  font-size: clamp(${tokens.fontSizes['3xl']}, 4vw, ${tokens.fontSizes['5xl']});
+  font-weight: ${tokens.fontWeights.bold};
+  color: ${tokens.colors.text};
+  line-height: ${tokens.lineHeights.snug};
+  margin-bottom: ${tokens.spacing.md};
+
+  span {
+    background: linear-gradient(135deg, ${tokens.colors.primary}, ${tokens.colors.primaryMuted});
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+`;
+
+const SectionSubtitle = styled.p`
+  font-size: clamp(${tokens.fontSizes.base}, 1.5vw, ${tokens.fontSizes.lg});
+  color: ${tokens.colors.textMuted};
+  line-height: ${tokens.lineHeights.relaxed};
+  max-width: 520px;
+  margin-bottom: ${tokens.spacing.xl};
+`;
+
 /* ─────────────────────────────────────────────
-   NEWSLETTER – Cyberpunk style
-   Chamfered form card, offset submit button
+   NEWSLETTER – Cyberpunk style (refined)
    ───────────────────────────────────────────── */
 
 const BENEFITS = [
@@ -23,33 +62,69 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: ${tokens.spacing['2xl']};
-  align-items: center;
-  ${media.lg} { grid-template-columns: 1fr 1fr; }
+  align-items: start;
+
+  ${media.lg} {
+    grid-template-columns: 1fr 1.1fr;
+    gap: ${tokens.spacing['3xl']};
+    align-items: start;
+  }
+`;
+
+const LeftCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${tokens.spacing.xl};
 `;
 
 const BenefitList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.md};
-  margin-top: ${tokens.spacing.xl};
 `;
 
+/* Check icon instead of empty box */
 const Benefit = styled.li`
   display: flex;
   align-items: center;
   gap: ${tokens.spacing.md};
   font-size: ${tokens.fontSizes.base};
   color: ${tokens.colors.textSoft};
+  line-height: ${tokens.lineHeights.normal};
+`;
 
-  &::before {
+const CheckIcon = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  background: ${tokens.colors.mintBg};
+  border: 1.5px solid ${tokens.colors.mint};
+  ${clipBR(4)}
+
+  /* Checkmark */
+  &::after {
     content: '';
     display: block;
-    width: 20px; height: 20px;
-    ${clipBR(4)}
-    background: ${tokens.colors.mintBg};
-    border: 1.5px solid ${tokens.colors.mint};
-    flex-shrink: 0;
-    position: relative;
+    width: 6px;
+    height: 10px;
+    border-right: 2px solid ${tokens.colors.mint};
+    border-bottom: 2px solid ${tokens.colors.mint};
+    transform: rotate(45deg) translateY(-1px);
+  }
+`;
+
+const SubNote = styled.p`
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  color: ${tokens.colors.textDim};
+  letter-spacing: 0.05em;
+
+  strong {
+    color: ${tokens.colors.mint};
+    font-weight: ${tokens.fontWeights.semi};
   }
 `;
 
@@ -59,6 +134,15 @@ const FormCard = styled.div`
   background: ${tokens.colors.surface};
   border: 1px solid ${tokens.colors.glassBorder};
   ${clipTLBR(CHAMFER.lg)}
+  box-shadow: ${tokens.shadows.card};
+`;
+
+const FormHeading = styled.p`
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes.lg};
+  font-weight: ${tokens.fontWeights.semi};
+  color: ${tokens.colors.text};
+  margin-bottom: ${tokens.spacing.lg};
 `;
 
 const FormGroup = styled.div`
@@ -89,7 +173,7 @@ const Input = styled.input`
 
   &:focus {
     border-color: ${tokens.colors.primary};
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
   }
 `;
 
@@ -144,7 +228,7 @@ const Privacy = styled.p`
 
 const SuccessMsg = styled.div`
   text-align: center;
-  padding: ${tokens.spacing['2xl']};
+  padding: ${tokens.spacing['2xl']} 0;
   h3 {
     font-family: ${tokens.fonts.display};
     font-size: ${tokens.fontSizes['2xl']};
@@ -168,18 +252,26 @@ export default function Newsletter() {
   return (
     <PlanetSection
       id="newsletter"
-      badge="Newsletter"
-      title="Bleib an der <span>KI-Spitze</span>"
-      subtitle="Erhalte wöchentlich exklusive Insights, Event-Einladungen und die neuesten KI-Trends direkt in dein Postfach. Über 5.000 Abonnenten vertrauen uns bereits."
       showStitch={false}
       accent={tokens.colors.glowMint}
     >
       <Grid>
-        <div>
+        <LeftCol>
+          <div>
+            <SectionBadge>Newsletter</SectionBadge>
+            <SectionTitle>Bleib an der <span>KI-Spitze</span></SectionTitle>
+            <SectionSubtitle>Erhalte wöchentlich exklusive Insights, Event-Einladungen und die neuesten KI-Trends direkt in dein Postfach.</SectionSubtitle>
+          </div>
           <BenefitList>
-            {BENEFITS.map((b) => <Benefit key={b}>{b}</Benefit>)}
+            {BENEFITS.map((b) => (
+              <Benefit key={b}>
+                <CheckIcon aria-hidden="true" />
+                {b}
+              </Benefit>
+            ))}
           </BenefitList>
-        </div>
+          <SubNote><strong>5.000+</strong> Abonnenten vertrauen uns bereits</SubNote>
+        </LeftCol>
 
         <FormCard>
           <CyberCorners $color={tokens.colors.mint} $size={12} />
@@ -190,6 +282,7 @@ export default function Newsletter() {
             </SuccessMsg>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
+              <FormHeading>Kostenlos anmelden</FormHeading>
               <FormGroup>
                 <Label htmlFor="nl-name">Dein Name</Label>
                 <Input id="nl-name" type="text" placeholder="Max Mustermann" value={name} onChange={(e) => setName(e.target.value)} required autoComplete="name" />
