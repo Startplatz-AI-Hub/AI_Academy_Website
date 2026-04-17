@@ -230,8 +230,15 @@ const CTAOffset = styled.div`
 
 const Burger = styled.button`
   display: flex; flex-direction: column; gap: 5px;
-  padding: ${tokens.spacing.sm}; z-index: ${tokens.zIndex.nav + 2};
+  padding: ${tokens.spacing.sm};
+  z-index: ${tokens.zIndex.nav + 10};
   ${media.lg} { display: none; }
+
+  ${({ $open }) => $open && css`
+    position: fixed;
+    top: 22px;
+    right: ${tokens.spacing.lg};
+  `}
 
   span {
     display: block; width: 22px; height: 2px;
