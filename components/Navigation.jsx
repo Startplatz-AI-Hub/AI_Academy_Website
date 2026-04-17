@@ -228,30 +228,48 @@ const CTAOffset = styled.div`
   }
 `;
 
-const Burger = styled.button`
+/* Burger sits inside header flow when closed, but needs a
+   separate fixed-position clone overlay when menu is open so
+   it escapes the Header stacking context.  We solve this with
+   TWO elements: an invisible placeholder inside the header
+   and the real button rendered at root level as fixed.       */
+
+const BurgerInner = styled.button`
   display: flex; flex-direction: column; gap: 5px;
   padding: ${tokens.spacing.sm};
-  z-index: ${tokens.zIndex.nav + 10};
   ${media.lg} { display: none; }
 
   span {
     display: block; width: 22px; height: 2px;
     background: ${tokens.colors.text};
-    transition: transform ${tokens.transitions.base}, opacity ${tokens.transitions.fast}, background ${tokens.transitions.fast};
+    transition: transform ${tokens.transitions.base}, opacity ${tokens.transitions.fast};
   }
 
   ${({ $open }) => $open && css`
-    position: fixed;
-    top: 22px;
-    right: ${tokens.spacing.lg};
-
-    span {
-      background: #fff !important;
-    }
     span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     span:nth-child(2) { opacity: 0; }
     span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   `}
+`;
+
+const BurgerFixed = styled.button`
+  position: fixed;
+  top: 22px;
+  right: ${tokens.spacing.lg};
+  z-index: ${tokens.zIndex.nav + 10};
+  display: flex; flex-direction: column; gap: 5px;
+  padding: ${tokens.spacing.sm};
+  ${media.lg} { display: none; }
+
+  span {
+    display: block; width: 22px; height: 2px;
+    background: #fff;
+    transition: transform ${tokens.transitions.base}, opacity ${tokens.transitions.fast};
+  }
+
+  span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  span:nth-child(2) { opacity: 0; }
+  span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 `;
 
 /* ── Staggered Mobile Menu ──────────────────── */
@@ -470,12 +488,21 @@ export default function Navigation() {
               Beratung buchen
             </CTAButton>
           </CTABtnWrap>
-          <Burger $open={mobileOpen} onClick={() => setMobileOpen((o) => !o)}
-            aria-label={mobileOpen ? 'Menü schließen' : 'Menü öffnen'} aria-expanded={mobileOpen}>
+          <BurgerInner $open={mobileOpen} onClick={() => setMobileOpen(true)}
+            aria-label="Menü öffnen" aria-expanded={mobileOpen}
+            style={{ visibility: mobileOpen ? 'hidden' : 'visible' }}>
             <span /><span /><span />
-          </Burger>
+          </BurgerInner>
         </Inner>
       </Header>
+
+      {/* Fixed close button – rendered at root level, outside Header stacking context */}
+      {mobileOpen && (
+        <BurgerFixed onClick={() => setMobileOpen(false)} aria-label="Menü schließen">
+          <span /><span /><span />
+        </BurgerFixed>
+      )}
+
       <MobileOverlay $open={mobileOpen} aria-hidden={!mobileOpen} role="dialog" aria-label="Navigation">
         <MobileNav aria-label="Mobile Navigation">
           {(() => {
