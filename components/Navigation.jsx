@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { tokens, media } from '../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
 
@@ -235,8 +235,8 @@ const Burger = styled.button`
 
   span {
     display: block; width: 22px; height: 2px;
-    background: ${tokens.colors.text};
-    transition: transform ${tokens.transitions.base}, opacity ${tokens.transitions.fast};
+    background: ${({ $open }) => $open ? '#fff' : tokens.colors.text};
+    transition: transform ${tokens.transitions.base}, opacity ${tokens.transitions.fast}, background ${tokens.transitions.fast};
   }
 
   ${({ $open }) => $open && css`
@@ -246,35 +246,100 @@ const Burger = styled.button`
   `}
 `;
 
+/* ── Staggered Mobile Menu ──────────────────── */
+
+const slideIn = keyframes`
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+`;
+
+const fadeInMenu = keyframes`
+  from { opacity: 0; }
+  to   { opacity: 1; }
+`;
+
 const MobileOverlay = styled.div`
-  position: fixed; inset: 0;
-  background: rgba(255,255,255,0.97);
-  backdrop-filter: blur(30px);
+  position: fixed;
+  inset: 0;
+  background: ${tokens.colors.dark};
   z-index: 1;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: ${tokens.spacing['2xl']};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px ${tokens.spacing['2xl']} ${tokens.spacing['3xl']};
   opacity: ${({ $open }) => ($open ? 1 : 0)};
   visibility: ${({ $open }) => ($open ? 'visible' : 'hidden')};
-  transition: opacity ${tokens.transitions.slow}, visibility ${tokens.transitions.slow};
+  transition: opacity 0.4s ease, visibility 0.4s ease;
   ${media.lg} { display: none; }
 `;
 
+const MobileNav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+`;
+
 const MobileLink = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-family: ${tokens.fonts.display};
-  font-size: ${tokens.fontSizes['3xl']};
+  font-size: clamp(${tokens.fontSizes['2xl']}, 6vw, ${tokens.fontSizes['4xl']});
   font-weight: ${tokens.fontWeights.bold};
-  color: ${tokens.colors.text};
+  color: ${tokens.colors.darkText};
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  &:hover { color: ${tokens.colors.primary}; }
+  padding: ${tokens.spacing.lg} 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: color 0.2s ease;
+
+  /* Stagger animation when menu opens */
+  ${({ $open, $delay }) => $open && css`
+    animation: ${slideIn} 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) ${$delay}ms forwards;
+  `}
+
+  &:hover, &:focus {
+    color: ${tokens.colors.primary};
+  }
+
+  /* Number index */
+  &::before {
+    content: '${({ $idx }) => String($idx).padStart(2, '0')}';
+    font-family: ${tokens.fonts.mono};
+    font-size: ${tokens.fontSizes.xs};
+    font-weight: ${tokens.fontWeights.medium};
+    color: ${tokens.colors.primary};
+    letter-spacing: 0.1em;
+    position: absolute;
+    left: 0;
+    top: ${tokens.spacing.md};
+  }
+`;
+
+const MobileLinkLabel = styled.span`
+  padding-left: ${tokens.spacing['2xl']};
+`;
+
+const MobileLinkArrow = styled.span`
+  font-size: ${tokens.fontSizes.lg};
+  color: ${tokens.colors.darkMuted};
+  transition: color 0.2s ease, transform 0.2s ease;
+
+  ${MobileLink}:hover & {
+    color: ${tokens.colors.primary};
+    transform: translateX(4px);
+  }
 `;
 
 const MobileCTA = styled.a`
-  position: relative;
-  margin-top: ${tokens.spacing.lg};
-  padding: 14px 32px;
+  display: block;
+  margin-top: ${tokens.spacing['2xl']};
+  padding: 16px 32px;
+  font-family: ${tokens.fonts.body};
   font-size: ${tokens.fontSizes.base};
   font-weight: ${tokens.fontWeights.semi};
   color: #fff;
@@ -282,7 +347,30 @@ const MobileCTA = styled.a`
   ${clipBR(CHAMFER.sm)}
   text-decoration: none;
   text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-align: center;
+  opacity: 0;
+  transition: background 0.2s ease;
+
+  ${({ $open, $delay }) => $open && css`
+    animation: ${slideIn} 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) ${$delay}ms forwards;
+  `}
+
   &:hover { background: ${tokens.colors.primaryHover}; color: #fff; }
+`;
+
+const MobileFooter = styled.div`
+  margin-top: auto;
+  padding-top: ${tokens.spacing.xl};
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  color: ${tokens.colors.darkMuted};
+  letter-spacing: 0.05em;
+  opacity: 0;
+
+  ${({ $open, $delay }) => $open && css`
+    animation: ${fadeInMenu} 0.6s ease ${$delay}ms forwards;
+  `}
 `;
 
 function handleHashNavigation(href) {
@@ -381,47 +469,71 @@ export default function Navigation() {
         </Inner>
       </Header>
       <MobileOverlay $open={mobileOpen} aria-hidden={!mobileOpen} role="dialog" aria-label="Navigation">
-        <nav aria-label="Mobile Navigation">
-          {NAV_LINKS.map((l) => {
-            if (l.children) {
+        <MobileNav aria-label="Mobile Navigation">
+          {(() => {
+            /* Flatten nav links for mobile (expand dropdowns) */
+            const flat = [];
+            NAV_LINKS.forEach((l) => {
+              if (l.children) {
+                l.children.forEach((child) => flat.push(child));
+              } else {
+                flat.push(l);
+              }
+            });
+
+            return flat.map((l, i) => {
+              const delay = 100 + i * 70;
+
+              if (l.href.startsWith('/#')) {
+                return (
+                  <MobileLink
+                    key={l.href}
+                    as="button"
+                    $open={mobileOpen}
+                    $delay={delay}
+                    $idx={i + 1}
+                    onClick={() => { handleHashNavigation(l.href); closeMobile(); }}
+                    tabIndex={mobileOpen ? 0 : -1}
+                    style={{ border: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)', background: 'none', cursor: 'pointer', font: 'inherit', width: '100%' }}
+                  >
+                    <MobileLinkLabel>{l.label}</MobileLinkLabel>
+                    <MobileLinkArrow>→</MobileLinkArrow>
+                  </MobileLink>
+                );
+              }
+
               return (
-                <React.Fragment key={l.href}>
-                  {l.children.map((child) => (
-                    <Link key={child.href} href={child.href} passHref legacyBehavior>
-                      <MobileLink onClick={closeMobile} tabIndex={mobileOpen ? 0 : -1}>{child.label}</MobileLink>
-                    </Link>
-                  ))}
-                </React.Fragment>
+                <Link key={l.href} href={l.href} passHref legacyBehavior>
+                  <MobileLink
+                    $open={mobileOpen}
+                    $delay={delay}
+                    $idx={i + 1}
+                    onClick={closeMobile}
+                    tabIndex={mobileOpen ? 0 : -1}
+                  >
+                    <MobileLinkLabel>{l.label}</MobileLinkLabel>
+                    <MobileLinkArrow>→</MobileLinkArrow>
+                  </MobileLink>
+                </Link>
               );
-            }
-            if (l.href.startsWith('/#')) {
-              return (
-                <MobileLink
-                  key={l.href}
-                  as="button"
-                  onClick={() => { handleHashNavigation(l.href); closeMobile(); }}
-                  tabIndex={mobileOpen ? 0 : -1}
-                  style={{ border: 'none', background: 'none', cursor: 'pointer', font: 'inherit' }}
-                >
-                  {l.label}
-                </MobileLink>
-              );
-            }
-            return (
-              <Link key={l.href} href={l.href} passHref legacyBehavior>
-                <MobileLink onClick={closeMobile} tabIndex={mobileOpen ? 0 : -1}>{l.label}</MobileLink>
-              </Link>
-            );
-          })}
+            });
+          })()}
+
           <MobileCTA
             as="button"
+            $open={mobileOpen}
+            $delay={100 + 7 * 70}
             onClick={() => { handleHashNavigation('/#newsletter'); closeMobile(); }}
             tabIndex={mobileOpen ? 0 : -1}
-            style={{ border: 'none', background: 'none', cursor: 'pointer', font: 'inherit' }}
+            style={{ cursor: 'pointer', font: 'inherit' }}
           >
             Beratung buchen
           </MobileCTA>
-        </nav>
+        </MobileNav>
+
+        <MobileFooter $open={mobileOpen} $delay={700}>
+          STARTPLATZ AI Academy — Köln &amp; Düsseldorf
+        </MobileFooter>
       </MobileOverlay>
     </>
   );
