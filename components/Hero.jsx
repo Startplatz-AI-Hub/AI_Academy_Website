@@ -84,22 +84,6 @@ const ClaimWrapper = styled.div`
   will-change: transform;
 `;
 
-const Badge = styled.span`
-  display: inline-block;
-  position: relative;
-  padding: 6px 14px;
-  font-family: ${tokens.fonts.mono};
-  font-size: ${tokens.fontSizes.xs};
-  font-weight: ${tokens.fontWeights.semi};
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: ${tokens.colors.mint};
-  background: ${tokens.colors.mintBg};
-  border: 1px solid rgba(5, 150, 105, 0.25);
-  ${clipBR(CHAMFER.sm)}
-  margin-bottom: ${tokens.spacing.xl};
-`;
-
 const Headline = styled.h1`
   font-family: ${tokens.fonts.display};
   font-size: ${tokens.fontSizes.hero};
@@ -220,19 +204,6 @@ const RevealContainer = styled.div`
   ${media.xl} { height: 580px; }
 `;
 
-/* ── HUD Decorations ──────────────────────── */
-
-const HudLabel = styled.span`
-  position: absolute;
-  font-family: ${tokens.fonts.mono};
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: ${tokens.colors.textDim};
-  opacity: 0.4;
-  pointer-events: none;
-`;
-
 /* ── Infinite Marquee ──────────────────────── */
 
 const marqueeScroll = keyframes`
@@ -324,11 +295,6 @@ export default function Hero() {
 
       <Inner>
         <ClaimWrapper style={{ transform: `translate(${x * 6}px, ${y * 6}px)` }}>
-          <Badge>
-            100 % Gefördert
-            <CyberCorners $color={tokens.colors.mint} $size={8} />
-          </Badge>
-
           <Headline id="hero-headline" aria-label="Starte deine Karriere jetzt.">
             {['STARTE', 'DEINE', 'KARRIERE', 'JETZT.'].map((word, i) => (
               <HeadlineWord
@@ -366,7 +332,6 @@ export default function Hero() {
         <RevealContainer id="hero-persona-reveal">
           <CyberCorners $color={tokens.colors.mint} $size={14} />
           <PersonaReveal />
-          <HudLabel style={{ top: -18, left: 0 }}>SECTOR_04 // VISUAL_DATA</HudLabel>
         </RevealContainer>
       </Inner>
 
