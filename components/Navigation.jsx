@@ -234,19 +234,20 @@ const Burger = styled.button`
   z-index: ${tokens.zIndex.nav + 10};
   ${media.lg} { display: none; }
 
-  ${({ $open }) => $open && css`
-    position: fixed;
-    top: 22px;
-    right: ${tokens.spacing.lg};
-  `}
-
   span {
     display: block; width: 22px; height: 2px;
-    background: ${({ $open }) => $open ? '#fff' : tokens.colors.text};
+    background: ${tokens.colors.text};
     transition: transform ${tokens.transitions.base}, opacity ${tokens.transitions.fast}, background ${tokens.transitions.fast};
   }
 
   ${({ $open }) => $open && css`
+    position: fixed;
+    top: 22px;
+    right: ${tokens.spacing.lg};
+
+    span {
+      background: #fff !important;
+    }
     span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     span:nth-child(2) { opacity: 0; }
     span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
