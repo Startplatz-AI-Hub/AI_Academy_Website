@@ -73,6 +73,8 @@ const Inner = styled.div`
   ${media.lg} {
     grid-template-columns: 1fr 1fr;
     padding: 0 ${tokens.spacing['2xl']};
+    align-items: start;
+    padding-top: ${tokens.spacing['3xl']};
   }
   ${media.xl} {
     grid-template-columns: 1.15fr 0.85fr;
