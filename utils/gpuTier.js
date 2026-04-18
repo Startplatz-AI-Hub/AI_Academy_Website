@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────
    GPU Tier Detection & Adaptive Quality Presets
    Detects GPU capability and returns a quality
-   tier used by LiquidEther and layout blur.
+   tier used by LiquidEther and layout glass.
    ───────────────────────────────────────────── */
 
 let cachedTier = null;
@@ -43,7 +43,6 @@ export function getGpuTier() {
 
       /* Intel integrated */
       if (renderer.includes('intel')) {
-        // Old Intel: UHD 6xx/5xx, HD 4xxx/5xxx/6xxx/3xxx, Iris (non-Xe)
         if (
           /uhd\s*(6[0-9]{2}|5[0-9]{2})/i.test(renderer) ||
           /hd\s*(graphics|[3-6][0-9]{2,3})/i.test(renderer) ||
@@ -51,7 +50,6 @@ export function getGpuTier() {
         ) {
           return (cachedTier = isMobile ? 'potato' : 'low');
         }
-        // Newer Intel (Iris Xe, Arc)
         return (cachedTier = 'medium');
       }
 
@@ -87,7 +85,7 @@ export function getGpuTier() {
       }
     }
 
-    /* Fallback heuristics when renderer string unavailable */
+    /* Fallback heuristics */
     if (navigator.deviceMemory && navigator.deviceMemory <= 4) {
       return (cachedTier = isMobile ? 'potato' : 'low');
     }
@@ -103,13 +101,19 @@ export function getGpuTier() {
 
 /**
  * Quality presets per tier.
- *   resolution  – simulation grid scale (0 = no WebGL)
- *   fps         – target frames per second
- *   bfecc       – BFECC advection (3× texture reads)
- *   poisson     – Poisson pressure-solver iterations
- *   pixelRatio  – max device pixel ratio for canvas
- *   blur        – backdrop-filter blur radius in px
- *   saturate    – backdrop-filter saturate multiplier
+ *
+ *   resolution   – simulation grid scale (0 = CSS fallback, no WebGL)
+ *   fps          – target frames per second
+ *   bfecc        – BFECC advection (3× texture reads)
+ *   poisson      – Poisson pressure-solver iterations
+ *   pixelRatio   – max device pixel ratio for canvas
+ *   etherBlur    – CSS filter blur applied directly to LiquidEther canvas (px)
+ *   mainOpacity  – rgba white overlay opacity on <main>
+ *
+ *   KEY CHANGE: We no longer use backdrop-filter on <main>.
+ *   Instead, LiquidEther itself gets a CSS `filter: blur()`.
+ *   This avoids the browser re-sampling + re-blurring the
+ *   entire viewport every frame — the single biggest perf hit.
  */
 export const GPU_PRESETS = {
   high: {
@@ -118,8 +122,8 @@ export const GPU_PRESETS = {
     bfecc: true,
     poisson: 32,
     pixelRatio: 2,
-    blur: 28,
-    saturate: 1.4,
+    etherBlur: 18,
+    mainOpacity: 0.68,
   },
   medium: {
     resolution: 0.35,
@@ -127,8 +131,8 @@ export const GPU_PRESETS = {
     bfecc: true,
     poisson: 18,
     pixelRatio: 1.5,
-    blur: 22,
-    saturate: 1.3,
+    etherBlur: 14,
+    mainOpacity: 0.72,
   },
   low: {
     resolution: 0.2,
@@ -136,16 +140,16 @@ export const GPU_PRESETS = {
     bfecc: false,
     poisson: 8,
     pixelRatio: 1,
-    blur: 14,
-    saturate: 1.2,
+    etherBlur: 10,
+    mainOpacity: 0.76,
   },
   potato: {
-    resolution: 0, // signals: use CSS fallback, skip WebGL
+    resolution: 0,
     fps: 0,
     bfecc: false,
     poisson: 0,
     pixelRatio: 1,
-    blur: 10,
-    saturate: 1.1,
+    etherBlur: 0,
+    mainOpacity: 0.85,
   },
 };

@@ -15,6 +15,9 @@ const Wrapper = styled.div`
   z-index: 0;
   overflow: hidden;
   touch-action: none;
+  /* Blur applied directly via filter (set inline by tier).
+     MUCH cheaper than backdrop-filter on <main> because
+     this is a single compositor layer — no backdrop sampling. */
 `;
 
 /* ── CSS fallback for "potato" tier ──────── */
@@ -786,5 +789,19 @@ export default function LiquidEther({
   /* Waiting for tier detection */
   if (!tier) return null;
 
-  return <Wrapper ref={mountRef} aria-hidden="true" />;
+  /* Apply blur as a direct CSS filter on the canvas wrapper.
+     This replaces the old backdrop-filter on <main> —
+     same visual result, but no per-frame backdrop sampling.
+     Extend the wrapper beyond the viewport by the blur radius
+     so blur doesn't create dark edges from sampling empty space. */
+  const etherBlur = preset?.etherBlur || 0;
+  const wrapperStyle = etherBlur > 0
+    ? {
+        filter: `blur(${etherBlur}px)`,
+        WebkitFilter: `blur(${etherBlur}px)`,
+        inset: `-${etherBlur}px`,
+      }
+    : undefined;
+
+  return <Wrapper ref={mountRef} aria-hidden="true" style={wrapperStyle} />;
 }
