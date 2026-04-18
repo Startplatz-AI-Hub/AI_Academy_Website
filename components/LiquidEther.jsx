@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { getGpuTier, GPU_PRESETS } from '../utils/gpuTier';
 
 /* ─────────────────────────────────────────────
    LIQUID ETHER – Navier-Stokes fluid simulation
-   Port of ReactBits LiquidEther component.
-   Three.js loaded from CDN at runtime (no npm dep).
+   With adaptive GPU-tier quality & frame throttle.
    ───────────────────────────────────────────── */
 
 const Wrapper = styled.div`
@@ -15,6 +15,29 @@ const Wrapper = styled.div`
   z-index: 0;
   overflow: hidden;
   touch-action: none;
+`;
+
+/* ── CSS fallback for "potato" tier ──────── */
+const drift = keyframes`
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+`;
+
+const FallbackBg = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.18),
+    rgba(255, 159, 252, 0.14),
+    rgba(180, 151, 207, 0.12),
+    rgba(124, 58, 237, 0.18)
+  );
+  background-size: 400% 400%;
+  animation: ${drift} 25s ease infinite;
+  pointer-events: none;
 `;
 
 /* ── Load Three.js from CDN ────────────────── */
@@ -243,10 +266,32 @@ export default function LiquidEther({
   const webglRef = useRef(null);
   const rafRef = useRef(null);
   const isVisibleRef = useRef(true);
+  const [tier, setTier] = useState(null);
+
+  /* Detect GPU tier on mount */
+  useEffect(() => {
+    const t = getGpuTier();
+    setTier(t);
+    console.log(`[LiquidEther] GPU tier: ${t}`, GPU_PRESETS[t]);
+  }, []);
+
+  /* Skip WebGL for potato tier */
+  const preset = tier ? GPU_PRESETS[tier] : null;
+  const isPotato = tier === 'potato';
 
   useEffect(() => {
-    if (!mountRef.current) return;
+    if (!mountRef.current || !tier || isPotato) return;
     let disposed = false;
+
+    /* ── Apply tier overrides ── */
+    const p = GPU_PRESETS[tier];
+    const effectiveResolution = Math.min(resolution, p.resolution);
+    const effectiveBFECC = BFECC && p.bfecc;
+    const effectivePoisson = Math.min(iterationsPoisson, p.poisson);
+    const effectiveViscousIter = Math.min(iterationsViscous, p.poisson);
+    const maxPixelRatio = p.pixelRatio;
+    const targetFPS = p.fps;
+    const frameInterval = 1000 / targetFPS;
 
     loadThree().then((THREE) => {
       if (disposed || !mountRef.current) return;
@@ -285,9 +330,9 @@ export default function LiquidEther({
         container: null,
         init(container) {
           this.container = container;
-          this.pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+          this.pixelRatio = Math.min(window.devicePixelRatio || 1, maxPixelRatio);
           this.resize();
-          this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+          this.renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
           this.renderer.autoClear = false;
           this.renderer.setClearColor(new THREE.Color(0x000000), 0);
           this.renderer.setPixelRatio(this.pixelRatio);
@@ -585,7 +630,19 @@ export default function LiquidEther({
       /* ── Simulation ── */
       class Simulation {
         constructor(opts) {
-          this.options = { iterations_poisson: iterationsPoisson, iterations_viscous: iterationsViscous, mouse_force: mouseForce, resolution, cursor_size: cursorSize, viscous, isBounce, dt, isViscous, BFECC, ...opts };
+          this.options = {
+            iterations_poisson: effectivePoisson,
+            iterations_viscous: effectiveViscousIter,
+            mouse_force: mouseForce,
+            resolution: effectiveResolution,
+            cursor_size: cursorSize,
+            viscous,
+            isBounce,
+            dt,
+            isViscous,
+            BFECC: effectiveBFECC,
+            ...opts,
+          };
           this.fbos = {}; this.fboSize = new THREE.Vector2(); this.cellScale = new THREE.Vector2(); this.boundarySpace = new THREE.Vector2();
           this.init();
         }
@@ -651,19 +708,27 @@ export default function LiquidEther({
       const autoDriverInst = new AutoDriver(Mouse, { lastUserInteraction }, {
         enabled: autoDemo, speed: autoSpeed, resumeDelay: autoResumeDelay, rampDuration: autoRampDuration
       });
-      // Patch manager ref so autoDriver reads fresh value
       const managerRef = { lastUserInteraction };
       autoDriverInst.manager = managerRef;
       Mouse.onInteract = () => { managerRef.lastUserInteraction = performance.now(); autoDriverInst.forceStop(); };
 
+      /* ── Frame-throttled render loop ── */
       let running = true;
-      function loop() {
+      let lastFrameTime = 0;
+
+      function loop(now) {
         if (!running) return;
+        rafRef.current = requestAnimationFrame(loop);
+
+        /* Skip frames to hit target FPS */
+        const elapsed = now - lastFrameTime;
+        if (elapsed < frameInterval) return;
+        lastFrameTime = now - (elapsed % frameInterval);
+
         autoDriverInst.update();
         Mouse.update();
         Common.update();
         output.update();
-        rafRef.current = requestAnimationFrame(loop);
       }
 
       const onResize = () => { Common.resize(); output.resize(); };
@@ -671,7 +736,7 @@ export default function LiquidEther({
 
       const onVis = () => {
         if (document.hidden) { running = false; if (rafRef.current) cancelAnimationFrame(rafRef.current); }
-        else if (isVisibleRef.current) { running = true; loop(); }
+        else if (isVisibleRef.current) { running = true; requestAnimationFrame(loop); }
       };
       document.addEventListener('visibilitychange', onVis);
 
@@ -681,16 +746,18 @@ export default function LiquidEther({
         io = new IntersectionObserver(entries => {
           const vis = entries[0].isIntersecting;
           isVisibleRef.current = vis;
-          if (vis && !document.hidden) { if (!running) { running = true; loop(); } }
+          if (vis && !document.hidden) { if (!running) { running = true; requestAnimationFrame(loop); } }
           else { running = false; if (rafRef.current) cancelAnimationFrame(rafRef.current); }
         }, { threshold: [0, 0.01] });
         io.observe(container);
       } catch (e) { /* fallback: always visible */ }
 
-      loop();
+      requestAnimationFrame(loop);
       webglRef.current = { Common, Mouse, output, autoDriverInst };
 
-      console.log('[LiquidEther] initialized', Common.width, 'x', Common.height);
+      console.log(
+        `[LiquidEther] initialized | tier=${tier} | res=${effectiveResolution} | fps=${targetFPS} | bfecc=${effectiveBFECC} | poisson=${effectivePoisson} | pxRatio=${Common.pixelRatio}`
+      );
 
     }).catch(err => {
       console.error('[LiquidEther] init failed:', err);
@@ -711,7 +778,13 @@ export default function LiquidEther({
       }
       webglRef.current = null;
     };
-  }, [colors, mouseForce, cursorSize, isViscous, viscous, iterationsViscous, iterationsPoisson, dt, BFECC, resolution, isBounce, autoDemo, autoSpeed, autoIntensity, takeoverDuration, autoResumeDelay, autoRampDuration]);
+  }, [tier, isPotato, colors, mouseForce, cursorSize, isViscous, viscous, iterationsViscous, iterationsPoisson, dt, BFECC, resolution, isBounce, autoDemo, autoSpeed, autoIntensity, takeoverDuration, autoResumeDelay, autoRampDuration]);
+
+  /* Potato tier: lightweight CSS fallback */
+  if (isPotato) return <FallbackBg aria-hidden="true" />;
+
+  /* Waiting for tier detection */
+  if (!tier) return null;
 
   return <Wrapper ref={mountRef} aria-hidden="true" />;
 }

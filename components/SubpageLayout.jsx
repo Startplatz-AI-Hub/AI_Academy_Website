@@ -8,14 +8,33 @@ import LiquidEther from './LiquidEther';
 import Navigation from './Navigation';
 import ScrollProgress from './ScrollProgress';
 import Footer from './Footer';
+import { getGpuTier, GPU_PRESETS } from '../utils/gpuTier';
 
 export default function SubpageLayout({ children }) {
+  const [glassStyle, setGlassStyle] = React.useState({
+    position: 'relative',
+    zIndex: 1,
+    background: 'rgba(255, 255, 255, 0.72)',
+    backdropFilter: 'blur(28px) saturate(1.4)',
+    WebkitBackdropFilter: 'blur(28px) saturate(1.4)',
+  });
+
   React.useEffect(() => {
     window.history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
-    // Remove the static preloader from layout.jsx (if present on direct page load)
     const el = document.getElementById('preloader');
     if (el) el.remove();
+
+    /* Adapt blur to GPU tier */
+    const tier = getGpuTier();
+    const p = GPU_PRESETS[tier];
+    setGlassStyle({
+      position: 'relative',
+      zIndex: 1,
+      background: `rgba(255, 255, 255, ${tier === 'potato' ? 0.85 : 0.72})`,
+      backdropFilter: `blur(${p.blur}px) saturate(${p.saturate})`,
+      WebkitBackdropFilter: `blur(${p.blur}px) saturate(${p.saturate})`,
+    });
   }, []);
 
   return (
@@ -39,13 +58,7 @@ export default function SubpageLayout({ children }) {
       <main
         id="main-content"
         role="main"
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          background: 'rgba(255, 255, 255, 0.72)',
-          backdropFilter: 'blur(28px) saturate(1.4)',
-          WebkitBackdropFilter: 'blur(28px) saturate(1.4)',
-        }}
+        style={glassStyle}
       >
         {children}
       </main>
