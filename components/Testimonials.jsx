@@ -343,6 +343,7 @@ export default function Testimonials() {
 
   return (
     <PlanetSection
+      solid
       id="testimonials"
       badge="Was Teilnehmer sagen"
       title="Echte <span>Erfolgsgeschichten</span>"

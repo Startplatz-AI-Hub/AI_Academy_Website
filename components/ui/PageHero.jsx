@@ -18,19 +18,10 @@ const Section = styled.section`
   padding: calc(72px + ${tokens.spacing['3xl']}) 0 ${tokens.spacing['3xl']};
   overflow: hidden;
   background: ${({ $variant }) =>
-    $variant === 'dark' ? tokens.colors.dark : tokens.colors.surface};
+    $variant === 'dark' ? tokens.colors.dark : 'transparent'};
 `;
 
-const GridPattern = styled.div`
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  opacity: ${({ $variant }) => $variant === 'dark' ? 0.3 : 1};
-`;
+/* GridPattern removed – replaced by global ColorBends background */
 
 const SlashAccent = styled.div`
   position: absolute;
@@ -38,7 +29,7 @@ const SlashAccent = styled.div`
   width: 35%; height: 120%;
   background: ${({ $accentColor }) => $accentColor || tokens.colors.primaryLighter};
   transform: skewX(-8deg);
-  opacity: ${({ $variant }) => $variant === 'dark' ? 0.08 : 0.25};
+  opacity: ${({ $variant }) => $variant === 'dark' ? 0.08 : 0.18};
   pointer-events: none;
 `;
 
@@ -105,27 +96,27 @@ const ImageWrap = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-  width: 45%;
+  width: 50%;
   overflow: hidden;
   display: none;
   ${media.lg} { display: block; }
+
+  /* CSS mask fades the entire image to transparent on all edges */
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, black 35%),
+    linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+  mask-image:
+    linear-gradient(to right, transparent 0%, black 35%),
+    linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%);
+  mask-composite: intersect;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     filter: saturate(0.85);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(90deg,
-      ${({ $variant }) => $variant === 'dark' ? tokens.colors.dark : tokens.colors.surface} 0%,
-      transparent 50%
-    );
+    opacity: 0.8;
   }
 `;
 
@@ -143,7 +134,6 @@ export default function PageHero({
 }) {
   return (
     <Section $variant={variant}>
-      <GridPattern $variant={variant} aria-hidden="true" />
       <SlashAccent $variant={variant} $accentColor={accentColor} aria-hidden="true" />
 
       {image && (

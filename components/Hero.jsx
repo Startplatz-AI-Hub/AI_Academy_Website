@@ -34,7 +34,7 @@ const Section = styled.section`
   justify-content: center;
   overflow: hidden;
   padding-top: 72px;
-  background: ${tokens.colors.surface};
+  /* transparent – ColorBends background shines through */
 `;
 
 const SlashAccent = styled.div`
@@ -47,15 +47,7 @@ const SlashAccent = styled.div`
   pointer-events: none;
 `;
 
-const GridPattern = styled.div`
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-`;
+/* GridPattern removed – replaced by global ColorBends background */
 
 const Inner = styled.div`
   position: relative;
@@ -231,11 +223,11 @@ const MarqueeWrapper = styled.div`
   }
   &::before {
     left: 0;
-    background: linear-gradient(90deg, ${tokens.colors.surface}, transparent);
+    background: linear-gradient(90deg, rgba(255,255,255,0.85), transparent);
   }
   &::after {
     right: 0;
-    background: linear-gradient(270deg, ${tokens.colors.surface}, transparent);
+    background: linear-gradient(270deg, rgba(255,255,255,0.85), transparent);
   }
 `;
 
@@ -292,7 +284,6 @@ export default function Hero() {
 
   return (
     <Section id="hero" aria-label="Hero">
-      <GridPattern aria-hidden="true" />
       <SlashAccent aria-hidden="true" />
 
       <Inner>

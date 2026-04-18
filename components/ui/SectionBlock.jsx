@@ -12,10 +12,11 @@ import { clipBR, CHAMFER } from '../../styles/cyberpunk';
    ───────────────────────────────────────────── */
 
 const bgColors = {
-  light: tokens.colors.pageBg,
-  white: tokens.colors.surface,
+  light: 'transparent',
+  white: 'rgba(255, 255, 255, 0.25)',
   dark: tokens.colors.dark,
-  muted: tokens.colors.surfaceAlt,
+  muted: 'rgba(255, 255, 255, 0.1)',
+  glass: 'transparent',
 };
 
 const Wrapper = styled.section`

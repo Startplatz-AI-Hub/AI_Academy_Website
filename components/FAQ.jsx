@@ -92,6 +92,7 @@ export default function FAQ() {
 
   return (
     <PlanetSection
+      solid
       id="faq"
       badge="Häufige Fragen"
       title="Alles was du wissen <span>musst</span>"

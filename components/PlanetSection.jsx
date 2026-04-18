@@ -16,6 +16,10 @@ const Wrapper = styled.section`
   z-index: 1;
   padding: ${tokens.spacing.section} 0;
   overflow: hidden;
+
+  /* Glass is on <main> — sections only add subtle shade variants */
+  background: ${({ $solid }) =>
+    $solid ? 'rgba(255, 255, 255, 0.25)' : 'transparent'};
 `;
 
 const BgImage = styled.div`
@@ -137,7 +141,9 @@ const SectionSubtitle = styled.p`
 
 export default function PlanetSection({
   id, badge, title, subtitle,
-  accent, showStitch = true, bgImage, bgImageOpacity, children,
+  accent, showStitch = true, bgImage, bgImageOpacity,
+  glass = false, solid = false,
+  children,
 }) {
   const sectionRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: -300, y: -300 });
@@ -180,6 +186,8 @@ export default function PlanetSection({
     <Wrapper
       ref={sectionRef}
       id={id}
+      $glass={glass}
+      $solid={solid}
       onMouseMove={handleMouseMove}
       aria-labelledby={id ? `${id}-title` : undefined}
     >

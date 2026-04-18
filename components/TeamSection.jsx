@@ -96,6 +96,7 @@ const LocationLabel = styled.div`
 export default function TeamSection() {
   return (
     <PlanetSection
+      solid
       id="team"
       badge="Unser Netzwerk"
       title="Experten, die <span>begeistern</span>"

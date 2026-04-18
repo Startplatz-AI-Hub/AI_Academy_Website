@@ -251,6 +251,7 @@ export default function Newsletter() {
 
   return (
     <PlanetSection
+      glass
       id="newsletter"
       showStitch={false}
       accent={tokens.colors.glowMint}
