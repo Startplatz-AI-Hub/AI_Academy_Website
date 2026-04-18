@@ -1,0 +1,272 @@
+[
+  {
+    "id": "hero-panel-arbeitssuchende",
+    "placement": "PersonaReveal.jsx → Panel 1 (Arbeitssuchende)",
+    "description": "Hero-Panel für Arbeitssuchende — 1 Person, Neuanfang, Fokus",
+    "format": "portrait",
+    "width": 600,
+    "height": 800,
+    "prompt": "Modern editorial photography, bright natural lighting, clean minimalist European coworking space, soft lavender and white tones, shot on Sony A7IV 35mm f/1.4, shallow depth of field, warm skin tones. A confident young professional in their late 20s sitting at a modern minimal desk with a laptop, looking thoughtfully at the screen. Clean smart-casual outfit — light blue button-down shirt, no tie. Bright coworking space with large windows, natural light flooding in. Subtle purple ambient glow from a desk lamp reflecting on their face. A notebook and pen beside them. Expression: focused but optimistic, the beginning of something new. Background softly blurred showing other workstations. European German appearance, natural hair. No stock photo smile — genuine contemplative expression. Color palette: whites, light grays, soft lavender (#F0ECF5), accents of vivid purple (#7C3AED). High contrast, cinematic."
+  },
+  {
+    "id": "hero-panel-berufstaetige",
+    "placement": "PersonaReveal.jsx → Panel 2 (Berufstätige)",
+    "description": "Hero-Panel für Berufstätige — 2 Personen, Zusammenarbeit",
+    "format": "portrait",
+    "width": 600,
+    "height": 800,
+    "prompt": "Modern editorial photography, bright natural lighting, clean minimalist European office, soft lavender and white tones, shot on Sony A7IV 35mm f/1.4, shallow depth of field, warm skin tones. Two professionals collaborating at a standing desk in a modern open-plan office. One woman early 30s with dark hair wearing a teal blouse pointing at a widescreen monitor showing data visualizations, the other person a man mid-30s in a casual blazer over t-shirt leaning in with interest. Both engaged in genuine conversation, natural body language. Clean white surfaces, a glass partition behind them with geometric patterns. Soft purple LED strip lighting visible on the ceiling edge. Warm afternoon light through floor-to-ceiling windows. Shot from a slight angle, cinematic composition. German European appearance, professional but relaxed atmosphere. Color palette: whites, light grays, soft lavender (#F0ECF5), accents of vivid purple (#7C3AED) and teal (#14B8A6)."
+  },
+  {
+    "id": "hero-panel-unternehmen",
+    "placement": "PersonaReveal.jsx → Panel 3 (Unternehmen)",
+    "description": "Hero-Panel für Unternehmen — Gruppe, Workshop, Team-Training",
+    "format": "portrait",
+    "width": 600,
+    "height": 800,
+    "prompt": "Modern editorial photography, bright natural lighting, clean minimalist European conference room, soft lavender and white tones, shot on Sony A7IV 24mm f/2.8, warm skin tones. A workshop or training session in a modern glass-walled conference room. 8-10 diverse professionals seated around a large table, one person standing and presenting at a digital whiteboard showing AI workflow diagrams. The group is engaged — some taking notes on laptops, others looking at the presenter. Mix of ages 25-55, genders, and ethnicities reflecting modern German corporate diversity. Warm overhead lighting, a plant in the corner, branded water bottles on the table. Through the glass walls an open-plan office is visible. Subtle purple accent — presenter slide has purple highlights. Wide shot capturing full group energy. Color palette: whites, light grays, soft lavender (#F0ECF5), vivid purple (#7C3AED) accents."
+  },
+  {
+    "id": "target-audience-arbeitssuchende",
+    "placement": "TargetAudience.jsx → Karte 1 (Arbeitssuchende)",
+    "description": "Zielgruppen-Karte Arbeitssuchende — Neustart, Lernen",
+    "format": "landscape",
+    "width": 800,
+    "height": 500,
+    "prompt": "Modern editorial photography, bright natural lighting, clean minimalist European study space, soft lavender and white tones, shot on Sony A7IV 50mm f/1.8, shallow depth of field, warm skin tones. Close-up portrait of a determined young woman in her late 20s sitting in a bright modern library or study space. She is wearing wireless earbuds, looking directly at camera with a confident approachable expression. A laptop screen reflects soft purple light on her face. Behind her bookshelves and other students slightly blurred. She wears a simple white t-shirt and has her hair naturally styled. The image conveys fresh start, self-investment, readiness. Warm inviting tones with lavender-tinted background (#F0ECF5). Accents of vivid purple (#7C3AED). No forced smile, natural expression. European German appearance."
+  },
+  {
+    "id": "target-audience-berufstaetige",
+    "placement": "TargetAudience.jsx → Karte 2 (Berufstätige)",
+    "description": "Zielgruppen-Karte Berufstätige — Weiterbildung neben dem Job",
+    "format": "landscape",
+    "width": 800,
+    "height": 500,
+    "prompt": "Modern editorial photography, bright natural lighting, clean minimalist European home office, soft lavender and white tones, shot on Sony A7IV 35mm f/1.4, shallow depth of field, warm skin tones. A mid-career professional man early 40s with salt-and-pepper short hair and smart glasses working on a dual-monitor setup in a home office. One screen shows code or a Jupyter notebook, the other shows a video call with colleagues. Clean well-organized space — minimal wooden desk, a small succulent plant, warm desk lamp with purple-tinted light. He wears a casual knit sweater. Expression deeply focused, competent. The image conveys upgrading skills while maintaining career, learning alongside work. Shot from the side at eye level. Color palette: whites, light grays, soft lavender (#F0ECF5), accents of vivid purple (#7C3AED). European German appearance."
+  },
+  {
+    "id": "target-audience-unternehmen",
+    "placement": "TargetAudience.jsx → Karte 3 (Unternehmen)",
+    "description": "Zielgruppen-Karte Unternehmen — Führungsteam, Strategie",
+    "format": "landscape",
+    "width": 800,
+    "height": 500,
+    "prompt": "Modern editorial photography, bright natural lighting, premium European boardroom, shot on Sony A7IV 24mm f/2.8, warm skin tones. An executive-level strategy meeting in a premium boardroom. A diverse leadership team of 5-6 people around a dark polished table reviewing a presentation on a large wall-mounted screen showing AI transformation metrics and roadmaps with purple chart accents. Premium finishes — leather chairs, subtle recessed lighting, floor-to-ceiling city views with Cologne or Düsseldorf skyline hint. The atmosphere is serious but progressive. One person gestures toward the screen while others listen intently. Contemporary European business style, no old-fashioned suits. Color palette: dark wood tones, whites, accents of vivid purple (#7C3AED). High-end corporate atmosphere."
+  },
+  {
+    "id": "team-gruppenfoto",
+    "placement": "TeamSection.jsx → Hero-Bild",
+    "description": "Team-Gruppenfoto — das ganze AI Academy Team",
+    "format": "landscape",
+    "width": 1400,
+    "height": 600,
+    "prompt": "Modern editorial photography, bright natural lighting, modern coworking space atrium, shot on Sony A7IV 24mm f/2.8, warm skin tones. A vibrant team photo of 12-15 people standing together in a modern coworking space atrium. The group is arranged naturally — some standing some sitting on modern furniture creating dynamic levels. Mix of ages 23-50, diverse backgrounds, all dressed smart-casual. The space has exposed concrete, large windows, hanging plants, and a prominent purple neon sign on the wall behind them glowing with abstract purple light art. Everyone has a natural genuine smile or laugh — not posed. Some holding laptops or coffee cups. Overall mood: energetic startup team, approachable experts. Bright airy lighting with signature lavender ceiling glow (#F0ECF5). Accents of vivid purple (#7C3AED) and teal (#14B8A6). European German diversity."
+  },
+  {
+    "id": "team-standort-koeln",
+    "placement": "TeamSection.jsx → Standort Köln",
+    "description": "STARTPLATZ Köln Außenansicht",
+    "format": "landscape",
+    "width": 800,
+    "height": 400,
+    "prompt": "Modern editorial photography, bright golden hour natural lighting, shot on Sony A7IV 35mm f/2.8. Exterior shot of a modern multi-story office building in Cologne Mediapark area on a bright day. Contemporary glass-and-steel facade. In the foreground young professionals walk along the sidewalk some with laptop bags creating life and movement. A subtle purple banner or flag visible near the entrance. The Cologne TV tower Colonius faintly visible in the background. Clean blue sky with soft clouds. The image conveys urban innovation hub in the heart of Cologne. Golden hour warm light on the facade. Sharp architectural lines, modern angular design. Color palette: warm stone and glass tones, blue sky, accent of vivid purple (#7C3AED) on the banner."
+  },
+  {
+    "id": "team-standort-duesseldorf",
+    "placement": "TeamSection.jsx → Standort Düsseldorf",
+    "description": "STARTPLATZ Düsseldorf Außenansicht",
+    "format": "landscape",
+    "width": 800,
+    "height": 400,
+    "prompt": "Modern editorial photography, bright early morning natural lighting, shot on Sony A7IV 35mm f/2.8. Exterior view of a sleek modern office building in Düsseldorf business district. Glass facade reflecting the sky, a few people entering through the main entrance. A teal-colored bike rack with parked bicycles near the entrance adding sustainability touch. Some greenery — trimmed hedges and a small tree. The Rhine or Medienhafen architecture hints visible in the background distance. Professional atmosphere, early morning light casting long shadows. The image conveys professional accessible Rhine-region tech hub. Sharp angular building design. Color palette: glass and steel tones, blue sky, accent of teal (#14B8A6)."
+  },
+  {
+    "id": "testimonial-thomas",
+    "placement": "Testimonials.jsx → Panel 1",
+    "description": "Thomas — Vom Lehrer zum KI-Entwickler (Interview-Portrait, muss in B&W + Farbe funktionieren)",
+    "format": "landscape",
+    "width": 800,
+    "height": 450,
+    "prompt": "Cinematic interview portrait photography, dramatic studio lighting, shot on Sony A7IV 85mm f/1.4, shallow depth of field. Portrait of a friendly man in his early 30s, former teacher turned tech professional. He sits in a podcast interview setting — a professional microphone visible, warm studio lighting with a purple-tinted backlight creating a rim light effect on his hair and shoulders. He wears a casual dark t-shirt. His expression is mid-conversation, animated, sharing his story. Background dark with soft bokeh lights in purple (#7C3AED) and teal (#14B8A6). High contrast cinematic lighting ratio. The image must work beautifully in both black-and-white and full color. European German appearance, natural warm skin tones."
+  },
+  {
+    "id": "testimonial-sarah",
+    "placement": "Testimonials.jsx → Panel 2",
+    "description": "Sarah — Mein Weg ins Tech-Startup (muss in B&W + Farbe funktionieren)",
+    "format": "landscape",
+    "width": 800,
+    "height": 450,
+    "prompt": "Cinematic editorial portrait photography, split lighting, shot on Sony A7IV 85mm f/1.4, shallow depth of field. A confident woman in her late 20s in a modern startup office environment. Standing with arms casually crossed leaning against a glass wall with Post-it notes and wireframes visible behind her. She wears a dark blazer over a white top. One side of her face lit with warm key light, the other side has a cool purple fill light creating a split-lighting effect. Expression proud determined approachable. Startup energy in the blurred background — screens plants team members. High contrast for strong black-and-white conversion while also stunning in full color. European German appearance. Color palette: dark tones, white top, accents of vivid purple (#7C3AED) in the fill light."
+  },
+  {
+    "id": "testimonial-michael",
+    "placement": "Testimonials.jsx → Panel 3",
+    "description": "Michael — Warum sich der Kurs lohnt (muss in B&W + Farbe funktionieren)",
+    "format": "landscape",
+    "width": 800,
+    "height": 450,
+    "prompt": "Cinematic interview portrait photography, dramatic overhead spotlight, shot on Sony A7IV 85mm f/1.4, shallow depth of field. A man in his mid-40s experienced professional sitting in a modern lounge chair in a coworking space. He is gesturing while speaking, captured mid-sentence in an interview moment. Salt-and-pepper beard, wearing a quality navy henley shirt. Behind him a large monitor showing abstract data visualizations in purple tones slightly out of focus. Warm overhead spotlight creates dramatic shadows. Professional video shoot setting — clean intentional lighting. High contrast for strong black-and-white conversion. Expression passionate convincing. European German appearance. Color palette: dark moody tones, navy clothing, accents of vivid purple (#7C3AED) on the background screen."
+  },
+  {
+    "id": "testimonial-julia",
+    "placement": "Testimonials.jsx → Panel 4",
+    "description": "Julia — KI im Marketing nutzen (muss in B&W + Farbe funktionieren)",
+    "format": "landscape",
+    "width": 800,
+    "height": 450,
+    "prompt": "Cinematic editorial portrait photography, side lighting, shot on Sony A7IV 85mm f/1.4, shallow depth of field. A creative professional woman in her early 30s at a standing desk with a large curved monitor showing marketing dashboards and AI tools. She is turned toward the camera with a natural half-smile, one hand on the desk. She wears a stylish turtleneck in deep teal. Her workspace has personality — a small plant, a design book, sticky notes with campaign ideas. Purple LED desk accent light visible. Cinematic side lighting creates depth. Strong tonal range for effective black-and-white rendering while stunning in color. European German appearance. Color palette: warm workspace tones, teal (#14B8A6) clothing, accents of vivid purple (#7C3AED) desk light."
+  },
+  {
+    "id": "testimonial-workshop",
+    "placement": "Testimonials.jsx → Panel 5",
+    "description": "Workshop — Prompt Engineering Basics (muss in B&W + Farbe funktionieren)",
+    "format": "landscape",
+    "width": 800,
+    "height": 450,
+    "prompt": "Cinematic editorial photography, dramatic directional window light, shot on Sony A7IV 24mm f/2.8. An engaging workshop scene — a presenter at the front of a bright classroom-style space gesturing at a large screen showing a ChatGPT AI interface with purple UI accents. 6-8 participants visible from behind, some with laptops open, one raising their hand. Modern furniture — high tables stools whiteboard walls. Overhead industrial-style pendant lights. Energetic interactive atmosphere, not lecture-style. Wide shot capturing the full scene. Strong directional light from windows on one side. High contrast, works well in both black-and-white and full color. European German diverse group. Color palette: bright whites, warm wood, accents of vivid purple (#7C3AED) on the screen interface."
+  },
+  {
+    "id": "testimonial-campus-tour",
+    "placement": "Testimonials.jsx → Panel 6",
+    "description": "Campus Tour — STARTPLATZ Köln (muss in B&W + Farbe funktionieren)",
+    "format": "landscape",
+    "width": 800,
+    "height": 450,
+    "prompt": "Cinematic editorial photography, wide-angle, bright airy, shot on Sony A7IV 16mm f/2.8. Interior shot of a modern coworking campus — a wide atrium or open collaborative space. Multiple levels visible with glass railings, people working at various stations, a coffee bar in the background. Exposed concrete warm wood accents hanging pendant lights and green plants throughout. A few people walking through creating natural movement. Prominent purple neon signage or accent lighting on one wall. Vibrant innovative campus life. Shot from a slightly elevated perspective. High contrast for strong B&W compatibility while also beautiful in full color. Color palette: concrete grays, warm wood, green plants, accents of vivid purple (#7C3AED) neon and teal (#14B8A6)."
+  },
+  {
+    "id": "events-abstract-background",
+    "placement": "EventsTimeline.jsx → Video/Standbild Hintergrund",
+    "description": "Abstrakter Tech-Hintergrund für Events-Sektion",
+    "format": "landscape",
+    "width": 1920,
+    "height": 1080,
+    "prompt": "Abstract digital art, 3D render, ultra high quality. Flowing particle streams and neural network nodes connecting in 3D space. Deep black (#0A0A0A) background, vivid purple (#7C3AED) glowing lines and nodes, with subtle teal (#14B8A6) accent particles. Particles move slowly organically like synapses firing. Depth of field effect — foreground particles sharp background ones softly blurred into bokeh. No text no recognizable shapes — pure abstract tech atmosphere. Cinematic premium feel — Apple keynote background meets neural visualization. Clean elegant minimal."
+  },
+  {
+    "id": "events-fallback",
+    "placement": "EventsTimeline.jsx → Fallback-Bild wenn kein Event-Bild vorhanden",
+    "description": "Leerer Event-Raum, bereit für Workshop",
+    "format": "landscape",
+    "width": 400,
+    "height": 250,
+    "prompt": "Modern editorial photography, bright clean, shot on Sony A7IV 24mm f/2.8. A bright minimal event space set up for a tech workshop. Rows of modern chairs with small writing tablets, a large projection screen at the front showing a simple purple logo on white. A podium with a sleek microphone. The room is empty but ready — anticipation before an event. Clean white walls, subtle purple uplighting along the base. Shot straight-on from the back of the room, symmetrical composition. Bright clinical professional. Color palette: whites, light grays, soft lavender (#F0ECF5), accents of vivid purple (#7C3AED) uplighting."
+  },
+  {
+    "id": "stories-main",
+    "placement": "Stories.jsx → Hauptstory-Bild",
+    "description": "Generative AI in der Kreativbranche — Mensch + KI Kollaboration",
+    "format": "landscape",
+    "width": 800,
+    "height": 500,
+    "prompt": "Modern editorial photography, moody creative studio atmosphere, shot on Sony A7IV 35mm f/1.4, shallow depth of field. A creative professional working at a large screen showing AI-generated artwork being refined — visible is a split screen with a text prompt on one side and evolving generated imagery on the other. The person's hand is on a Wacom tablet blending AI output with human creativity. The workspace is artistic but techy — physical sketch papers color swatches and digital screens. Purple-tinted ambient light from monitors. Shot from over-the-shoulder perspective focusing on the screen content with the person slightly soft. Human plus AI creative collaboration. Color palette: dark moody studio tones, screen glow, accents of vivid purple (#7C3AED) from the AI interface."
+  },
+  {
+    "id": "faq-cta-background",
+    "placement": "FAQ.jsx → CTA Hintergrundbild",
+    "description": "Abstrakter geometrischer Brand-Hintergrund für CTA-Bereich",
+    "format": "landscape",
+    "width": 1600,
+    "height": 600,
+    "prompt": "Abstract digital art, geometric, sharp angular. Sharp angular shapes and parallelograms matching corporate logo geometry in layers. Deep dark purple (#1a0a2e) base with translucent layered shapes in vivid purple (#7C3AED) at varying opacities 10-40%. Subtle grid pattern overlay. A few teal (#14B8A6) accent lines cutting diagonally across the composition. No text no people — pure brand-geometric atmosphere. Shapes suggest forward movement innovation sharp edges. Cyberpunk UI background meets corporate brand pattern. Clean bold angular. No gradients to white — stays dark and dramatic."
+  },
+  {
+    "id": "experten-hero",
+    "placement": "Experten-Seite → Hero-Bild",
+    "description": "Großes Networking-Event — Expertennetzwerk",
+    "format": "landscape",
+    "width": 1200,
+    "height": 600,
+    "prompt": "Modern editorial photography, event photography style, shot on Sony A7IV 24mm f/2.8, warm ambient lighting. A large professional networking event in a premium modern venue. 30-40 people mingling in small groups holding drinks and business cards. High ceilings with industrial-modern design — exposed beams polished concrete floors warm spot lighting. Some people in animated conversation others exchanging contacts. The crowd is diverse — various ages genders backgrounds, all dressed smart-casual to business attire. Purple and teal accent lighting throughout the venue. Shot from a slightly elevated angle to capture scope and energy. Exclusive professional community, knowledge exchange, high-value networking. Must work in both color and desaturated B&W. European German diversity. Color palette: warm event lighting, accents of vivid purple (#7C3AED) and teal (#14B8A6)."
+  },
+  {
+    "id": "subpage-arbeitssuchende-hero",
+    "placement": "app/arbeitssuchende/page.jsx → Hero",
+    "description": "Subpage Hero Arbeitssuchende — Neuanfang, Tür zur Zukunft",
+    "format": "portrait",
+    "width": 600,
+    "height": 700,
+    "prompt": "Modern editorial photography, cinematic, shot on Sony A7IV 35mm f/1.4, shallow depth of field, golden morning light. A young professional woman late 20s at the start of a new chapter — standing at the entrance of a modern tech campus looking up at the building with anticipation and confidence. She carries a laptop bag over one shoulder wearing a clean white blouse and dark jeans. Behind her glass doors with a subtle purple logo reflection. Morning golden light illuminates her from the side. Aspirational composition — the building represents opportunity she represents readiness. Not corporate — cinematic emotional. European German appearance natural expression. Color palette: warm golden tones, whites, glass reflections, accent of vivid purple (#7C3AED) in the logo reflection."
+  },
+  {
+    "id": "subpage-berufstaetige-hero",
+    "placement": "app/berufstaetige/page.jsx → Hero",
+    "description": "Subpage Hero Berufstätige — Zwei Kollegen in Bewegung",
+    "format": "portrait",
+    "width": 600,
+    "height": 700,
+    "prompt": "Modern editorial photography, dynamic motion, shot on Sony A7IV 35mm f/1.4, shallow depth of field. Two colleagues man and woman both mid-30s walking together through a modern office corridor both looking at a tablet the woman is holding. They are in motion — dynamic purposeful. The corridor has clean lines glass walls showing teams working in meeting rooms. Subtle purple accent lighting in the ceiling channels. Man in a dark polo, woman in a structured blazer. Professionals actively upskilling learning on the go integrating AI into their work. Motion blur on the background, sharp focus on the two subjects. Warm energetic lighting. European German appearance. Color palette: clean whites, glass, warm skin tones, accent of vivid purple (#7C3AED) ceiling light."
+  },
+  {
+    "id": "subpage-unternehmen-hero",
+    "placement": "app/unternehmen/page.jsx → Hero",
+    "description": "Subpage Hero Unternehmen — C-Level Präsentation, Transformation",
+    "format": "portrait",
+    "width": 600,
+    "height": 700,
+    "prompt": "Modern editorial photography, dramatic boardroom, shot on Sony A7IV 35mm f/1.8, cinematic lighting. A C-suite executive woman early 50s with silver bob hair and elegant dark blazer presenting to her leadership team in a premium boardroom. She stands confidently at the head of the table gesturing toward a large display showing an AI Transformation Roadmap with purple-branded charts and graphs. The 6-person team is engaged — some leaning forward one taking notes. Premium finishes dark wood leather city skyline through the windows. Enterprise-level AI adoption strategic leadership organizational transformation. Wide shot cinematic boardroom drama lighting. European German appearance. Color palette: dark premium tones, wood, leather, city skyline blues, accent of vivid purple (#7C3AED) on the presentation charts."
+  },
+  {
+    "id": "avatar-sarah",
+    "placement": "app/arbeitssuchende/page.jsx → Testimonial Avatar",
+    "description": "Avatar Sarah — Arbeitssuchende Testimonial",
+    "format": "square",
+    "width": 256,
+    "height": 256,
+    "prompt": "Professional headshot portrait, tight crop chin to top of head, soft studio lighting with subtle purple rim light, neutral light gray background (#F0ECF5), shot on Sony A7IV 85mm f/2.8. Young woman late 20s, light brown hair pulled back in a low ponytail, warm brown eyes, subtle smile, wearing a white crew-neck top. Clean fresh optimistic look. Natural expression warm trustworthy approachable. No heavy makeup no filters. European German appearance. Features must be clear and recognizable even at small display size."
+  },
+  {
+    "id": "avatar-marcus",
+    "placement": "app/arbeitssuchende/page.jsx → Testimonial Avatar",
+    "description": "Avatar Marcus — Arbeitssuchende Testimonial",
+    "format": "square",
+    "width": 256,
+    "height": 256,
+    "prompt": "Professional headshot portrait, tight crop chin to top of head, soft studio lighting with subtle purple rim light, neutral light gray background (#F0ECF5), shot on Sony A7IV 85mm f/2.8. Young man early 30s, short dark curly hair, light beard stubble, friendly open expression, wearing a dark navy t-shirt. Relaxed genuine natural look. Warm trustworthy approachable. No filters. European German appearance. Features must be clear and recognizable even at small display size."
+  },
+  {
+    "id": "avatar-petra",
+    "placement": "app/berufstaetige/page.jsx → Testimonial Avatar",
+    "description": "Avatar Petra — Berufstätige Testimonial",
+    "format": "square",
+    "width": 256,
+    "height": 256,
+    "prompt": "Professional headshot portrait, tight crop chin to top of head, soft studio lighting with subtle purple rim light, neutral light gray background (#F0ECF5), shot on Sony A7IV 85mm f/2.8. Professional woman mid-40s, shoulder-length auburn hair, smart glasses with thin frames, confident warm smile, wearing a teal (#14B8A6) blouse. Experienced approachable. Natural expression. No heavy makeup no filters. European German appearance. Features must be clear and recognizable even at small display size."
+  },
+  {
+    "id": "avatar-christian",
+    "placement": "app/berufstaetige/page.jsx → Testimonial Avatar",
+    "description": "Avatar Christian — Berufstätige Testimonial",
+    "format": "square",
+    "width": 256,
+    "height": 256,
+    "prompt": "Professional headshot portrait, tight crop chin to top of head, soft studio lighting with subtle purple rim light, neutral light gray background (#F0ECF5), shot on Sony A7IV 85mm f/2.8. Man late 30s, neat short brown hair, clean-shaven, slight grin, wearing a charcoal V-neck sweater over a collared shirt. Professional but casual. Warm trustworthy. No filters. European German appearance. Features must be clear and recognizable even at small display size."
+  },
+  {
+    "id": "avatar-dr-heike",
+    "placement": "app/unternehmen/page.jsx → Testimonial Avatar",
+    "description": "Avatar Dr. Heike — Unternehmen Testimonial",
+    "format": "square",
+    "width": 256,
+    "height": 256,
+    "prompt": "Professional headshot portrait, tight crop chin to top of head, soft studio lighting with subtle purple rim light, neutral light gray background (#F0ECF5), shot on Sony A7IV 85mm f/2.8. Executive woman early 50s, silver-streaked dark hair in a sophisticated bob cut, pearl stud earrings, composed confident expression, wearing a dark navy blazer. Authority and warmth. Natural expression. No heavy makeup no filters. European German appearance. Features must be clear and recognizable even at small display size."
+  },
+  {
+    "id": "avatar-thomas-corp",
+    "placement": "app/unternehmen/page.jsx → Testimonial Avatar",
+    "description": "Avatar Thomas — Unternehmen Testimonial",
+    "format": "square",
+    "width": 256,
+    "height": 256,
+    "prompt": "Professional headshot portrait, tight crop chin to top of head, soft studio lighting with subtle purple rim light, neutral light gray background (#F0ECF5), shot on Sony A7IV 85mm f/2.8. Senior executive man mid-50s, distinguished gray hair, warm blue eyes, genuine broad smile, wearing a medium gray suit with open collar no tie. Trustworthy experienced leader. Natural expression. No filters. European German appearance. Features must be clear and recognizable even at small display size."
+  },
+  {
+    "id": "blog-featured",
+    "placement": "app/blog/page.jsx → Featured Image",
+    "description": "Blog Hero — Flat-Lay Workspace, KI meets menschliches Denken",
+    "format": "landscape",
+    "width": 800,
+    "height": 500,
+    "prompt": "Modern editorial photography, flat-lay bird's-eye view, bright soft natural lighting from one side, shot on Sony A7IV 35mm f/2.8. Dramatic bird's-eye view of a modern desk workspace — a laptop showing an AI chat interface with purple UI accents, a smartphone with notifications, a paper notebook with handwritten mind-maps and arrows, a cup of coffee, and wireless earbuds. All arranged on a clean white marble-surface desk. One corner of the laptop screen glows purple from the AI interface. Flat-lay style but elevated — editorial magazine-quality. Soft natural light creating gentle shadows. Daily intersection of AI and human thought content creation knowledge work. Color palette: white marble, warm coffee tones, paper whites, accent of vivid purple (#7C3AED) from the screen glow. Muted overall with the purple as focal accent."
+  }
+]

@@ -141,7 +141,7 @@ export default function UnternehmenPage() {
         subtitle="Maßgeschneiderte Trainings und Bootcamps – vom Workshop bis zum Bootcamp für dein gesamtes Team."
         breadcrumbs={breadcrumbs}
         accentColor={tokens.colors.orangeBg}
-        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png"
+        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776469603/ai-hub/website/AI-Academy-Website-Images/target-audience-unternehmen.png"
       />
 
       <SectionBlock

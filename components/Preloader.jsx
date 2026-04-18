@@ -20,9 +20,9 @@ import { tokens } from '../styles/tokens';
    ───────────────────────────────────────────── */
 
 const IMAGES = [
-  'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662279/ai-hub/website/website_stock_images/EVENT-01.png',
-  'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662282/ai-hub/website/website_stock_images/EVENT-03.png',
-  'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png',
+  'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473244/ai-hub/website/AI-Academy-Website-Images/hero-panel-arbeitssuchende-upscaled.png',
+  'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473245/ai-hub/website/AI-Academy-Website-Images/hero-panel-berufstaetige-upscaled.png',
+  'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473243/ai-hub/website/AI-Academy-Website-Images/hero-panel-unternehmen-upscaled.png',
 ];
 
 const WORDS = ['STARTE', 'DEINE', 'KARRIERE', 'JETZT.'];

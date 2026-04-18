@@ -15,48 +15,50 @@ import PlanetSection from './PlanetSection';
 
 const VIDEOS = [
   {
-    title: 'Thomas',
-    subtitle: 'Vom Lehrer zum KI-Entwickler',
-    youtubeId: 'dQw4w9WgXcQ',
+    title: 'Tobias',
+    subtitle: 'Aufsichtsratsvorsitzender · 20+ Jahre C-Level',
+    quote: 'Ich hab wahnsinnig viel gelernt.',
+    youtubeId: 'WYqC5Or82zM',
     color: tokens.colors.mint,
-    thumb: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80&auto=format',
   },
   {
-    title: 'Sarah',
-    subtitle: 'Mein Weg ins Tech-Startup',
-    youtubeId: 'dQw4w9WgXcQ',
+    title: 'Olga',
+    subtitle: 'Management & Operations · Quereinsteigerin KI',
+    quote: 'Ein Must Know für uns alle.',
+    youtubeId: 'zFAO7A84ujY',
     color: tokens.colors.navy,
-    thumb: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80&auto=format',
   },
   {
-    title: 'Michael',
-    subtitle: 'Warum sich der Kurs lohnt',
-    youtubeId: 'dQw4w9WgXcQ',
+    title: 'Annika',
+    subtitle: 'UX Designerin · Digitale Produktentwicklung',
+    quote: 'Das fand ich super verrückt.',
+    youtubeId: 'VXbAHkJ0DzQ',
     color: tokens.colors.primary,
-    thumb: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format',
   },
   {
-    title: 'Julia',
-    subtitle: 'KI im Marketing nutzen',
-    youtubeId: 'dQw4w9WgXcQ',
+    title: 'Carsten',
+    subtitle: 'Informatiker & Gründer · 20 Jahre Softwareentwicklung',
+    quote: 'KI entzaubern, jenseits des Hypes.',
+    youtubeId: '3es2lpCKEZw',
     color: tokens.colors.orange,
-    thumb: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80&auto=format',
   },
   {
-    title: 'Workshop',
-    subtitle: 'Prompt Engineering Basics',
-    youtubeId: 'dQw4w9WgXcQ',
+    title: 'Carolin',
+    subtitle: 'Product Ownerin · Softwareentwicklung B2B',
+    quote: 'Die richtige Entscheidung.',
+    youtubeId: 'P6rORA19PWc',
     color: tokens.colors.mint,
-    thumb: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80&auto=format',
   },
   {
-    title: 'Campus Tour',
-    subtitle: 'STARTPLATZ Köln',
-    youtubeId: 'dQw4w9WgXcQ',
+    title: 'Oskar',
+    subtitle: 'Philosoph & Wirtschaftswissenschaftler',
+    quote: 'Mehr gelernt als je zuvor.',
+    youtubeId: '1Lc7O99DKOc',
     color: tokens.colors.navy,
-    thumb: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80&auto=format',
   },
 ];
+
+const ytThumb = (id) => `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
 
 /* ── Animations ──────────────────────────── */
 
@@ -207,6 +209,15 @@ const ContentSub = styled.span`
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: ${({ $color }) => $color};
+  margin-bottom: ${tokens.spacing.sm};
+`;
+
+const ContentQuote = styled.p`
+  font-family: ${tokens.fonts.body};
+  font-size: ${tokens.fontSizes.sm};
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: ${tokens.lineHeights.relaxed};
   margin-bottom: ${tokens.spacing.md};
 `;
 
@@ -359,12 +370,13 @@ export default function Testimonials() {
               role="button"
               aria-label={`${v.title} – ${v.subtitle} (Video abspielen)`}
             >
-              <PanelImage $src={v.thumb} $active={isActive} />
+              <PanelImage $src={ytThumb(v.youtubeId)} $active={isActive} />
               <PanelOverlay $active={isActive} />
               <VerticalLabel $visible={showVertical}>{v.title}</VerticalLabel>
               <Content $active={isActive}>
                 <ContentTitle>{v.title}</ContentTitle>
                 <ContentSub $color={v.color}>{v.subtitle}</ContentSub>
+                {v.quote && <ContentQuote>&ldquo;{v.quote}&rdquo;</ContentQuote>}
                 <PlayCTA>
                   <PlayTriangle aria-hidden="true" />
                   Video ansehen

@@ -136,7 +136,7 @@ export default function BerufstaettigePage() {
         subtitle="Intensive, flexible KI-Kurse speziell für Professionals. Abends, Wochenends oder online – du entscheidest deinen Lernrhythmus."
         breadcrumbs={breadcrumbs}
         accentColor={tokens.colors.navyBg}
-        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662282/ai-hub/website/website_stock_images/EVENT-03.png"
+        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776469600/ai-hub/website/AI-Academy-Website-Images/target-audience-berufstaetige.png"
       />
 
       <SectionBlock

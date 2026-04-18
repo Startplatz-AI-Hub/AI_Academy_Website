@@ -21,7 +21,7 @@ const PERSONAS = [
     cta: 'Förderung prüfen',
     href: '/arbeitssuchende',
     color: tokens.colors.mint,
-    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662279/ai-hub/website/website_stock_images/EVENT-01.png',
+    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1776473244/ai-hub/website/AI-Academy-Website-Images/hero-panel-arbeitssuchende-upscaled.png',
   },
   {
     id: 'professional',
@@ -31,7 +31,7 @@ const PERSONAS = [
     cta: 'Kurse entdecken',
     href: '/berufstaetige',
     color: tokens.colors.navy,
-    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662282/ai-hub/website/website_stock_images/EVENT-03.png',
+    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1776473245/ai-hub/website/AI-Academy-Website-Images/hero-panel-berufstaetige-upscaled.png',
   },
   {
     id: 'enterprise',
@@ -41,7 +41,7 @@ const PERSONAS = [
     cta: 'Beratung anfragen',
     href: '/unternehmen',
     color: tokens.colors.orange,
-    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png',
+    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1776473243/ai-hub/website/AI-Academy-Website-Images/hero-panel-unternehmen-upscaled.png',
   },
 ];
 

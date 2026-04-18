@@ -37,7 +37,7 @@ const AUDIENCES = [
     href: '/arbeitssuchende',
     color: SOFT.teal,
     colorBg: SOFT.tealBg,
-    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662279/ai-hub/website/website_stock_images/EVENT-01.png',
+    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1776469601/ai-hub/website/AI-Academy-Website-Images/target-audience-arbeitssuchende.png',
   },
   {
     badge: 'Berufsbegleitend',
@@ -52,7 +52,7 @@ const AUDIENCES = [
     href: '/berufstaetige',
     color: SOFT.sky,
     colorBg: SOFT.skyBg,
-    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662282/ai-hub/website/website_stock_images/EVENT-03.png',
+    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1776469600/ai-hub/website/AI-Academy-Website-Images/target-audience-berufstaetige.png',
   },
   {
     badge: 'Inhouse',
@@ -67,7 +67,7 @@ const AUDIENCES = [
     href: '/unternehmen',
     color: SOFT.coral,
     colorBg: SOFT.coralBg,
-    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png',
+    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1776469603/ai-hub/website/AI-Academy-Website-Images/target-audience-unternehmen.png',
   },
 ];
 

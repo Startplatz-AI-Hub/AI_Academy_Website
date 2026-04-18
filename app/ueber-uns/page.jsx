@@ -247,7 +247,7 @@ export default function UeberUnsPage() {
           <GroupPhoto>
             <CyberCorners $color={tokens.colors.mint} $size={14} />
             <img
-              src="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1771197824/ai-hub/website/website_stock_images/gruppenfoto.png"
+              src="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1776469608/ai-hub/website/AI-Academy-Website-Images/team-gruppenfoto.png"
               alt="Das STARTPLATZ AI Academy Team"
               width="1200"
               height="500"

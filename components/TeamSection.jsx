@@ -12,7 +12,7 @@ import PlanetSection from './PlanetSection';
    Large group photo with overlapping location cards
    ───────────────────────────────────────────── */
 
-const GROUP_PHOTO = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1400/v1771197824/ai-hub/website/website_stock_images/gruppenfoto.png';
+const GROUP_PHOTO = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1400/v1776469608/ai-hub/website/AI-Academy-Website-Images/team-gruppenfoto.png';
 
 const LOCATIONS = [
   { city: 'Köln', image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,c_fill,q_auto,w_800,h_400/v1614775893/Offices/K%C3%B6ln/Au%C3%9Fenansicht/STARTPLATZ_Ko%CC%88ln_Au%C3%9Fenansicht9.jpg' },

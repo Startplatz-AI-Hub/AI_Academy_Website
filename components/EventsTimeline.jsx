@@ -12,7 +12,7 @@ import { clipBR, clipTLBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
    Fallback: static list below if API fails
    ───────────────────────────────────────────── */
 
-const VIDEO_BG = 'https://res.cloudinary.com/startplatz/video/upload/v1767675544/ai-hub/website/Abstract_background_deep_1080p_202601060439.mp4';
+const VIDEO_BG = 'https://res.cloudinary.com/startplatz/video/upload/v1776473242/ai-hub/website/AI-Academy-Website-Images/Event_video_2.mp4';
 const ALL_EVENTS_URL = 'https://www.startplatz.de/events?tag=startplatz-ai-hub#kommendeEvents';
 
 /* Fallback shown while loading or if the live feed errors out */
@@ -27,7 +27,7 @@ const FALLBACK_EVENTS = [
     location: 'Köln + Online',
     cta: 'Bewerben',
     href: ALL_EVENTS_URL,
-    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1767662279/ai-hub/website/website_stock_images/EVENT-01.png',
+    image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1776469601/ai-hub/website/AI-Academy-Website-Images/target-audience-arbeitssuchende.png',
   },
   { id: 'fallback-2', date: 'FEB 15', title: 'ChatGPT für Business', tags: ['Workshop'], description: 'Praktische Anwendungen für Marketing & Sales.', location: 'Düsseldorf', cta: 'Anmelden', href: ALL_EVENTS_URL },
   { id: 'fallback-3', date: 'FEB 22', title: 'AI Meetup Köln #47', tags: ['Kostenlos'], description: 'Networking und Talks zu aktuellen KI-Trends.', location: 'Köln', cta: 'Join', href: ALL_EVENTS_URL },

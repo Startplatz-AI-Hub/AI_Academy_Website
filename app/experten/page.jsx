@@ -142,7 +142,7 @@ export default function ExpertenPage() {
         subtitle="Gestalte die KI-Fähigkeiten der nächsten Generation. Unterrichte an der STARTPLATZ AI Academy und verdiene dabei durchschnittlich 2.500-5.000 Euro pro Kurs."
         breadcrumbs={breadcrumbs}
         accentColor={tokens.colors.primaryLighter}
-        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png"
+        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776469604/ai-hub/website/AI-Academy-Website-Images/experten-networking-event.png"
       />
 
       <SectionBlock

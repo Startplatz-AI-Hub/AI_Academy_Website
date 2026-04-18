@@ -23,7 +23,7 @@ export const metadata = {
     url: 'https://ai-hub.startplatz.de/',
     images: [
       {
-        url: 'https://res.cloudinary.com/startplatz/image/upload/v1771197824/ai-hub/website/website_stock_images/gruppenfoto.png',
+        url: 'https://res.cloudinary.com/startplatz/image/upload/v1776469608/ai-hub/website/AI-Academy-Website-Images/team-gruppenfoto.png',
         width: 1200,
         height: 630,
         alt: 'STARTPLATZ AI Academy Team – Gruppenfoto',
@@ -38,7 +38,7 @@ export const metadata = {
       'Geförderte Bootcamps, praxisnahe Kurse und eine starke Community für KI-Kompetenz in NRW.',
     images: [
       {
-        url: 'https://res.cloudinary.com/startplatz/image/upload/v1771197824/ai-hub/website/website_stock_images/gruppenfoto.png',
+        url: 'https://res.cloudinary.com/startplatz/image/upload/v1776469608/ai-hub/website/AI-Academy-Website-Images/team-gruppenfoto.png',
         alt: 'STARTPLATZ AI Academy Team – Gruppenfoto',
       },
     ],
@@ -116,17 +116,17 @@ export default function RootLayout({ children }) {
         <link
           rel="preload"
           as="image"
-          href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662279/ai-hub/website/website_stock_images/EVENT-01.png"
+          href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473244/ai-hub/website/AI-Academy-Website-Images/hero-panel-arbeitssuchende-upscaled.png"
         />
         <link
           rel="preload"
           as="image"
-          href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662282/ai-hub/website/website_stock_images/EVENT-03.png"
+          href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473245/ai-hub/website/AI-Academy-Website-Images/hero-panel-berufstaetige-upscaled.png"
         />
         <link
           rel="preload"
           as="image"
-          href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1767662288/ai-hub/website/website_stock_images/EVENT-04.png"
+          href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473243/ai-hub/website/AI-Academy-Website-Images/hero-panel-unternehmen-upscaled.png"
         />
 
         {/* JSON-LD */}
