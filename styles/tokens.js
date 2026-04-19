@@ -62,8 +62,8 @@ export const tokens = {
   },
 
   fonts: {
-    display: "'Outfit', sans-serif",
-    body:    "'Inter', sans-serif",
+    display: "'Aileron', 'Outfit', sans-serif",
+    body:    "'Aileron', 'Inter', sans-serif",
     mono:    "'JetBrains Mono', monospace",
   },
 
@@ -83,6 +83,8 @@ export const tokens = {
   },
 
   fontWeights: {
+    thin:    100,
+    light:   300,
     regular: 400,
     medium:  500,
     semi:    600,

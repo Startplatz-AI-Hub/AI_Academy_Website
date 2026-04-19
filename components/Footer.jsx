@@ -11,7 +11,7 @@ import { clipBR, clipTLBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
    Chamfered elements, corner accents
    ───────────────────────────────────────────── */
 
-const LOGO_URL = 'https://res.cloudinary.com/startplatz/image/upload/v1776212867/ai-hub/website/AI-Academy%20Logos/startplatz-ai-academy-logo-white.png';
+const LOGO_URL = 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-dark-400w.png';
 
 const LINK_GROUPS = [
   { title: 'Programme', links: [
@@ -23,6 +23,7 @@ const LINK_GROUPS = [
   { title: 'Ressourcen', links: [
     { label: 'Über Uns', href: '/ueber-uns' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Presse & Medien', href: '/presse' },
     { label: 'Events', href: '/#events' },
     { label: 'FAQ', href: '/#faq' },
   ]},
@@ -35,6 +36,7 @@ const LINK_GROUPS = [
 
 const Foot = styled.footer`
   position: relative;
+  z-index: 1;
   background: ${tokens.colors.dark};
   color: ${tokens.colors.darkText};
   padding: ${tokens.spacing['4xl']} ${tokens.spacing.lg} ${tokens.spacing['2xl']};

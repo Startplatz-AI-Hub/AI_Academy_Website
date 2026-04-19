@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: ${tokens.fonts.body};
+    font-weight: ${tokens.fontWeights.light};
     background: ${tokens.colors.pageBg};
     color: ${tokens.colors.text};
     line-height: ${tokens.lineHeights.normal};
@@ -87,12 +88,13 @@ const GlobalStyles = createGlobalStyle`
   /* ── Typography ──────────────────────────── */
   h1, h2, h3, h4, h5, h6 {
     font-family: ${tokens.fonts.display};
-    font-weight: ${tokens.fontWeights.bold};
+    font-weight: ${tokens.fontWeights.black};
     line-height: ${tokens.lineHeights.tight};
     color: ${tokens.colors.text};
   }
 
   p {
+    font-weight: ${tokens.fontWeights.light};
     line-height: ${tokens.lineHeights.relaxed};
     color: ${tokens.colors.textSoft};
   }

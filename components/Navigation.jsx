@@ -6,7 +6,7 @@ import styled, { css, keyframes } from 'styled-components';
 import { tokens, media } from '../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
 
-const LOGO_URL = 'https://res.cloudinary.com/startplatz/image/upload/v1776212864/ai-hub/website/AI-Academy%20Logos/startplatz-ai-academy-logo-transparent-md.png';
+const LOGO_URL = 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-light-400w.png';
 
 const NAV_LINKS = [
   {

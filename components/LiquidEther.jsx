@@ -299,6 +299,13 @@ export default function LiquidEther({
     loadThree().then((THREE) => {
       if (disposed || !mountRef.current) return;
 
+      /* Validate shader strings (can be null after HMR) */
+      const shaders = [face_vert, line_vert, mouse_vert, advection_frag, color_frag, divergence_frag, externalForce_frag, poisson_frag, pressure_frag, viscous_frag];
+      if (shaders.some(s => !s || typeof s !== 'string')) {
+        console.warn('[LiquidEther] Shader strings missing (HMR?), skipping init');
+        return;
+      }
+
       /* ── Palette texture ── */
       function makePaletteTexture(stops) {
         let arr = (Array.isArray(stops) && stops.length > 0)
@@ -728,10 +735,15 @@ export default function LiquidEther({
         if (elapsed < frameInterval) return;
         lastFrameTime = now - (elapsed % frameInterval);
 
-        autoDriverInst.update();
-        Mouse.update();
-        Common.update();
-        output.update();
+        try {
+          autoDriverInst.update();
+          Mouse.update();
+          Common.update();
+          output.update();
+        } catch (err) {
+          console.error('[LiquidEther] render error, stopping:', err.message);
+          running = false;
+        }
       }
 
       const onResize = () => { Common.resize(); output.resize(); };

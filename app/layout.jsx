@@ -11,8 +11,8 @@ export const metadata = {
   metadataBase: new URL('https://ai-hub.startplatz.de'),
   alternates: { canonical: '/' },
   icons: {
-    icon: 'https://res.cloudinary.com/startplatz/image/upload/v1776212926/ai-hub/website/AI-Academy%20Logos/favicon-512x512.png',
-    apple: 'https://res.cloudinary.com/startplatz/image/upload/v1776212926/ai-hub/website/AI-Academy%20Logos/favicon-512x512.png',
+    icon: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/favicon/favicon-512x512.png',
+    apple: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/favicon/apple-touch-icon.png',
   },
   openGraph: {
     type: 'website',
@@ -55,7 +55,7 @@ const jsonLd = [
     '@type': 'EducationalOrganization',
     name: 'STARTPLATZ AI Academy',
     url: 'https://ai-hub.startplatz.de/',
-    logo: 'https://res.cloudinary.com/startplatz/image/upload/v1776212864/ai-hub/website/AI-Academy%20Logos/startplatz-ai-academy-logo-transparent-md.png',
+    logo: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-light-800w.png',
     description:
       'Geförderte KI-Weiterbildungen, praxisnahe Bootcamps und anerkannte Zertifizierungen in Köln und Düsseldorf.',
     address: [
@@ -105,8 +105,13 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://reinhart1010.github.io" />
 
-        {/* Fonts */}
+        {/* Fonts – Aileron (display/headings), Inter (body), JetBrains Mono (code) */}
+        <link
+          href="https://reinhart1010.github.io/aileron/aileron.lite.css"
+          rel="stylesheet"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"

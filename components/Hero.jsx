@@ -16,11 +16,11 @@ const PARTNERS = [
   { src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', alt: 'Microsoft', w: 110 },
   { src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', alt: 'Google', w: 90 },
   { src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg', alt: 'AWS', w: 80 },
-  { src: 'https://res.cloudinary.com/startplatz/image/upload/v1776212864/ai-hub/website/AI-Academy%20Logos/startplatz-ai-academy-logo-transparent-md.png', alt: 'AI Academy', w: 110 },
+  { src: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-light-400w.png', alt: 'AI Academy', w: 110 },
   { src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', alt: 'Microsoft', w: 110 },
   { src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', alt: 'Google', w: 90 },
   { src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg', alt: 'AWS', w: 80 },
-  { src: 'https://res.cloudinary.com/startplatz/image/upload/v1776212864/ai-hub/website/AI-Academy%20Logos/startplatz-ai-academy-logo-transparent-md.png', alt: 'AI Academy', w: 110 },
+  { src: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-light-400w.png', alt: 'AI Academy', w: 110 },
 ];
 
 /* ── Styles ────────────────────────────────── */
