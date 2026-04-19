@@ -25,6 +25,9 @@ export default function HomePage() {
       <Stories />
       <FAQ />
       <Newsletter />
+
+      {/* ElevenLabs AI Voice Agent – floating widget */}
+      <elevenlabs-convai agent-id="agent_7801kphmjab6fmk921djmyxcz10x" />
     </SharedLayout>
   );
 }

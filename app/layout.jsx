@@ -129,6 +129,13 @@ export default function RootLayout({ children }) {
           href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473243/ai-hub/website/AI-Academy-Website-Images/hero-panel-unternehmen-upscaled.png"
         />
 
+        {/* ElevenLabs ConvAI Widget */}
+        <script
+          src="https://unpkg.com/@elevenlabs/convai-widget-embed"
+          async
+          type="text/javascript"
+        />
+
         {/* JSON-LD */}
         {jsonLd.map((data, i) => (
           <script
