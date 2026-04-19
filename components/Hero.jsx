@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { tokens, media } from '../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
@@ -8,9 +8,33 @@ import useMouseParallax from '../hooks/useMouseParallax';
 import PersonaReveal from './PersonaReveal';
 
 /* ─────────────────────────────────────────────
-   HERO – Cyberpunk-styled claim + PersonaReveal
-   + Infinite partner marquee
+   HERO – Single-word "liquid dissolve" rotation
+   Only the highlighted keyword morphs.
+   Structure: STARTE / DEINE / [keyword] / JETZT.
    ───────────────────────────────────────────── */
+
+/* ── Rotating keyword data ────────────────── */
+
+const KEYWORDS = [
+  {
+    word: 'KARRIERE',
+    sub: 'Geförderte Bootcamps für Arbeitssuchende in Köln & Düsseldorf. 12\u00a0Wochen. Zertifiziert. Karriere\u00a0ready.',
+  },
+  {
+    word: 'ZUKUNFT',
+    sub: 'Maßgeschneiderte KI-Trainings für Unternehmen. Praxisnah. Vor\u00a0Ort oder remote. Sofort\u00a0einsetzbar.',
+  },
+  {
+    word: 'EXPERTISE',
+    sub: 'Berufsbegleitende KI-Weiterbildung für Profis. Abends & am Wochenende. Zertifiziert. Zukunftssicher.',
+  },
+];
+
+const DISPLAY_MS = 8000;
+const DISSOLVE_MS = 800;
+const EMERGE_MS = 800;
+
+/* ── Partners ─────────────────────────────── */
 
 const PARTNERS = [
   { src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', alt: 'Microsoft', w: 110 },
@@ -34,7 +58,6 @@ const Section = styled.section`
   justify-content: center;
   overflow: hidden;
   padding-top: 72px;
-  /* transparent – ColorBends background shines through */
 `;
 
 const SlashAccent = styled.div`
@@ -46,8 +69,6 @@ const SlashAccent = styled.div`
   opacity: 0.3;
   pointer-events: none;
 `;
-
-/* GridPattern removed – replaced by global ColorBends background */
 
 const Inner = styled.div`
   position: relative;
@@ -103,12 +124,35 @@ const HeadlineWord = styled.span`
   &.dim { color: ${tokens.colors.textDim}; }
 `;
 
+/* Parallax wrapper — moves instantly with mouse, no transition */
+const MorphParallax = styled.span`
+  display: block;
+  will-change: transform;
+`;
+
+/* The morphing keyword — only opacity + filter transition (no layout-affecting props) */
+const MorphWord = styled.span`
+  display: block;
+  will-change: opacity, filter;
+  background: linear-gradient(135deg, ${tokens.colors.primary}, ${tokens.colors.primaryMuted});
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition:
+    opacity ${DISSOLVE_MS}ms cubic-bezier(0.4, 0, 0.2, 1),
+    filter ${DISSOLVE_MS}ms cubic-bezier(0.4, 0, 0.2, 1);
+`;
+
 const SubText = styled.p`
   font-size: clamp(${tokens.fontSizes.base}, 2vw, ${tokens.fontSizes.xl});
   color: ${tokens.colors.textMuted};
   line-height: ${tokens.lineHeights.relaxed};
   max-width: 520px;
   margin-bottom: ${tokens.spacing['2xl']};
+  will-change: opacity, filter;
+  transition:
+    opacity ${DISSOLVE_MS * 0.6}ms ease,
+    filter ${DISSOLVE_MS * 0.6}ms ease;
 `;
 
 const CTAGroup = styled.div`
@@ -248,25 +292,19 @@ const MarqueeTrack = styled.div`
   align-items: center;
   width: max-content;
   animation: ${marqueeScroll} 25s linear infinite;
-
   &:hover { animation-play-state: paused; }
 `;
 
 const MarqueeItem = styled.div`
   flex-shrink: 0;
   padding: 0 ${tokens.spacing['2xl']};
-
   img {
     height: 22px;
     width: auto;
     opacity: 0.25;
     filter: grayscale(1);
     transition: opacity ${tokens.transitions.fast}, filter ${tokens.transitions.fast};
-
-    &:hover {
-      opacity: 0.6;
-      filter: none;
-    }
+    &:hover { opacity: 0.6; filter: none; }
   }
 `;
 
@@ -282,29 +320,106 @@ export default function Hero() {
   const { x, y } = useMouseParallax(0.06);
   const depths = [14, 20, 28, 10];
 
+  const [kwIndex, setKwIndex] = useState(0);
+  const [phase, setPhase] = useState('visible'); // 'visible' | 'dissolving' | 'emerging'
+  const [displayWord, setDisplayWord] = useState(KEYWORDS[0].word);
+  const [displaySub, setDisplaySub] = useState(KEYWORDS[0].sub);
+  const timerRef = useRef(null);
+
+  const startTransition = useCallback(() => {
+    // Phase 1: dissolve — word spreads apart, blurs, fades into ether
+    setPhase('dissolving');
+
+    setTimeout(() => {
+      // Swap to next keyword while invisible
+      const nextIdx = (kwIndex + 1) % KEYWORDS.length;
+      setKwIndex(nextIdx);
+      setDisplayWord(KEYWORDS[nextIdx].word);
+      setDisplaySub(KEYWORDS[nextIdx].sub);
+
+      // Phase 2: emerge — new word materializes from blur
+      setPhase('emerging');
+
+      setTimeout(() => {
+        setPhase('visible');
+      }, EMERGE_MS);
+    }, DISSOLVE_MS);
+  }, [kwIndex]);
+
+  useEffect(() => {
+    if (phase === 'visible') {
+      timerRef.current = setTimeout(startTransition, DISPLAY_MS);
+    }
+    return () => clearTimeout(timerRef.current);
+  }, [phase, startTransition]);
+
+  /* Morphing word style — only opacity + filter, no layout changes */
+  const getMorphStyle = () => {
+    if (phase === 'dissolving') {
+      return { opacity: 0, filter: 'blur(18px)' };
+    }
+    if (phase === 'emerging') {
+      return { opacity: 1, filter: 'blur(0px)' };
+    }
+    return { opacity: 1, filter: 'blur(0px)' };
+  };
+
+  /* Subtitle style */
+  const getSubStyle = () => {
+    if (phase === 'dissolving') {
+      return { opacity: 0, filter: 'blur(6px)' };
+    }
+    if (phase === 'emerging') {
+      return { opacity: 1, filter: 'blur(0px)' };
+    }
+    return { opacity: 1, filter: 'blur(0px)' };
+  };
+
+  const staticWords = ['STARTE', 'DEINE', null, 'JETZT.'];
+
   return (
     <Section id="hero" aria-label="Hero">
       <SlashAccent aria-hidden="true" />
 
       <Inner>
         <ClaimWrapper style={{ transform: `translate(${x * 6}px, ${y * 6}px)` }}>
-          <Headline id="hero-headline" aria-label="Starte deine Karriere jetzt.">
-            {['STARTE', 'DEINE', 'KARRIERE', 'JETZT.'].map((word, i) => (
-              <HeadlineWord
-                key={word}
-                data-hero-word={i}
-                aria-hidden="true"
-                className={`${i === 2 ? 'highlight' : ''} ${i === 3 ? 'dim' : ''}`}
-                style={{ transform: `translate(${x * depths[i]}px, ${y * depths[i]}px)` }}
-              >
-                {word}
-              </HeadlineWord>
-            ))}
+          <Headline
+            id="hero-headline"
+            aria-label={`Starte deine ${displayWord.toLowerCase()} jetzt.`}
+            aria-live="polite"
+          >
+            {staticWords.map((word, i) => {
+              if (i === 2) {
+                /* The morphing keyword — parallax on outer, dissolve on inner */
+                return (
+                  <MorphParallax
+                    key="morph"
+                    data-hero-word={2}
+                    aria-hidden="true"
+                    style={{ transform: `translate(${x * depths[2]}px, ${y * depths[2]}px)` }}
+                  >
+                    <MorphWord style={getMorphStyle()}>
+                      {displayWord}
+                    </MorphWord>
+                  </MorphParallax>
+                );
+              }
+              return (
+                <HeadlineWord
+                  key={word}
+                  data-hero-word={i}
+                  aria-hidden="true"
+                  className={i === 3 ? 'dim' : ''}
+                  style={{ transform: `translate(${x * depths[i]}px, ${y * depths[i]}px)` }}
+                >
+                  {word}
+                </HeadlineWord>
+              );
+            })}
           </Headline>
 
-          <SubText>
-            Praxisnahe Bootcamps in Köln &amp; Düsseldorf.
-            12&nbsp;Wochen. Zertifiziert. Karriere&nbsp;ready.
+          <SubText style={getSubStyle()}>
+            {displaySub}
           </SubText>
 
           <CTAGroup>
