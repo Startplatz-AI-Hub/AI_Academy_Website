@@ -430,7 +430,7 @@ export default function Hero() {
                 <ArrowIcon />
               </PrimaryBtn>
             </PrimaryBtnWrap>
-            <SecondaryBtn href="#faq">
+            <SecondaryBtn href="/wissens-test">
               Wissens-Test machen
               <CyberCorners $color={tokens.colors.textDim} $size={6} />
             </SecondaryBtn>
