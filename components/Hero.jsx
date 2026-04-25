@@ -19,7 +19,7 @@ import { CALENDLY_URL } from '../lib/site';
 const KEYWORDS = [
   {
     word: 'STÄRKE',
-    sub: 'Starte deine Karriere mit dem FortyDays KI-Manager:in. 8 Wochen Vollzeit, 100% gefördert, AZAV-zertifiziert.',
+    sub: 'Starte deine Karriere mit dem FortyDays KI-Manager:in.\n8 Wochen Vollzeit, 100% gefördert, AZAV-zertifiziert.',
   },
   {
     word: 'WIRKUNG',
@@ -163,6 +163,7 @@ const SubText = styled.p`
   line-height: ${tokens.lineHeights.relaxed};
   max-width: 520px;
   margin-bottom: ${tokens.spacing['2xl']};
+  white-space: pre-line;
   will-change: opacity, filter;
   transition:
     opacity ${DISSOLVE_MS * 0.6}ms ease,
