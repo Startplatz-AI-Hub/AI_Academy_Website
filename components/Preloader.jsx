@@ -42,6 +42,10 @@ const Overlay = styled.div`
 
 const ImagePanel = styled.div`
   position: absolute;
+  top: 0;
+  left: ${({ $index }) => `calc(${$index} * 33.333vw)`};
+  width: calc(33.333vw + 1px);
+  height: 100%;
   overflow: hidden;
 
   img {
@@ -160,7 +164,7 @@ export default function Preloader({ onComplete }) {
       const vh = window.innerHeight;
       const panelW = vw / 3;
 
-      if (vw < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         gsap.to(overlay, {
           opacity: 0,
           delay: 0.25,
@@ -182,7 +186,7 @@ export default function Preloader({ onComplete }) {
       });
 
       /* ===== Layout text centred ===== */
-      const fontSize = Math.min(vw * 0.1, 120);
+      const fontSize = vw < 768 ? Math.min(vw * 0.13, 58) : Math.min(vw * 0.1, 120);
       const lineH = fontSize * 1.05;
       const totalH = WORDS.length * lineH;
       const startY = (vh - totalH) / 2;
@@ -297,7 +301,7 @@ export default function Preloader({ onComplete }) {
   return (
     <Overlay ref={overlayRef} aria-hidden="true" role="presentation">
       {IMAGES.map((src, i) => (
-        <ImagePanel key={i} ref={(el) => (panelRefs.current[i] = el)}>
+        <ImagePanel key={i} $index={i} ref={(el) => (panelRefs.current[i] = el)}>
           <img src={src} alt="" loading="eager" />
         </ImagePanel>
       ))}

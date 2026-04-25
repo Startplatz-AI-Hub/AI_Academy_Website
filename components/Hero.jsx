@@ -59,6 +59,7 @@ const Section = styled.section`
   position: relative;
   z-index: 1;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,9 +86,13 @@ const Inner = styled.div`
   padding: 0 ${tokens.spacing.lg};
   display: grid;
   grid-template-columns: 1fr;
-  gap: ${tokens.spacing['3xl']};
+  gap: ${tokens.spacing['2xl']};
   align-items: center;
   flex: 1;
+
+  ${media.md} {
+    gap: ${tokens.spacing['3xl']};
+  }
 
   ${media.lg} {
     grid-template-columns: minmax(0, 1fr) minmax(440px, 1fr);
@@ -244,13 +249,21 @@ const SecondaryBtn = styled.a`
 
 const RevealContainer = styled.div`
   position: relative;
-  align-self: start;
-  width: 100%;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 420px);
   min-width: 0;
   contain: layout paint;
-  height: 500px;
-  display: none;
-  ${media.md} { display: block; height: 420px; }
+  height: clamp(240px, 66vw, 310px);
+  display: block;
+
+  ${media.md} {
+    align-self: start;
+    justify-self: stretch;
+    width: 100%;
+    height: 420px;
+  }
+
   ${media.lg} { height: 520px; }
   ${media.xl} { height: 580px; }
 `;
