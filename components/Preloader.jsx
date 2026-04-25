@@ -25,7 +25,7 @@ const IMAGES = [
   'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473243/ai-hub/website/AI-Academy-Website-Images/hero-panel-unternehmen-upscaled.png',
 ];
 
-const WORDS = ['ENTDECKE', 'MEHR', 'STÄRKE', 'MIT KI.'];
+const WORDS = ['ENTDECKE', 'MEHR', 'STÄRKEN', 'MIT KI.'];
 const READY_TIMEOUT_MS = 1200;
 const MAX_VISIBLE_MS = 5200;
 
