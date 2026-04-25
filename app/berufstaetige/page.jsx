@@ -3,127 +3,87 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
+  BeforeAfter,
   Button,
-  PageHero,
-  SectionBlock,
-  FeatureCard,
   CTABanner,
+  DetailTable,
+  FeatureCard,
+  MiniFAQ,
+  PageHero,
+  ResponsiveGrid,
+  SectionBlock,
   StatsRow,
-  TestimonialCard,
+  TwoColumn,
+  VisualSlot,
 } from '../../components/ui';
 import SubpageLayout from '../../components/SubpageLayout';
 import { tokens } from '../../styles/tokens';
+import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
+import { CALENDLY_URL } from '../../lib/site';
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+const Panel = styled.div`
+  position: relative;
+  padding: ${tokens.spacing['2xl']};
+  background: ${tokens.colors.surface};
+  border: 1px solid ${tokens.colors.glassBorder};
+  ${clipBR(CHAMFER.md)}
 `;
 
-const GridTwoCol = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-export default function BerufstaettigePage() {
-  const breadcrumbs = [
-    { label: 'Berufstätige', href: '/berufstaetige', active: true },
+export default function BerufstaetigePage() {
+  const before = [
+    'Alle reden über KI. Du nickst und hoffst.',
+    'Dein Chef fragt: "Können wir das mit KI?"',
+    'Du fühlst dich abgehängt.',
   ];
 
-  const whyNow = [
-    {
-      icon: '🔐',
-      title: 'Zukunftssicherheit',
-      description: 'KI ist nicht mehr optional. Sichern deine Karriere mit gefragten KI-Skills ab.',
-      features: ['Künftige Jobsicherheit', 'Wettbewerbsfähigkeit', 'Future-Ready'],
-      accentColor: tokens.colors.navy,
-      accentBg: tokens.colors.navyBg,
-      cornerColor: tokens.colors.navy,
-    },
-    {
-      icon: '📈',
-      title: 'Karrieresprung',
-      description: 'KI-Expertise öffnet Türen für Beförderungen, Gehaltssteigerungen und neue Rollen.',
-      features: ['Höhere Positionen', 'Mehr Verantwortung', 'Leadership Opportunities'],
-      accentColor: tokens.colors.navy,
-      accentBg: tokens.colors.navyBg,
-      cornerColor: tokens.colors.navy,
-    },
-    {
-      icon: '🏆',
-      title: 'Wettbewerbsvorteil',
-      description: 'Differenziere dich von Kollegen. KI-Skills sind noch immer ein großes Differenzierungsmerkmal.',
-      features: ['Spezialisierung', 'Expertise', 'Marktführer'],
-      accentColor: tokens.colors.navy,
-      accentBg: tokens.colors.navyBg,
-      cornerColor: tokens.colors.navy,
-    },
+  const after = [
+    'Du automatisierst Prozesse, die andere händisch machen.',
+    'Du sagst: "Kann ich zeigen. Hier ist der Workflow."',
+    'Du stehst vor deinem Chef besser da.',
   ];
 
-  const formats = [
+  const details = [
+    { label: 'Format', value: '8 Wochen Teilzeit' },
+    { label: 'Rhythmus', value: 'Di & Do, 15-18 Uhr' },
+    { label: 'Teilnehmer', value: 'Max. 20 pro Kohorte' },
+    { label: 'Förderung', value: 'QCG-förderfähig' },
+  ];
+
+  const curriculum = [
     {
-      icon: '🌙',
-      title: 'Abendkurse',
-      description: 'Flexible Abendkurse nach der Arbeit. Perfekt für berufstätige mit vollem Terminkalender.',
-      features: ['Nach 18 Uhr', '2-3 x pro Woche', 'Hybrid-Option'],
-      accentColor: tokens.colors.navy,
-      accentBg: tokens.colors.navyBg,
-      cornerColor: tokens.colors.navy,
+      icon: '01',
+      title: 'n8n Workflows',
+      description: 'Du baust Automationen, die wiederkehrende Aufgaben sichtbar reduzieren.',
     },
     {
-      icon: '📅',
-      title: 'Wochenend-Workshops',
-      description: 'Intensive Workshops samstags und sonntags für schnelle Skill-Entwicklung im Schnelltempo.',
-      features: ['Sa & So', '8-10 Stunden', 'Hands-On'],
-      accentColor: tokens.colors.navy,
-      accentBg: tokens.colors.navyBg,
-      cornerColor: tokens.colors.navy,
+      icon: '02',
+      title: 'GPT-APIs & Agents',
+      description: 'Du verbindest KI-Modelle mit Prozessen statt nur einzelne Prompts zu schreiben.',
     },
     {
-      icon: '💻',
-      title: 'Online-Module',
-      description: 'Vollständig asynchrone Kurse mit flexiblem Zeitmanagement. Lerne in deinem eigenen Tempo.',
-      features: ['24/7 Zugang', 'Self-Paced', 'Lifetime Access'],
-      accentColor: tokens.colors.navy,
-      accentBg: tokens.colors.navyBg,
-      cornerColor: tokens.colors.navy,
+      icon: '03',
+      title: 'RAG & Wissen',
+      description: 'Du lernst, wie interne Dokumente und KI-Antworten sauber zusammenkommen.',
+    },
+    {
+      icon: '04',
+      title: 'Security & EU AI Act',
+      description: 'Du nutzt KI produktiv, ohne Datenschutz und Governance zu ignorieren.',
     },
   ];
 
   const stats = [
-    { value: 5000, label: 'Berufstätige', suffix: '+' },
-    { value: 92, label: 'Weiterempfehlung', suffix: '%' },
-    { value: 4, label: 'Wochen Kurs', suffix: '' },
-    { value: 300, label: 'Partner Unternehmen', suffix: '+' },
+    { value: 1000, label: 'Absolventen', suffix: '+' },
+    { value: 20, label: 'Max. Teilnehmer pro Kohorte' },
+    { displayValue: '2x', label: 'Pro Woche, Di & Do' },
   ];
 
-  const testimonials = [
-    {
-      quote:
-        'Als Manager wollte ich KI verstehen. Die Abendkurse haben mir das Wissen gegeben, das ich brauchte, ohne meine Arbeit zu unterbrechen. Großartig!',
-      name: 'Petra H.',
-      role: 'Projektmanagerin, DAX-Unternehmen',
-      avatar: 'https://res.cloudinary.com/startplatz/image/upload/c_fill,w_44,h_44,g_face,q_auto/avatar-3.jpg',
-      accentColor: tokens.colors.navy,
-    },
-    {
-      quote:
-        'Die Wochenend-Workshops passen perfekt zu meinem Zeitplan. Ich lerne schnell und kann das Wissen sofort in meinen täglichen Aufgaben anwenden.',
-      name: 'Christian B.',
-      role: 'Consultant, IT-Beratung',
-      avatar: 'https://res.cloudinary.com/startplatz/image/upload/c_fill,w_44,h_44,g_face,q_auto/avatar-4.jpg',
-      accentColor: tokens.colors.navy,
-    },
+  const faq = [
+    { q: 'Schaffe ich das neben meinem Vollzeitjob?', a: 'Ja, wenn du zwei feste Zeitfenster pro Woche blockst. Der Kurs ist bewusst auf berufsbegleitendes Lernen ausgelegt.' },
+    { q: 'Was lerne ich in den OneDay-Workshops?', a: 'OneDay ist kompakter: ein Tag, ein Thema, ein konkretes Deliverable. AfterWork führt dich tiefer über 8 Wochen.' },
+    { q: 'Kann mein Arbeitgeber die Kosten über QCG übernehmen?', a: 'Ja, AfterWork ist QCG-förderfähig. Wir helfen dir, die Argumentation und nächsten Schritte mit deinem Arbeitgeber vorzubereiten.' },
+    { q: 'Was ist der Unterschied zwischen AfterWork und FortyDays?', a: 'FortyDays ist Vollzeit für Arbeitssuchende. AfterWork läuft berufsbegleitend und fokussiert Automation im Job.' },
+    { q: 'Brauche ich Vorkenntnisse?', a: 'Nein. Grundlegende digitale Sicherheit reicht. Du lernst die Tools im Kurs und arbeitest an nachvollziehbaren Business Cases.' },
   ];
 
   return (
@@ -132,91 +92,88 @@ export default function BerufstaettigePage() {
         badge="Berufsbegleitend"
         badgeColor={tokens.colors.navy}
         badgeBg={tokens.colors.navyBg}
-        title="KI-Skills für <span>Berufstätige</span>"
-        subtitle="Intensive, flexible KI-Kurse speziell für Professionals. Abends, Wochenends oder online – du entscheidest deinen Lernrhythmus."
-        breadcrumbs={breadcrumbs}
+        title="Du bringst zwei Abende. <span>Wir bringen den Rest.</span>"
+        subtitle="AfterWork AI Automation. 8 Wochen, neben dem Job, sofort anwendbar."
+        breadcrumbs={[{ label: 'Berufstätige', href: '/berufstaetige', active: true }]}
         accentColor={tokens.colors.navyBg}
-        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776469600/ai-hub/website/AI-Academy-Website-Images/target-audience-berufstaetige.png"
-      />
+        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_900/v1776469600/ai-hub/website/AI-Academy-Website-Images/target-audience-berufstaetige.png"
+      >
+        <Button href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" variant="navy" size="lg" arrow>
+          Kostenlos beraten lassen
+        </Button>
+        <Button href="/wissens-test" variant="secondary" size="lg">
+          Wissens-Test machen
+        </Button>
+      </PageHero>
 
       <SectionBlock
-        badge="Strategie"
-        title="Warum gerade <span>jetzt</span>?"
-        subtitle="KI revolutioniert jeden Bereich. Investiere jetzt in deine Fähigkeiten."
+        badge="Vorher / Nachher"
+        title="Von Mitreden zu <span>Vormachen.</span>"
+        subtitle="AfterWork ist für Menschen gebaut, die KI im Job konkret einsetzen wollen."
         accent={tokens.colors.glowNavy}
       >
-        <Grid>
-          {whyNow.map((item, idx) => (
-            <FeatureCard
-              key={idx}
-              icon={item.icon}
-              title={item.title}
-              description={item.description}
-              features={item.features}
-              accentColor={item.accentColor}
-              accentBg={item.accentBg}
-              cornerColor={item.cornerColor}
-            />
-          ))}
-        </Grid>
+        <BeforeAfter before={before} after={after} accentColor={tokens.colors.navy} />
       </SectionBlock>
 
       <SectionBlock
-        badge="Formate"
-        title="Flexible Lernformate für <span>deinen</span> Alltag"
-        subtitle="Wähle das Format, das zu deinen Zielen und deinem Zeitplan passt"
+        badge="Produkt"
+        title="AfterWork <span>AI Automation</span>"
+        subtitle="Zwei Abende pro Woche. Genug Struktur, ohne deinen Job zu sprengen."
         variant="muted"
         accent={tokens.colors.glowNavy}
       >
-        <Grid>
-          {formats.map((fmt, idx) => (
+        <TwoColumn>
+          <Panel>
+            <CyberCorners $color={tokens.colors.navy} $size={10} />
+            <DetailTable items={details} />
+          </Panel>
+          <VisualSlot
+            title="Automation Workflow Map"
+            image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_900/v1776469600/ai-hub/website/AI-Academy-Website-Images/target-audience-berufstaetige.png"
+            accentColor={tokens.colors.navy}
+            prompt="Use case: infographic-diagram. Asset type: subpage visual. Clean automation workflow map for n8n, GPT APIs, human review, and business output; no tiny readable text; STARTPLATZ purple/sky palette; premium editorial style; no logos or watermark."
+          />
+        </TwoColumn>
+      </SectionBlock>
+
+      <SectionBlock
+        badge="Curriculum"
+        title="Was du nach 8 Wochen <span>zeigen kannst.</span>"
+        accent={tokens.colors.glowNavy}
+      >
+        <ResponsiveGrid $cols={4}>
+          {curriculum.map((item) => (
             <FeatureCard
-              key={idx}
-              icon={fmt.icon}
-              title={fmt.title}
-              description={fmt.description}
-              features={fmt.features}
-              accentColor={fmt.accentColor}
-              accentBg={fmt.accentBg}
-              cornerColor={fmt.cornerColor}
+              key={item.title}
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+              accentColor={tokens.colors.navy}
+              accentBg={tokens.colors.navyBg}
+              cornerColor={tokens.colors.navy}
             />
           ))}
-        </Grid>
+        </ResponsiveGrid>
+      </SectionBlock>
+
+      <SectionBlock title="Nach Zahlen" variant="white" centered accent={tokens.colors.glowNavy}>
+        <StatsRow stats={stats} />
       </SectionBlock>
 
       <SectionBlock
-        title="Nach Zahlen"
-        variant="white"
-        accent={tokens.colors.glowNavy}
-        centered
-      >
-        <StatsRow stats={stats} variant="light" />
-      </SectionBlock>
-
-      <SectionBlock
-        badge="Erfolgsgeschichten"
-        title="Von <span>Profis</span>, für Profis"
-        subtitle="Erfahren von Berufstätigen, die ihre KI-Fähigkeiten ausgebaut haben"
-        variant="light"
+        badge="FAQ"
+        title="Fragen vor dem <span>Feierabend-Kurs.</span>"
         accent={tokens.colors.glowNavy}
       >
-        <GridTwoCol>
-          {testimonials.map((test, idx) => (
-            <TestimonialCard
-              key={idx}
-              quote={test.quote}
-              name={test.name}
-              role={test.role}
-              avatar={test.avatar}
-              accentColor={test.accentColor}
-            />
-          ))}
-        </GridTwoCol>
+        <MiniFAQ items={faq} accentColor={tokens.colors.navy} />
       </SectionBlock>
 
-      <CTABanner title="Starte deine <span>KI-Transformation</span>">
-        <Button href="/#newsletter" variant="navy" size="lg" arrow>
-          Mehr Infos erhalten
+      <CTABanner
+        title="Mach KI zu deinem <span>Arbeitsvorteil.</span>"
+        subtitle="Wir klären gemeinsam, ob AfterWork und eine Förderung über QCG für dich passen."
+      >
+        <Button href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" variant="navy" size="lg" arrow>
+          Kostenlos beraten lassen
         </Button>
       </CTABanner>
     </SubpageLayout>

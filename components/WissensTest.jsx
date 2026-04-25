@@ -29,34 +29,34 @@ const QUESTIONS = [
   {
     id: 1,
     dimension: 'describe',
-    question: 'Ein Kollege behauptet, ChatGPT "versteht" Sprache wie ein Mensch. Wie schätzt du das ein?',
+    question: 'ChatGPT "versteht" Sprache wie ein Mensch. Stimmt das?',
     options: [
-      { text: 'Stimmt — LLMs haben durch das Training ein echtes Sprachverständnis entwickelt, ähnlich wie Menschen', score: 1 },
-      { text: 'LLMs erkennen statistische Muster in Sprache und generieren wahrscheinliche Fortsetzungen — das wirkt wie Verstehen, ist aber ein fundamental anderer Prozess', score: 3 },
-      { text: 'LLMs greifen auf eine Datenbank mit fertigen Antworten zu und wählen die passendste aus', score: 0 },
-      { text: 'LLMs verstehen Sprache zwar nicht, simulieren aber Bewusstsein so gut, dass der Unterschied in der Praxis irrelevant ist', score: 2 },
+      { icon: '○', text: 'Ja, LLMs verstehen Sprache ähnlich wie Menschen.', score: 1 },
+      { icon: '◇', text: 'Nein, sie berechnen wahrscheinliche Fortsetzungen.', score: 3 },
+      { icon: '□', text: 'Sie suchen fertige Antworten aus einer Datenbank.', score: 0 },
+      { icon: '▣', text: 'Der Unterschied ist im Alltag praktisch egal.', score: 2 },
     ],
   },
   {
     id: 2,
     dimension: 'describe',
-    question: 'Du möchtest mit KI eine Wettbewerbsanalyse für dein Unternehmen erstellen. Wie gehst du vor?',
+    question: 'Du willst eine Wettbewerbsanalyse mit KI starten. Was hilft?',
     options: [
-      { text: 'Du gibst der KI deinen Firmennamen und bittest um eine vollständige Wettbewerbsanalyse', score: 1 },
-      { text: 'Du definierst Branche, Zielmarkt, 3-5 konkrete Wettbewerber, Vergleichskriterien und gewünschtes Output-Format — und gibst der KI die Rolle eines Strategieberaters', score: 3 },
-      { text: 'Du fütterst die KI mit möglichst vielen Dokumenten über deine Branche und lässt sie frei analysieren', score: 1 },
-      { text: 'Du fragst die KI nacheinander nach jedem Wettbewerber einzeln und setzt die Ergebnisse selbst zusammen', score: 2 },
+      { icon: '○', text: 'Firmennamen eingeben und komplette Analyse verlangen.', score: 1 },
+      { icon: '◇', text: 'Branche, Wettbewerber, Kriterien und Format festlegen.', score: 3 },
+      { icon: '□', text: 'Viele Dokumente hochladen und frei analysieren lassen.', score: 1 },
+      { icon: '▣', text: 'Jeden Wettbewerber einzeln fragen und selbst bündeln.', score: 2 },
     ],
   },
   {
     id: 3,
     dimension: 'delegate',
-    question: 'Die KI liefert dir einen Entwurf für eine Kundenpräsentation, aber der Ton ist zu förmlich. Was machst du?',
+    question: 'Ein KI-Entwurf klingt zu förmlich. Was tust du?',
     options: [
-      { text: 'Du überarbeitest die Präsentation manuell — KI kann Tonalität nicht gut anpassen', score: 1 },
-      { text: 'Du generierst drei neue Versionen und nimmst die beste', score: 1 },
-      { text: 'Du gibst konkretes Feedback mit einem Beispiel des gewünschten Tons, lässt die KI überarbeiten und iterierst bis es passt', score: 3 },
-      { text: 'Du fügst dem ursprünglichen Prompt "lockerer Ton" hinzu und startest von vorne', score: 2 },
+      { icon: '○', text: 'Manuell überarbeiten, Tonalität kann KI kaum.', score: 1 },
+      { icon: '◇', text: 'Drei neue Versionen erzeugen und die beste nehmen.', score: 1 },
+      { icon: '□', text: 'Konkretes Feedback plus Beispielton geben.', score: 3 },
+      { icon: '▣', text: '"Lockerer Ton" ergänzen und von vorne starten.', score: 2 },
     ],
   },
   {
@@ -64,10 +64,10 @@ const QUESTIONS = [
     dimension: 'delegate',
     question: 'Dein Team soll KI nutzen, um den wöchentlichen Reporting-Aufwand zu reduzieren. Welche Strategie wählst du?',
     options: [
-      { text: 'Ein KI-Tool kaufen, das automatisch Reports aus den Datenquellen generiert — vollautomatisch ohne menschliche Prüfung', score: 1 },
-      { text: 'Einen standardisierten Prompt entwickeln, der Rohdaten in Entwürfe verwandelt, die das Team dann reviewt und finalisiert', score: 3 },
-      { text: 'Jedes Teammitglied lässt seinen Report individuell von KI schreiben, jeder mit seinem eigenen Ansatz', score: 1 },
-      { text: 'Die KI nur für die Datenaufbereitung nutzen, aber den eigentlichen Report weiterhin manuell schreiben', score: 2 },
+      { icon: '○', text: 'Ein Tool kaufen und Reports vollautomatisch erzeugen.', score: 1 },
+      { icon: '◇', text: 'Rohdaten per Standard-Prompt in Review-Entwürfe wandeln.', score: 3 },
+      { icon: '□', text: 'Jedes Teammitglied nutzt eigene Prompts und Methoden.', score: 1 },
+      { icon: '▣', text: 'KI nur für Datenaufbereitung einsetzen.', score: 2 },
     ],
   },
   {
@@ -75,10 +75,10 @@ const QUESTIONS = [
     dimension: 'discern',
     question: 'Eine KI erstellt dir eine Marktanalyse mit konkreten Zahlen und Quellenangaben. Alles wirkt schlüssig. Wie gehst du vor?',
     options: [
-      { text: 'Die Quellenangaben stichprobenartig prüfen, denn KI kann plausibel klingende aber fiktive Quellen und Statistiken generieren', score: 3 },
-      { text: 'Die Analyse ist verwendbar — wenn die KI Quellen nennt, hat sie diese auch tatsächlich ausgewertet', score: 0 },
-      { text: 'Die Zahlen grob mit deiner Branchenkenntnis abgleichen — die Quellen selbst sind bei einem renommierten KI-Modell verlässlich', score: 2 },
-      { text: 'Grundsätzlich alle KI-Analysen verwerfen und nur menschliche Quellen verwenden', score: 0 },
+      { icon: '○', text: 'Quellen stichprobenartig prüfen.', score: 3 },
+      { icon: '◇', text: 'Wenn Quellen genannt werden, sind sie ausgewertet.', score: 0 },
+      { icon: '□', text: 'Zahlen grob mit Branchenwissen abgleichen.', score: 2 },
+      { icon: '▣', text: 'KI-Analysen grundsätzlich verwerfen.', score: 0 },
     ],
   },
   {
@@ -86,10 +86,10 @@ const QUESTIONS = [
     dimension: 'discern',
     question: 'Du bittest eine KI um Empfehlungen für Projektmanagement-Software. Die Antwort enthält detaillierte Feature-Vergleiche und Preise. Was bedenkst du?',
     options: [
-      { text: 'Die Empfehlung ist fundiert, da KI-Modelle Zugang zu aktuellen Produktdatenbanken haben', score: 0 },
-      { text: 'Preise und Features können veraltet oder falsch sein, da das Wissen des Modells einen Stichtag hat — du verifizierst die Angaben auf den Anbieter-Websites', score: 3 },
-      { text: 'Die Empfehlung ist brauchbar als Startpunkt, aber du solltest noch 2-3 Bewertungsportale checken', score: 2 },
-      { text: 'KI-Modelle werden von Software-Herstellern beeinflusst, daher ist die Empfehlung grundsätzlich nicht neutral', score: 1 },
+      { icon: '○', text: 'KI-Modelle haben aktuelle Produktdatenbanken.', score: 0 },
+      { icon: '◇', text: 'Preise und Features direkt beim Anbieter prüfen.', score: 3 },
+      { icon: '□', text: 'Als Startpunkt nutzen und Bewertungsportale checken.', score: 2 },
+      { icon: '▣', text: 'KI-Empfehlungen sind grundsätzlich nicht neutral.', score: 1 },
     ],
   },
   {
@@ -97,10 +97,10 @@ const QUESTIONS = [
     dimension: 'discern',
     question: 'Du nutzt KI, um Bewerbungen vorzufiltern. Ein Kollege äußert Bedenken wegen möglicher Diskriminierung. Was ist deine Einschätzung?',
     options: [
-      { text: 'KI-Modelle sind objektiver als Menschen, da sie keine persönlichen Vorurteile haben — die Bedenken sind übertrieben', score: 0 },
-      { text: 'Das Risiko besteht, lässt sich aber durch einen Disclaimer im Bewerbungsprozess ausreichend adressieren', score: 0 },
-      { text: 'KI kann systematische Verzerrungen aus Trainingsdaten reproduzieren — es braucht regelmäßige Audits der Ergebnisse auf demographische Fairness und menschliche Letztentscheidung', score: 3 },
-      { text: 'Die Bedenken sind berechtigt, daher sollte man KI in sensiblen HR-Prozessen grundsätzlich nicht einsetzen', score: 1 },
+      { icon: '○', text: 'KI ist objektiver als Menschen, Bedenken sind übertrieben.', score: 0 },
+      { icon: '◇', text: 'Ein Disclaimer im Bewerbungsprozess reicht aus.', score: 0 },
+      { icon: '□', text: 'Bias prüfen, Audits nutzen, Menschen entscheiden lassen.', score: 3 },
+      { icon: '▣', text: 'KI in sensiblen HR-Prozessen nie einsetzen.', score: 1 },
     ],
   },
   {
@@ -108,10 +108,10 @@ const QUESTIONS = [
     dimension: 'direct',
     question: 'Du führst KI-Tools in einem Unternehmen mit 200 Mitarbeitern ein. Es gibt Begeisterung, aber auch Ängste. Wie gehst du vor?',
     options: [
-      { text: 'Schnell und flächendeckend ausrollen — wer nicht mitmacht, wird abgehängt. Der Markt wartet nicht', score: 0 },
-      { text: 'Erst mit 2-3 Pilotteams starten, gemeinsam Use-Cases identifizieren, Erfolge dokumentieren und schrittweise skalieren — begleitet von Schulung und klaren Richtlinien', score: 3 },
-      { text: 'Jedem Team die Freiheit geben, selbst zu entscheiden ob und wie sie KI nutzen — Innovation braucht Freiraum', score: 1 },
-      { text: 'Eine umfassende 6-monatige Schulungsphase planen, bevor irgendjemand die Tools produktiv nutzen darf', score: 1 },
+      { icon: '○', text: 'Schnell flächendeckend ausrollen.', score: 0 },
+      { icon: '◇', text: 'Mit Pilotteams, Use Cases und Guidelines starten.', score: 3 },
+      { icon: '□', text: 'Jedes Team entscheidet frei über Nutzung.', score: 1 },
+      { icon: '▣', text: 'Erst 6 Monate schulen, dann produktiv nutzen.', score: 1 },
     ],
   },
   {
@@ -119,10 +119,10 @@ const QUESTIONS = [
     dimension: 'direct',
     question: 'Dein Unternehmen möchte eine interne KI-Richtlinie erstellen. Was sollte sie priorisieren?',
     options: [
-      { text: 'Maximale Nutzung fördern: Jeder Mitarbeiter soll KI so oft wie möglich einsetzen, um die Produktivität zu steigern', score: 0 },
-      { text: 'Datenschutz und Vertraulichkeit: Klare Regeln, welche Daten in welche KI-Tools eingegeben werden dürfen, plus Qualitätssicherungsprozesse für KI-Outputs', score: 3 },
-      { text: 'Nur zertifizierte Enterprise-Tools zulassen und alle anderen KI-Anwendungen auf Firmengeräten sperren', score: 2 },
-      { text: 'Eine Positivliste konkreter Use-Cases definieren — alles andere ist verboten, bis es einzeln freigegeben wird', score: 1 },
+      { icon: '○', text: 'Maximale Nutzung in allen Teams fördern.', score: 0 },
+      { icon: '◇', text: 'Datenregeln, Vertraulichkeit und Output-Review klären.', score: 3 },
+      { icon: '□', text: 'Nur Enterprise-Tools erlauben, alles andere sperren.', score: 2 },
+      { icon: '▣', text: 'Nur freigegebene Use Cases zulassen.', score: 1 },
     ],
   },
   {
@@ -130,10 +130,10 @@ const QUESTIONS = [
     dimension: 'direct',
     question: 'Ein Startup-Gründer fragt dich: "Werden KI-Agenten in 2 Jahren die meisten Bürojobs ersetzen?" Was antwortest du?',
     options: [
-      { text: 'Ja, Unternehmen die jetzt nicht automatisieren, werden in 2 Jahren nicht mehr existieren', score: 0 },
-      { text: 'KI-Agenten werden einzelne Aufgaben automatisieren, aber ganze Berufsbilder werden sich eher transformieren als verschwinden — der Wettbewerbsvorteil liegt bei denen, die KI als Hebel für menschliche Expertise nutzen', score: 3 },
-      { text: 'Die Technologie ist noch zu unzuverlässig — in 2 Jahren werden wir vielleicht erste produktive Anwendungen sehen', score: 1 },
-      { text: 'Es kommt stark auf die Branche an — Wissensarbeit wird stark betroffen sein, handwerkliche Berufe gar nicht', score: 2 },
+      { icon: '○', text: 'Ja, ohne Automatisierung verschwinden Unternehmen.', score: 0 },
+      { icon: '◇', text: 'Aufgaben verschwinden, Berufsbilder verändern sich.', score: 3 },
+      { icon: '□', text: 'Agenten sind noch zu unzuverlässig für echte Arbeit.', score: 1 },
+      { icon: '▣', text: 'Nur Wissensarbeit ist betroffen, Handwerk gar nicht.', score: 2 },
     ],
   },
 ];
@@ -148,10 +148,10 @@ const LEVELS = [
     description: 'Du hast noch wenig Berührungspunkte mit KI gehabt. Kein Problem — die KI-Revolution beginnt gerade erst, und wer jetzt einsteigt, hat einen klaren Vorteil. Die Grundlagen sind schneller gelernt als du denkst.',
     color: tokens.colors.mint,
     program: {
-      title: 'KI-Bootcamp für Einsteiger',
-      text: 'Unser gefördertes 12-Wochen-Bootcamp bringt dich von Null auf KI-ready. 100\u00a0% förderfähig mit Bildungsgutschein.',
+      title: 'FortyDays KI-Manager:in',
+      text: '8 Wochen Vollzeit, digital und 100% förderfähig mit Bildungsgutschein. Für deinen strukturierten KI-Neustart.',
       href: '/arbeitssuchende',
-      cta: 'Bootcamp entdecken',
+      cta: 'FortyDays ansehen',
     },
   },
   {
@@ -162,10 +162,10 @@ const LEVELS = [
     description: 'Du hast ein grundlegendes Verständnis von KI und nutzt sie gelegentlich. Dir fehlt aber noch die Tiefe, um KI strategisch und effizient in deinem Beruf einzusetzen. Mit dem richtigen Training kannst du den nächsten großen Sprung machen.',
     color: tokens.colors.navy,
     program: {
-      title: 'Berufsbegleitende KI-Weiterbildung',
-      text: 'Abends & am Wochenende. Zertifiziert. Bau deine KI-Skills systematisch aus, ohne deinen Job aufzugeben.',
+      title: 'AfterWork AI Automation',
+      text: '8 Wochen berufsbegleitend, Di & Do. Für konkrete Workflows, n8n, GPT-APIs und sichere Anwendung im Job.',
       href: '/berufstaetige',
-      cta: 'Weiterbildung ansehen',
+      cta: 'AfterWork ansehen',
     },
   },
   {
@@ -176,10 +176,10 @@ const LEVELS = [
     description: 'Du arbeitest regelmäßig mit KI-Tools, kennst die Grenzen und weißt, wie man Outputs kritisch bewertet. Dein nächster Schritt: Dieses Wissen strategisch in dein Team oder Unternehmen bringen und KI-Prozesse skalieren.',
     color: tokens.colors.primary,
     program: {
-      title: 'KI-Training für Unternehmen',
-      text: 'Maßgeschneiderte Workshops und Trainings für dein Team. Praxisnah, vor Ort oder remote, sofort einsetzbar.',
-      href: '/unternehmen',
-      cta: 'Unternehmens-Training anfragen',
+      title: 'OneDay Workshops',
+      text: 'Ein Tag, ein Thema, ein konkretes Deliverable. Ideal, wenn du schnell Orientierung oder ein Tool-Setup brauchst.',
+      href: '/oneday',
+      cta: 'OneDay ansehen',
     },
   },
   {
@@ -190,10 +190,10 @@ const LEVELS = [
     description: 'Beeindruckend! Du verstehst KI auf einem hohen Niveau, evaluierst Outputs kritisch und denkst strategisch über KI-Integration nach. Du bist genau die Art von Person, die die KI-Transformation in Unternehmen vorantreiben kann.',
     color: tokens.colors.primary,
     program: {
-      title: 'Werde KI-Experte & Dozent',
-      text: 'Mit deinem Wissen kannst du andere ausbilden. Werde Teil unseres Experten-Netzwerks oder bringe KI in dein Unternehmen.',
-      href: '/experten',
-      cta: 'Experten-Netzwerk entdecken',
+      title: 'OneDay Deep Dive',
+      text: 'Für Fortgeschrittene passt ein fokussierter OneDay Deep Dive oder ein Teamformat, das direkt in Umsetzung geht.',
+      href: '/oneday',
+      cta: 'Deep Dive ansehen',
     },
   },
 ];
@@ -320,7 +320,7 @@ const QuestionText = styled.h2`
   line-height: ${tokens.lineHeights.snug};
   color: ${tokens.colors.text};
   margin-bottom: ${tokens.spacing['2xl']};
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 `;
 
 const OptionsGrid = styled.div`
@@ -335,6 +335,10 @@ const OptionButton = styled.button`
   position: relative;
   width: 100%;
   text-align: left;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  gap: ${tokens.spacing.md};
   padding: 18px 24px;
   padding-left: 54px;
   font-family: ${tokens.fonts.body};
@@ -402,6 +406,19 @@ const OptionButton = styled.button`
   `}
 `;
 
+const OptionIcon = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.sm};
+  color: ${tokens.colors.primary};
+  background: ${tokens.colors.primaryLighter};
+  ${clipBR(4)}
+`;
+
 /* ── Intro Screen ─────────────────────────── */
 
 const IntroScreen = styled.div`
@@ -436,7 +453,7 @@ const IntroTitle = styled.h1`
   font-size: clamp(${tokens.fontSizes['3xl']}, 5vw, ${tokens.fontSizes['5xl']});
   font-weight: ${tokens.fontWeights.black};
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: ${tokens.lineHeights.tight};
   color: ${tokens.colors.text};
   margin-bottom: ${tokens.spacing.lg};
@@ -575,7 +592,7 @@ const ResultLevel = styled.h2`
   font-size: clamp(${tokens.fontSizes['2xl']}, 4vw, ${tokens.fontSizes['4xl']});
   font-weight: ${tokens.fontWeights.black};
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: ${tokens.colors.text};
   margin-bottom: ${tokens.spacing.sm};
 `;
@@ -858,7 +875,8 @@ export default function WissensTestPage() {
                       $selected={isSelected}
                       onClick={() => handleSelect(question.id, i, opt.score)}
                     >
-                      {opt.text}
+                      <OptionIcon aria-hidden="true">{opt.icon || '◇'}</OptionIcon>
+                      <span>{opt.text}</span>
                     </OptionButton>
                   );
                 })}

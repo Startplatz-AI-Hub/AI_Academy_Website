@@ -18,11 +18,12 @@ const LINK_GROUPS = [
     { label: 'Für Arbeitssuchende', href: '/arbeitssuchende' },
     { label: 'Für Berufstätige', href: '/berufstaetige' },
     { label: 'Für Unternehmen', href: '/unternehmen' },
+    { label: 'OneDay Workshops', href: '/oneday' },
     { label: 'Experten & Dozenten', href: '/experten' },
   ]},
   { title: 'Ressourcen', links: [
     { label: 'Über Uns', href: '/ueber-uns' },
-    { label: 'Blog', href: '/blog' },
+    { label: 'Insights', href: '/insights' },
     { label: 'Presse & Medien', href: '/presse' },
     { label: 'Events', href: '/#events' },
     { label: 'FAQ', href: '/#faq' },
@@ -100,7 +101,7 @@ const SocialLink = styled.a`
 `;
 
 const LinkCol = styled.div`
-  h4 {
+  h2 {
     font-family: ${tokens.fonts.display};
     font-size: ${tokens.fontSizes.sm};
     font-weight: ${tokens.fontWeights.semi};
@@ -193,7 +194,7 @@ export default function Footer() {
           </BrandCol>
           {LINK_GROUPS.map((g) => (
             <LinkCol key={g.title}>
-              <h4>{g.title}</h4>
+              <h2>{g.title}</h2>
               <ul>{g.links.map((l) => <li key={l.label}><a href={l.href}>{l.label}</a></li>)}</ul>
             </LinkCol>
           ))}

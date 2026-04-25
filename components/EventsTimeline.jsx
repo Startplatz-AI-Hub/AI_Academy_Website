@@ -22,8 +22,8 @@ const FALLBACK_EVENTS = [
     featured: true,
     date: 'FEB 03',
     title: 'KI-Manager Bootcamp',
-    tags: ['AZAV', '12 Wochen'],
-    description: 'Vollzeit-Weiterbildung zum zertifizierten KI-Manager. 100 % förderfähig.',
+    tags: ['AZAV', '8 Wochen'],
+    description: 'FortyDays KI-Manager:in. Vollzeit, digital und 100% förderfähig.',
     location: 'Köln + Online',
     cta: 'Bewerben',
     href: ALL_EVENTS_URL,
@@ -107,7 +107,7 @@ const SectionTitle = styled.h2`
   font-weight: ${tokens.fontWeights.black};
   color: ${tokens.colors.darkText};
   line-height: ${tokens.lineHeights.tight};
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   margin-bottom: ${tokens.spacing.md};
   text-transform: uppercase;
 
@@ -157,6 +157,8 @@ const EventCard = styled.article`
   flex: 0 0 auto;
   width: 340px;
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: rgba(20, 20, 20, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -179,13 +181,16 @@ const EventCard = styled.article`
 `;
 
 const CardImageWrap = styled.div`
-  height: 200px;
+  aspect-ratio: 5 / 4;
   overflow: hidden;
   img { width: 100%; height: 100%; object-fit: cover; }
 `;
 
 const CardBody = styled.div`
   padding: ${tokens.spacing.xl};
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 
 const DateBadge = styled.span`
@@ -228,7 +233,7 @@ const EventTitle = styled.h3`
 
 const EventDesc = styled.p`
   font-size: ${tokens.fontSizes.sm};
-  color: ${tokens.colors.darkMuted};
+  color: rgba(255, 255, 255, 0.76);
   line-height: ${tokens.lineHeights.relaxed};
   margin-bottom: ${tokens.spacing.md};
 `;
@@ -236,7 +241,7 @@ const EventDesc = styled.p`
 const LocationText = styled.span`
   display: block;
   font-size: ${tokens.fontSizes.xs};
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.58);
   margin-bottom: ${tokens.spacing.md};
 `;
 
@@ -254,6 +259,7 @@ const EventCTA = styled.a`
   text-transform: uppercase;
   letter-spacing: 0.03em;
   transition: all ${tokens.transitions.fast};
+  margin-top: auto;
   &:hover { background: ${tokens.colors.primaryHover}; color: #fff; }
 
   svg { width: 14px; height: 14px; }
@@ -430,7 +436,7 @@ export default function EventsTimeline() {
             : cards.map((ev) => (
                 <EventCard key={ev.id || ev.title} $featured={ev.featured} aria-label={`${ev.title} – ${ev.date}`}>
                   <CyberCorners $color={ev.featured ? tokens.colors.primaryLight : tokens.colors.mint} $size={10} />
-                  {ev.image && <CardImageWrap><img src={ev.image} alt={ev.title} loading="lazy" width="600" height="360" /></CardImageWrap>}
+                  {ev.image && <CardImageWrap><img src={ev.image} alt={ev.title} loading="lazy" width="1000" height="800" /></CardImageWrap>}
                   <CardBody>
                     <DateBadge><time>{ev.date}</time></DateBadge>
                     {ev.tags && ev.tags.length > 0 && (

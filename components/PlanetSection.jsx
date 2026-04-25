@@ -189,7 +189,7 @@ export default function PlanetSection({
       $glass={glass}
       $solid={solid}
       onMouseMove={handleMouseMove}
-      aria-labelledby={id ? `${id}-title` : undefined}
+      aria-labelledby={id && title ? `${id}-title` : undefined}
     >
       {bgImage && <BgImage $src={bgImage} $opacity={bgImageOpacity} />}
       <GlowLine $accent={accent} />

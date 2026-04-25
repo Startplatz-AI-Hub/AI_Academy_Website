@@ -175,7 +175,7 @@ export default function Stories() {
               <SideTitle>{s.title}</SideTitle>
             </SideCard>
           ))}
-          <AllLink href="/blog">Alle Artikel <ArrowSVG /></AllLink>
+          <AllLink href="/insights">Alle Artikel <ArrowSVG /></AllLink>
         </SideList>
       </Grid>
     </PlanetSection>

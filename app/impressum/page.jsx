@@ -55,6 +55,7 @@ const SectionTitle = styled.h2`
   color: ${tokens.colors.text};
   margin-top: ${tokens.spacing['2xl']};
   margin-bottom: ${tokens.spacing.md};
+  overflow-wrap: anywhere;
 
   &:first-child { margin-top: 0; }
 `;
@@ -65,11 +66,13 @@ const Text = styled.p`
   color: ${tokens.colors.textSoft};
   line-height: ${tokens.lineHeights.relaxed};
   margin-bottom: ${tokens.spacing.md};
+  overflow-wrap: anywhere;
 `;
 
 const Link = styled.a`
   color: ${tokens.colors.primary};
   text-decoration: none;
+  overflow-wrap: anywhere;
   &:hover { text-decoration: underline; }
 `;
 
@@ -108,7 +111,7 @@ export default function ImpressumPage() {
 
             <SectionTitle>Vertreten durch</SectionTitle>
             <Text>
-              Geschäftsführung: Lorenz Gräf, Matthias Gräf<br />
+              Geschäftsführer: Lorenz Gräf, Jakow Smirin<br />
               Persönlich haftende Gesellschafterin: STARTPLATZ Verwaltungs GmbH<br />
               Sitz der Gesellschaft: Köln
             </Text>
@@ -121,14 +124,14 @@ export default function ImpressumPage() {
             <SectionTitle>Kontakt</SectionTitle>
             <Text>
               E-Mail: <Link href="mailto:academy@startplatz.de">academy@startplatz.de</Link><br />
-              Telefon: <Pending>wird ergänzt</Pending><br />
+              Telefon: <Link href="tel:+4922165082490">+49 221 650 824 90</Link><br />
               Website: <Link href="https://ai-academy.startplatz.de">ai-academy.startplatz.de</Link>
             </Text>
 
             <SectionTitle>Handelsregister</SectionTitle>
             <Text>
               Registergericht: Amtsgericht Köln<br />
-              Registernummer: <Pending>HRA wird ergänzt</Pending>
+              Registernummer: HRB 68126
             </Text>
 
             <SectionTitle>Umsatzsteuer-Identifikationsnummer</SectionTitle>

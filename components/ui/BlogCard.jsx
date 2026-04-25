@@ -118,7 +118,7 @@ export default function BlogCard({
   slug,
   featured = false,
 }) {
-  const href = `/blog/${slug || title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`;
+  const href = `/insights/${slug || title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`;
 
   if (featured) {
     return (

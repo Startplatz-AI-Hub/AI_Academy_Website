@@ -11,7 +11,7 @@ import { clipBR, CHAMFER } from '../../styles/cyberpunk';
    PRESSE & MEDIEN – Logos, Brand Guide, Boilerplate
    ───────────────────────────────────────────── */
 
-const BASE = 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos';
+const BASE = '/logo-assets';
 
 const LOGO_SETS = [
   {
@@ -401,7 +401,7 @@ export default function PressePage() {
           <GuideCard>
             <GuideTitle>Co-Branding</GuideTitle>
             <GuideText>
-              Bei gemeinsamen Veröffentlichungen kontaktiere uns vorab unter hello@ai-hub.de.
+              Bei gemeinsamen Veröffentlichungen kontaktiere uns vorab unter academy@startplatz.de.
               Wir stellen gerne eine abgestimmte Version bereit.
             </GuideText>
           </GuideCard>
@@ -416,8 +416,8 @@ export default function PressePage() {
             Für Interviews, Bildmaterial in höherer Auflösung oder weitere Informationen
             stehen wir gerne zur Verfügung.
           </SetDesc>
-          <Button href="mailto:hello@ai-hub.de" $variant="primary" as="a">
-            hello@ai-hub.de kontaktieren
+          <Button href="mailto:academy@startplatz.de" $variant="primary" as="a">
+            academy@startplatz.de kontaktieren
           </Button>
         </div>
       </SectionBlock>

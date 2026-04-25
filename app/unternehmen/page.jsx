@@ -3,228 +3,378 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
+  BeforeAfter,
   Button,
-  PageHero,
-  SectionBlock,
-  FeatureCard,
   CTABanner,
+  FeatureCard,
+  MiniFAQ,
+  PageHero,
+  ResponsiveGrid,
+  SectionBlock,
   StatsRow,
-  TestimonialCard,
+  TwoColumn,
+  VisualSlot,
 } from '../../components/ui';
 import SubpageLayout from '../../components/SubpageLayout';
-import { tokens } from '../../styles/tokens';
+import { tokens, media } from '../../styles/tokens';
+import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
+import { CALENDLY_URL } from '../../lib/site';
 
-const Grid = styled.div`
+const OfferCard = styled.article`
+  position: relative;
+  padding: ${tokens.spacing['2xl']};
+  background: ${tokens.colors.surface};
+  border: 1px solid ${tokens.colors.glassBorder};
+  ${clipBR(CHAMFER.md)}
+`;
+
+const OfferMeta = styled.span`
+  display: inline-block;
+  margin-bottom: ${tokens.spacing.md};
+  font-family: ${tokens.fonts.mono};
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${tokens.colors.orange};
+`;
+
+const OfferTitle = styled.h3`
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes['2xl']};
+  font-weight: ${tokens.fontWeights.bold};
+  color: ${tokens.colors.text};
+  margin-bottom: ${tokens.spacing.sm};
+`;
+
+const OfferText = styled.p`
+  color: ${tokens.colors.textMuted};
+  line-height: ${tokens.lineHeights.relaxed};
+`;
+
+const DetailStack = styled.div`
+  display: grid;
+  gap: ${tokens.spacing.xl};
+`;
+
+const OfferDetail = styled.article`
+  position: relative;
+  scroll-margin-top: 104px;
+  padding: ${tokens.spacing['2xl']};
+  background: ${tokens.colors.surface};
+  border: 1px solid ${tokens.colors.glassBorder};
+  ${clipBR(CHAMFER.md)}
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(${({ $cols }) => $cols || 3}, 1fr);
+  gap: ${tokens.spacing.xl};
+
+  ${media.lg} {
+    grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+    align-items: start;
   }
 `;
 
-const GridTwoCol = styled.div`
+const DetailMeta = styled.span`
+  display: inline-block;
+  margin-bottom: ${tokens.spacing.md};
+  font-family: ${tokens.fonts.mono};
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${tokens.colors.orange};
+`;
+
+const DetailTitle = styled.h3`
+  font-family: ${tokens.fonts.display};
+  font-size: clamp(${tokens.fontSizes['2xl']}, 3vw, ${tokens.fontSizes['4xl']});
+  font-weight: ${tokens.fontWeights.bold};
+  color: ${tokens.colors.text};
+  line-height: ${tokens.lineHeights.tight};
+`;
+
+const DetailText = styled.p`
+  color: ${tokens.colors.textSoft};
+  line-height: ${tokens.lineHeights.relaxed};
+  max-width: 760px;
+`;
+
+const DetailList = styled.ul`
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+  gap: ${tokens.spacing.sm};
+  margin-top: ${tokens.spacing.lg};
+  color: ${tokens.colors.textMuted};
+  line-height: ${tokens.lineHeights.relaxed};
+
+  li {
+    position: relative;
+    padding-left: 1.4rem;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 8px;
+    height: 8px;
+    background: ${tokens.colors.orange};
+    ${clipBR(2)}
+    transform: translateY(-50%) rotate(45deg);
   }
 `;
 
 export default function UnternehmenPage() {
-  const breadcrumbs = [
-    { label: 'Unternehmen', href: '/unternehmen', active: true },
+  const before = [
+    'Der Vorstand fragt nach KI-Strategie. Du hast keine.',
+    'Dein Team experimentiert planlos mit ChatGPT.',
+    'Du weißt nicht, wo anfangen.',
   ];
 
-  const offerings = [
+  const after = [
+    'Du präsentierst einen Kompetenzrahmen mit Roadmap.',
+    'Dein Team automatisiert Prozesse mit klaren Guidelines.',
+    'Nach einem Innovation Day weißt du es.',
+  ];
+
+  const offers = [
     {
-      icon: '🎓',
-      title: 'Inhouse-Workshops',
-      description: 'Maßgeschneiderte Trainingsmodule speziell für die Bedürfnisse deines Unternehmens entwickelt.',
-      features: ['Flexible Terminfindung', 'Anpassbare Inhalte', 'Vor-Ort oder Online', 'Nachbetreuung'],
-      accentColor: tokens.colors.orange,
-      accentBg: tokens.colors.orangeBg,
-      cornerColor: tokens.colors.orange,
+      id: 'innovation-day',
+      title: 'Innovation Day',
+      duration: '1 Tag',
+      text: 'In einem Tag von "Was ist KI?" zu "So setzen wir es ein."',
     },
     {
-      icon: '💪',
-      title: 'Team-Bootcamps',
-      description: 'Intensive Gruppenprogramme für tiefgreifende KI-Kompetenzen im gesamten Team.',
-      features: ['2-12 Wochen Programme', 'Praxisorientiert', 'Zertifizierung', 'Mentoring'],
-      accentColor: tokens.colors.orange,
-      accentBg: tokens.colors.orangeBg,
-      cornerColor: tokens.colors.orange,
+      id: 'inhouse-schulungen',
+      title: 'Inhouse KI-Schulung',
+      duration: '1-5 Tage',
+      text: 'Euer Team versteht und nutzt KI — ab nächster Woche.',
     },
     {
-      icon: '👥',
-      title: 'Executive Briefings',
-      description: 'Strategische KI-Einführungen für Führungskräfte und Management-Teams.',
-      features: ['C-Level fokussiert', 'Strategische Perspektive', 'Kurze Formate', 'Entscheidungshilfen'],
-      accentColor: tokens.colors.orange,
-      accentBg: tokens.colors.orangeBg,
-      cornerColor: tokens.colors.orange,
+      id: 'private-academy',
+      title: 'AI-Private Academy',
+      duration: '3-12 Monate',
+      text: 'Eure eigene KI-Akademie. Maßgeschneidert. Begleitet. Messbar.',
+    },
+    {
+      id: 'oneday-workshops',
+      title: 'OneDay Workshops',
+      duration: '1 Tag',
+      text: 'Spezifische Tools und Skills, direkt einsetzbar.',
     },
   ];
 
-  const processSteps = [
+  const offerDetails = [
+    {
+      id: 'innovation-day',
+      meta: '1 Tag · Strategie & Use Cases',
+      title: 'Innovation Day',
+      text: 'Ein intensiver Arbeitstag für Teams, die aus KI-Neugier ein klares Lagebild machen wollen. Am Ende stehen priorisierte Use Cases, erste Guidelines und ein realistischer nächster Schritt.',
+      bullets: [
+        'Für Führungsteams, Fachbereiche oder gemischte Projektgruppen',
+        'Workshop, Tool-Demos, Use-Case-Mapping und Roadmap-Sprint',
+        'Ideal als Pilot, bevor ihr größere Trainings oder eine Private Academy startet',
+      ],
+    },
+    {
+      id: 'inhouse-schulungen',
+      meta: '1-5 Tage · Training im Team',
+      title: 'Inhouse KI-Schulung',
+      text: 'Für Teams, die KI nicht nur verstehen, sondern im eigenen Arbeitsalltag anwenden wollen. Inhalte, Beispiele und Übungen werden auf eure Prozesse, Tools und Rollen zugeschnitten.',
+      bullets: [
+        'Praxisnahes Training für Marketing, Sales, HR, Operations oder Führung',
+        'Konkrete Workflows statt abstrakter Tool-Show',
+        'Auf Wunsch mit Datenschutz-, EU-AI-Act- und Governance-Bausteinen',
+      ],
+    },
+    {
+      id: 'private-academy',
+      meta: '3-12 Monate · Skalierbarer Kompetenzaufbau',
+      title: 'AI-Private Academy',
+      text: 'Eure eigene KI-Akademie für nachhaltigen Kompetenzaufbau. Wir kombinieren Curriculum, Dozenten, interne Lernpfade und Transferformate zu einem Programm, das mit eurer Organisation wächst.',
+      bullets: [
+        'Für Unternehmen, die KI-Kompetenz über mehrere Teams ausrollen wollen',
+        'Eigene Lernpfade, wiederkehrende Sessions und Transferaufgaben',
+        'Begleitung mit Metriken, Refreshern und strategischer Weiterentwicklung',
+      ],
+    },
+  ];
+
+  const pillars = [
     {
       step: '1',
-      title: 'Bedarfsanalyse',
-      description: 'Wir analysieren deinen IST-Zustand und definieren klare Lernziele für dein Team.',
-      accentColor: tokens.colors.orange,
-      accentBg: tokens.colors.orangeBg,
-      cornerColor: tokens.colors.orange,
+      title: 'Technologische Grundlagen',
+      description: 'Euer Team versteht Modelle, Tools, Grenzen und sinnvolle Einsatzfelder.',
     },
     {
       step: '2',
-      title: 'Curriculum-Design',
-      description: 'Entwicklung eines individuellen Lehrplans, der exakt auf deine Industrie und Prozesse abgestimmt ist.',
-      accentColor: tokens.colors.orange,
-      accentBg: tokens.colors.orangeBg,
-      cornerColor: tokens.colors.orange,
+      title: 'Anwendung im Unternehmenskontext',
+      description: 'Aus Wissen werden Workflows, Guidelines und konkrete Use Cases.',
     },
     {
       step: '3',
-      title: 'Training & Coaching',
-      description: 'Intensive Schulung durch Experten mit praktischen Projekten aus deinem Geschäftsalltag.',
-      accentColor: tokens.colors.orange,
-      accentBg: tokens.colors.orangeBg,
-      cornerColor: tokens.colors.orange,
+      title: 'Strategische & ethische Einbettung',
+      description: 'KI wird steuerbar: Datenschutz, EU AI Act, Rollen und Roadmap.',
     },
-    {
-      step: '4',
-      title: 'Nachbetreuung',
-      description: 'Kontinuierliche Unterstützung und Refresher-Sessions für nachhaltigen Wissenstransfer.',
-      accentColor: tokens.colors.orange,
-      accentBg: tokens.colors.orangeBg,
-      cornerColor: tokens.colors.orange,
-    },
+  ];
+
+  const process = [
+    { step: '1', title: 'Bedarfsanalyse', description: 'Wo steht euer Team? Was ist das Ziel?' },
+    { step: '2', title: 'Curriculum-Design', description: 'Maßgeschneidert für eure Branche und Prozesse.' },
+    { step: '3', title: 'Training', description: 'Durch Dozenten, die selbst täglich mit KI arbeiten.' },
+    { step: '4', title: 'Nachbetreuung', description: 'Refresher-Sessions und Support für nachhaltigen Transfer.' },
   ];
 
   const stats = [
-    { value: 50, label: 'Partner', suffix: '+' },
-    { value: 150, label: 'Dozenten', suffix: '+' },
-    { value: 95, label: 'Zufriedenheit', suffix: '%' },
-    { value: 500, label: 'Geschulte Mitarbeiter', suffix: '+' },
+    { value: 100, label: 'Unternehmen geschult', suffix: '+' },
+    { value: 500, label: 'KI-Events durchgeführt', suffix: '+' },
+    { value: 15, label: 'Jahre STARTPLATZ', suffix: '+' },
   ];
 
-  const testimonials = [
-    {
-      quote:
-        'Das Inhouse-Training hat unser gesamtes Team befähigt, KI-Projekte eigenständig durchzuführen. Die Dozenten verstanden unsere spezifischen Herausforderungen perfekt und die ROI ist beeindruckend.',
-      name: 'Dr. Heike Weber',
-      role: 'Chief Digital Officer, DAX-Konzern',
-      avatar: 'https://res.cloudinary.com/startplatz/image/upload/c_fill,w_44,h_44,g_face,q_auto/avatar-corporate-1.jpg',
-      accentColor: tokens.colors.orange,
-    },
-    {
-      quote:
-        'Innerhalb von 8 Wochen haben 30 Mitarbeiter fundamental neue KI-Fähigkeiten erworben. Das hat unsere Innovation massiv beschleunigt. Wir arbeiten nun kontinuierlich mit dem STARTPLATZ Team zusammen.',
-      name: 'Thomas Müller',
-      role: 'VP Operations, Tech-Mittelstand',
-      avatar: 'https://res.cloudinary.com/startplatz/image/upload/c_fill,w_44,h_44,g_face,q_auto/avatar-corporate-2.jpg',
-      accentColor: tokens.colors.orange,
-    },
+  const faq = [
+    { q: 'Was kostet ein KI-Training für unser Team?', a: 'Das hängt von Format, Dauer und Individualisierung ab. Innovation Days und Inhouse-Formate kalkulieren wir nach Zielbild und Teamgröße.' },
+    { q: 'Wie individuell sind die Inhalte?', a: 'Sehr individuell. Wir starten mit Bedarfsanalyse und bauen Beispiele, Übungen und Transferaufgaben rund um eure realen Prozesse.' },
+    { q: 'Wie messen wir den ROI der Schulung?', a: 'Wir definieren vorab Use Cases, Zeitersparnis, Qualitätsziele und Transfermetriken. So bleibt das Training nicht bei Inspiration stehen.' },
+    { q: 'Können wir mit einem Pilottag starten?', a: 'Ja. Der Innovation Day ist genau dafür gedacht: ein klares Lagebild, erste Use Cases und eine belastbare nächste Roadmap.' },
+    { q: 'Welche Förderprogramme gibt es für Unternehmen?', a: 'Je nach Team und Beschäftigungssituation kann das Qualifizierungschancengesetz relevant sein. Wir prüfen das im Erstgespräch.' },
   ];
 
   return (
     <SubpageLayout>
       <PageHero
-        badge="Inhouse Training"
+        badge="Für Teams & Organisationen"
         badgeColor={tokens.colors.orange}
         badgeBg={tokens.colors.orangeBg}
-        title="KI-Transformation für <span>Ihr Unternehmen</span>"
-        subtitle="Maßgeschneiderte Trainings und Bootcamps – vom Workshop bis zum Bootcamp für dein gesamtes Team."
-        breadcrumbs={breadcrumbs}
+        title="Euer Team nutzt KI produktiv — <span>nicht nur zum Experimentieren.</span>"
+        subtitle="Von OneDay Workshops bis zur 12-monatigen Private Academy. 100+ Unternehmen vertrauen uns bereits."
+        breadcrumbs={[{ label: 'Unternehmen', href: '/unternehmen', active: true }]}
         accentColor={tokens.colors.orangeBg}
-        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776469603/ai-hub/website/AI-Academy-Website-Images/target-audience-unternehmen.png"
-      />
+        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_900/v1776469603/ai-hub/website/AI-Academy-Website-Images/target-audience-unternehmen.png"
+      >
+        <Button href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" variant="orange" size="lg" arrow>
+          Gespräch buchen
+        </Button>
+        <Button href="/oneday" variant="secondary" size="lg">
+          OneDay ansehen
+        </Button>
+      </PageHero>
 
       <SectionBlock
-        badge="Leistungen"
-        title="Unser <span>Angebot</span>"
-        subtitle="Flexible Formate für jeden Bedarf und jede Unternehmensgröße"
-        variant="light"
+        badge="Vorher / Nachher"
+        title="Aus KI-Experimenten wird <span>Kompetenzaufbau.</span>"
         accent={tokens.colors.glowOrange}
       >
-        <Grid $cols={3}>
-          {offerings.map((offer, idx) => (
-            <FeatureCard
-              key={idx}
-              icon={offer.icon}
-              title={offer.title}
-              description={offer.description}
-              features={offer.features}
-              accentColor={offer.accentColor}
-              accentBg={offer.accentBg}
-              cornerColor={offer.cornerColor}
-            />
+        <BeforeAfter before={before} after={after} accentColor={tokens.colors.orange} />
+      </SectionBlock>
+
+      <SectionBlock
+        id="angebote"
+        badge="Angebote"
+        title="Das passende Format für eure <span>Situation.</span>"
+        subtitle="Vom Pilottag bis zur eigenen Academy."
+        variant="muted"
+        accent={tokens.colors.glowOrange}
+      >
+        <ResponsiveGrid $cols={4}>
+          {offers.map((offer) => (
+            <OfferCard key={offer.title}>
+              <CyberCorners $color={tokens.colors.orange} $size={8} />
+              <OfferMeta>{offer.duration}</OfferMeta>
+              <OfferTitle>{offer.title}</OfferTitle>
+              <OfferText>{offer.text}</OfferText>
+            </OfferCard>
           ))}
-        </Grid>
+        </ResponsiveGrid>
+      </SectionBlock>
+
+      <SectionBlock
+        badge="Formate im Detail"
+        title="Drei Einstiege, die euer Team <span>wirklich weiterbringen.</span>"
+        subtitle="Vom ersten Pilottag bis zum langfristigen Kompetenzaufbau: jedes Format hat ein klares Ziel, einen passenden Rahmen und ein greifbares Ergebnis."
+        accent={tokens.colors.glowOrange}
+      >
+        <DetailStack>
+          {offerDetails.map((detail) => (
+            <OfferDetail key={detail.id} id={detail.id}>
+              <div>
+                <CyberCorners $color={tokens.colors.orange} $size={8} />
+                <DetailMeta>{detail.meta}</DetailMeta>
+                <DetailTitle>{detail.title}</DetailTitle>
+              </div>
+              <div>
+                <DetailText>{detail.text}</DetailText>
+                <DetailList>
+                  {detail.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </DetailList>
+              </div>
+            </OfferDetail>
+          ))}
+        </DetailStack>
+      </SectionBlock>
+
+      <SectionBlock
+        badge="Kompetenzrahmen"
+        title="Drei Säulen, damit KI <span>tragfähig</span> wird."
+        accent={tokens.colors.glowOrange}
+      >
+        <TwoColumn>
+          <ResponsiveGrid $cols={1}>
+            {pillars.map((pillar) => (
+              <FeatureCard
+                key={pillar.title}
+                step={pillar.step}
+                title={pillar.title}
+                description={pillar.description}
+                accentColor={tokens.colors.orange}
+                accentBg={tokens.colors.orangeBg}
+                cornerColor={tokens.colors.orange}
+              />
+            ))}
+          </ResponsiveGrid>
+          <VisualSlot
+            title="KI-Kompetenzrahmen"
+            image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_900/v1776469603/ai-hub/website/AI-Academy-Website-Images/target-audience-unternehmen.png"
+            accentColor={tokens.colors.orange}
+            prompt="Use case: infographic-diagram. Asset type: company subpage visual. Three-pillar AI competence framework with abstract blocks and roadmap arrows, no tiny text, STARTPLATZ purple/coral palette, clean premium B2B training style, no logos, no watermark."
+          />
+        </TwoColumn>
       </SectionBlock>
 
       <SectionBlock
         badge="Prozess"
-        title="Ihr Weg zur <span>KI-Kompetenz</span>"
-        subtitle="Ein bewährter vierstufiger Prozess für maximalen Lernerfolg und nachhaltigen Wissenstransfer"
-        variant="muted"
-        accent={tokens.colors.glowOrange}
-      >
-        <Grid $cols={4}>
-          {processSteps.map((step, idx) => (
-            <FeatureCard
-              key={idx}
-              step={step.step}
-              title={step.title}
-              description={step.description}
-              accentColor={step.accentColor}
-              accentBg={step.accentBg}
-              cornerColor={step.cornerColor}
-            />
-          ))}
-        </Grid>
-      </SectionBlock>
-
-      <SectionBlock
-        title="Nach Zahlen"
+        title="So wird daraus ein <span>Training.</span>"
         variant="white"
         accent={tokens.colors.glowOrange}
-        centered
       >
-        <StatsRow stats={stats} variant="light" />
-      </SectionBlock>
-
-      <SectionBlock
-        badge="Erfolgsgeschichten"
-        title="Was <span>Unternehmen</span> sagen"
-        subtitle="Echte Ergebnisse von Partnern, die ihre KI-Fähigkeiten mit uns entwickelt haben"
-        variant="light"
-        accent={tokens.colors.glowOrange}
-      >
-        <GridTwoCol>
-          {testimonials.map((test, idx) => (
-            <TestimonialCard
-              key={idx}
-              quote={test.quote}
-              name={test.name}
-              role={test.role}
-              avatar={test.avatar}
-              accentColor={test.accentColor}
+        <ResponsiveGrid $cols={4}>
+          {process.map((item) => (
+            <FeatureCard
+              key={item.title}
+              step={item.step}
+              title={item.title}
+              description={item.description}
+              accentColor={tokens.colors.orange}
+              accentBg={tokens.colors.orangeBg}
+              cornerColor={tokens.colors.orange}
             />
           ))}
-        </GridTwoCol>
+        </ResponsiveGrid>
       </SectionBlock>
 
-      <CTABanner title="Bereit für die <span>KI-Transformation</span>?">
-        <Button href="/#newsletter" variant="orange" size="lg" arrow>
-          Gespräch Buchen
-        </Button>
-        <Button href="/#weiterbildungen" variant="secondary" size="lg">
-          Angebote Ansehen
+      <SectionBlock title="Nach Zahlen" centered accent={tokens.colors.glowOrange}>
+        <StatsRow stats={stats} />
+      </SectionBlock>
+
+      <SectionBlock badge="FAQ" title="Fragen für <span>Entscheider.</span>" accent={tokens.colors.glowOrange}>
+        <MiniFAQ items={faq} accentColor={tokens.colors.orange} />
+      </SectionBlock>
+
+      <CTABanner
+        title="Startet mit einem <span>klaren Bild.</span>"
+        subtitle="Im Erstgespräch klären wir Zielgruppe, Format, Förderoptionen und den sinnvollsten Startpunkt."
+      >
+        <Button href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" variant="orange" size="lg" arrow>
+          Gespräch buchen
         </Button>
       </CTABanner>
     </SubpageLayout>

@@ -6,27 +6,28 @@ import { tokens, media } from '../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
 import useMouseParallax from '../hooks/useMouseParallax';
 import PersonaReveal from './PersonaReveal';
+import { CALENDLY_URL } from '../lib/site';
 
 /* ─────────────────────────────────────────────
    HERO – Single-word "liquid dissolve" rotation
    Only the highlighted keyword morphs.
-   Structure: STARTE / DEINE / [keyword] / JETZT.
+   Structure: ENTDECKE / MEHR / [keyword] / MIT KI.
    ───────────────────────────────────────────── */
 
 /* ── Rotating keyword data ────────────────── */
 
 const KEYWORDS = [
   {
-    word: 'KARRIERE',
-    sub: 'Geförderte Bootcamps für Arbeitssuchende in Köln & Düsseldorf. 12\u00a0Wochen. Zertifiziert. Karriere\u00a0ready.',
+    word: 'STÄRKE',
+    sub: 'Starte deine Karriere mit dem FortyDays KI-Manager:in. 8 Wochen Vollzeit, 100% gefördert, AZAV-zertifiziert.',
   },
   {
-    word: 'ZUKUNFT',
-    sub: 'Maßgeschneiderte KI-Trainings für Unternehmen. Praxisnah. Vor\u00a0Ort oder remote. Sofort\u00a0einsetzbar.',
+    word: 'WIRKUNG',
+    sub: 'Starte deinen Vorsprung mit AfterWork AI Automation. Berufsbegleitend, Di & Do. Ab der ersten Woche anwendbar.',
   },
   {
-    word: 'EXPERTISE',
-    sub: 'Berufsbegleitende KI-Weiterbildung für Profis. Abends & am Wochenende. Zertifiziert. Zukunftssicher.',
+    word: 'POTENTIAL',
+    sub: 'Von OneDay Workshops bis zur AI-Private Academy. Maßgeschneidert für euer Team.',
   },
 ];
 
@@ -37,14 +38,19 @@ const EMERGE_MS = 800;
 /* ── Partners ─────────────────────────────── */
 
 const PARTNERS = [
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', alt: 'Microsoft', w: 110 },
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', alt: 'Google', w: 90 },
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg', alt: 'AWS', w: 80 },
-  { src: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-light-400w.png', alt: 'AI Academy', w: 110 },
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', alt: 'Microsoft', w: 110 },
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', alt: 'Google', w: 90 },
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg', alt: 'AWS', w: 80 },
-  { src: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-light-400w.png', alt: 'AI Academy', w: 110 },
+  {
+    label: 'STARTPLATZ',
+    src: '/partners/startplatz-logo.jpeg',
+  },
+  { label: 'Anthropic', src: 'https://cdn.simpleicons.org/anthropic/191919', name: 'Anthropic' },
+  { label: 'Claude', src: 'https://cdn.simpleicons.org/claude/D97757', name: 'Claude' },
+  { label: 'Microsoft Founders Hub', src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', name: 'Microsoft Founders Hub' },
+  { label: 'HubSpot', src: 'https://cdn.simpleicons.org/hubspot/FF7A59', name: 'HubSpot' },
+  { label: 'Amazon', src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
+  { label: 'Google', src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
+  { label: 'Make', src: 'https://cdn.simpleicons.org/make/6D00CC', name: 'Make' },
+  { label: 'n8n', src: 'https://cdn.simpleicons.org/n8n/EA4B71', name: 'n8n' },
+  { label: 'HSD', src: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/D%C3%BCsseldorf_University_of_Applied_Sciences_logos.png' },
 ];
 
 /* ── Styles ────────────────────────────────── */
@@ -84,18 +90,19 @@ const Inner = styled.div`
   flex: 1;
 
   ${media.lg} {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(440px, 1fr);
     padding: 0 ${tokens.spacing['2xl']};
     align-items: start;
     padding-top: ${tokens.spacing['3xl']};
   }
   ${media.xl} {
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: minmax(0, 1.15fr) minmax(520px, 0.85fr);
   }
 `;
 
 const ClaimWrapper = styled.div`
   position: relative;
+  min-width: 0;
   will-change: transform;
 `;
 
@@ -105,7 +112,7 @@ const Headline = styled.h1`
   font-weight: ${tokens.fontWeights.black};
   line-height: ${tokens.lineHeights.tight};
   color: ${tokens.colors.text};
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   margin-bottom: ${tokens.spacing.xl};
   text-transform: uppercase;
 `;
@@ -127,6 +134,8 @@ const HeadlineWord = styled.span`
 /* Parallax wrapper — moves instantly with mouse, no transition */
 const MorphParallax = styled.span`
   display: block;
+  width: 10ch;
+  max-width: 100%;
   will-change: transform;
 `;
 
@@ -235,6 +244,10 @@ const SecondaryBtn = styled.a`
 
 const RevealContainer = styled.div`
   position: relative;
+  align-self: start;
+  width: 100%;
+  min-width: 0;
+  contain: layout paint;
   height: 500px;
   display: none;
   ${media.md} { display: block; height: 420px; }
@@ -291,21 +304,46 @@ const MarqueeTrack = styled.div`
   display: flex;
   align-items: center;
   width: max-content;
-  animation: ${marqueeScroll} 25s linear infinite;
+  animation: ${marqueeScroll} 32s linear infinite;
   &:hover { animation-play-state: paused; }
 `;
 
 const MarqueeItem = styled.div`
   flex-shrink: 0;
-  padding: 0 ${tokens.spacing['2xl']};
-  img {
-    height: 22px;
-    width: auto;
-    opacity: 0.25;
-    filter: grayscale(1);
-    transition: opacity ${tokens.transitions.fast}, filter ${tokens.transitions.fast};
-    &:hover { opacity: 0.6; filter: none; }
+  padding: 0 ${tokens.spacing.lg};
+`;
+
+const PartnerMark = styled.div`
+  width: ${({ $named }) => ($named ? '238px' : '190px')};
+  height: 76px;
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  opacity: 0.72;
+  transition: opacity ${tokens.transitions.fast}, filter ${tokens.transitions.fast}, transform ${tokens.transitions.fast};
+
+  &:hover {
+    opacity: 1;
+    filter: saturate(1.1);
+    transform: translateY(-2px);
   }
+
+  img {
+    max-width: ${({ $named }) => ($named ? '74px' : '100%')};
+    max-height: ${({ $named }) => ($named ? '38px' : '50px')};
+    object-fit: contain;
+  }
+`;
+
+const PartnerName = styled.span`
+  font-family: ${tokens.fonts.body};
+  font-size: ${tokens.fontSizes.sm};
+  font-weight: ${tokens.fontWeights.semi};
+  color: ${tokens.colors.textSoft};
+  line-height: 1.1;
+  max-width: 138px;
 `;
 
 const ArrowIcon = () => (
@@ -375,7 +413,7 @@ export default function Hero() {
     return { opacity: 1, filter: 'blur(0px)' };
   };
 
-  const staticWords = ['STARTE', 'DEINE', null, 'JETZT.'];
+  const staticWords = ['ENTDECKE', 'MEHR', null, 'MIT KI.'];
 
   return (
     <Section id="hero" aria-label="Hero">
@@ -385,7 +423,7 @@ export default function Hero() {
         <ClaimWrapper style={{ transform: `translate(${x * 6}px, ${y * 6}px)` }}>
           <Headline
             id="hero-headline"
-            aria-label={`Starte deine ${displayWord.toLowerCase()} jetzt.`}
+            aria-label={`Entdecke mehr ${displayWord.toLowerCase()} mit KI.`}
             aria-live="polite"
           >
             {staticWords.map((word, i) => {
@@ -425,7 +463,7 @@ export default function Hero() {
           <CTAGroup>
             <PrimaryBtnWrap>
               <PrimaryOffset aria-hidden="true" />
-              <PrimaryBtn href="#newsletter">
+              <PrimaryBtn href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
                 Kostenlos beraten lassen
                 <ArrowIcon />
               </PrimaryBtn>
@@ -445,11 +483,14 @@ export default function Hero() {
 
       {/* Infinite partner marquee */}
       <MarqueeWrapper>
-        <MarqueeLabel>Unsere Partner</MarqueeLabel>
+        <MarqueeLabel>Technologie- & Netzwerkpartner</MarqueeLabel>
         <MarqueeTrack>
           {[...PARTNERS, ...PARTNERS].map((p, i) => (
-            <MarqueeItem key={`${p.alt}-${i}`}>
-              <img src={p.src} alt={p.alt} width={p.w} height="22" loading="eager" />
+            <MarqueeItem key={`${p.label}-${i}`}>
+              <PartnerMark aria-label={p.label} $named={Boolean(p.name)}>
+                <img src={p.src} alt={p.label} loading="lazy" />
+                {p.name && <PartnerName>{p.name}</PartnerName>}
+              </PartnerMark>
             </MarqueeItem>
           ))}
         </MarqueeTrack>

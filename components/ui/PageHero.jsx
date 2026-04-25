@@ -64,7 +64,7 @@ const Title = styled.h1`
   font-weight: ${tokens.fontWeights.black};
   line-height: ${tokens.lineHeights.tight};
   color: ${({ $variant }) => $variant === 'dark' ? tokens.colors.darkText : tokens.colors.text};
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   margin-bottom: ${tokens.spacing.xl};
   text-transform: uppercase;
   max-width: 960px;
@@ -137,7 +137,7 @@ export default function PageHero({
       <SlashAccent $variant={variant} $accentColor={accentColor} aria-hidden="true" />
 
       {image && (
-        <ImageWrap $variant={variant}>
+        <ImageWrap $variant={variant} aria-hidden="true">
           <img src={image} alt="" loading="eager" />
         </ImageWrap>
       )}

@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import StyledComponentsRegistry from '../lib/registry';
+import CalendlyWidget from '../components/CalendlyWidget';
 
 export const metadata = {
   title: 'STARTPLATZ AI Academy | KI-Weiterbildung & Bootcamps in Köln & Düsseldorf',
@@ -73,8 +74,8 @@ const jsonLd = [
         addressCountry: 'DE',
       },
     ],
-    telephone: '+49221123456',
-    email: 'hello@ai-hub.de',
+    telephone: '+4922165082490',
+    email: 'academy@startplatz.de',
     sameAs: [
       'https://www.linkedin.com/company/startplatz',
       'https://www.instagram.com/startplatz',
@@ -116,23 +117,6 @@ export default function RootLayout({ children }) {
         <link
           href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
-        />
-
-        {/* Preload hero images */}
-        <link
-          rel="preload"
-          as="image"
-          href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473244/ai-hub/website/AI-Academy-Website-Images/hero-panel-arbeitssuchende-upscaled.png"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473245/ai-hub/website/AI-Academy-Website-Images/hero-panel-berufstaetige-upscaled.png"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473243/ai-hub/website/AI-Academy-Website-Images/hero-panel-unternehmen-upscaled.png"
         />
 
         {/* ElevenLabs ConvAI Widget — loaded via next/script to avoid hydration mismatch */}
@@ -183,6 +167,7 @@ export default function RootLayout({ children }) {
           <div className="preloader-ring" />
         </div>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <CalendlyWidget />
         <Script
           src="https://unpkg.com/@elevenlabs/convai-widget-embed"
           strategy="afterInteractive"

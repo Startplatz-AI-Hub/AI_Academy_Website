@@ -15,9 +15,9 @@ import { CHAMFER } from '../styles/cyberpunk';
 const PERSONAS = [
   {
     id: 'jobseeker',
-    title: 'Arbeitssuchende',
-    subtitle: '100 % gefördert',
-    description: 'Starte deine Karriere in der KI-Branche mit vollständig geförderten Weiterbildungen.',
+    title: 'Arbeitssuchend',
+    subtitle: 'Dein Neustart',
+    description: '8 Wochen Vollzeit, digital und mit Bildungsgutschein komplett kostenfrei.',
     cta: 'Förderung prüfen',
     href: '/arbeitssuchende',
     color: tokens.colors.mint,
@@ -25,9 +25,9 @@ const PERSONAS = [
   },
   {
     id: 'professional',
-    title: 'Berufstätige',
-    subtitle: 'Berufsbegleitend',
-    description: 'Erweitere deine Skills und bleibe relevant in der digitalen Transformation.',
+    title: 'Berufstätig',
+    subtitle: 'Neben dem Job',
+    description: 'Zwei Abende pro Woche. Automation lernen, ohne den Job zu pausieren.',
     cta: 'Kurse entdecken',
     href: '/berufstaetige',
     color: tokens.colors.navy,
@@ -36,8 +36,8 @@ const PERSONAS = [
   {
     id: 'enterprise',
     title: 'Unternehmen',
-    subtitle: 'Inhouse-Training',
-    description: 'Transformiere dein Team mit massgeschneiderten KI-Trainings.',
+    subtitle: 'Für Teams',
+    description: 'Vom OneDay Workshop bis zur 12-monatigen Private Academy.',
     cta: 'Beratung anfragen',
     href: '/unternehmen',
     color: tokens.colors.orange,

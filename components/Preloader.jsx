@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { tokens } from '../styles/tokens';
 
@@ -25,7 +25,9 @@ const IMAGES = [
   'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776473243/ai-hub/website/AI-Academy-Website-Images/hero-panel-unternehmen-upscaled.png',
 ];
 
-const WORDS = ['STARTE', 'DEINE', 'KARRIERE', 'JETZT.'];
+const WORDS = ['ENTDECKE', 'MEHR', 'STÄRKE', 'MIT KI.'];
+const READY_TIMEOUT_MS = 1200;
+const MAX_VISIBLE_MS = 5200;
 
 /* ── Styled ───────────────────────────────── */
 
@@ -56,7 +58,7 @@ const WordEl = styled.span`
   font-family: ${tokens.fonts.display};
   font-weight: ${tokens.fontWeights.black};
   text-transform: uppercase;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   line-height: ${tokens.lineHeights.tight};
   color: #fff;
   white-space: nowrap;
@@ -72,6 +74,26 @@ export default function Preloader({ onComplete }) {
   const wordRefs = useRef([]);
   const [ready, setReady] = useState(false);
   const hasRun = useRef(false);
+  const hasCompleted = useRef(false);
+
+  const finish = useCallback(() => {
+    if (hasCompleted.current) return;
+    hasCompleted.current = true;
+
+    const overlay = overlayRef.current;
+    if (overlay) {
+      overlay.style.opacity = '0';
+      overlay.style.display = 'none';
+      overlay.style.pointerEvents = 'none';
+    }
+
+    onComplete?.();
+  }, [onComplete]);
+
+  useEffect(() => {
+    const hardStop = setTimeout(finish, MAX_VISIBLE_MS);
+    return () => clearTimeout(hardStop);
+  }, [finish]);
 
   /* Wait for BOTH images AND fonts to load */
   useEffect(() => {
@@ -105,7 +127,7 @@ export default function Preloader({ onComplete }) {
     /* Safety timeout */
     const safety = setTimeout(() => {
       if (!cancelled) setReady(true);
-    }, 4000);
+    }, READY_TIMEOUT_MS);
 
     return () => {
       cancelled = true;
@@ -119,7 +141,14 @@ export default function Preloader({ onComplete }) {
     hasRun.current = true;
 
     const run = async () => {
-      const { gsap } = await import('gsap');
+      let gsap;
+      try {
+        ({ gsap } = await import('gsap'));
+      } catch {
+        finish();
+        return;
+      }
+
       const overlay = overlayRef.current;
       if (!overlay) return;
 
@@ -130,6 +159,17 @@ export default function Preloader({ onComplete }) {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
       const panelW = vw / 3;
+
+      if (vw < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.to(overlay, {
+          opacity: 0,
+          delay: 0.25,
+          duration: 0.35,
+          ease: 'power2.out',
+          onComplete: finish,
+        });
+        return;
+      }
 
       /* ===== Layout images fullscreen ===== */
       panelRefs.current.forEach((el, i) => {
@@ -247,16 +287,12 @@ export default function Preloader({ onComplete }) {
       });
 
       /* ===== Cleanup ===== */
-      tl.call(() => {
-        overlay.style.display = 'none';
-        overlay.style.pointerEvents = 'none';
-        onComplete?.();
-      });
+      tl.call(finish);
     };
 
     /* Wait one frame for Hero DOM to be fully painted */
     requestAnimationFrame(() => requestAnimationFrame(() => run()));
-  }, [ready, onComplete]);
+  }, [ready, finish]);
 
   return (
     <Overlay ref={overlayRef} aria-hidden="true" role="presentation">

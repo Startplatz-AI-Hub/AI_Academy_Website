@@ -13,5 +13,14 @@ export { default as SectionBlock } from './SectionBlock';
 export { default as FeatureCard } from './FeatureCard';
 export { default as CTABanner } from './CTABanner';
 export { default as BlogCard } from './BlogCard';
+export { default as ReflectiveInstructorCard } from './ReflectiveInstructorCard';
 export { default as TestimonialCard } from './TestimonialCard';
 export { default as StatsRow } from './StatsRow';
+export {
+  BeforeAfter,
+  DetailTable,
+  MiniFAQ,
+  ResponsiveGrid,
+  TwoColumn,
+  VisualSlot,
+} from './ContentBlocks';

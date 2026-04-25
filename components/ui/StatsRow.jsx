@@ -77,13 +77,13 @@ function useCountUp(end, duration = 2200) {
   return { count, ref };
 }
 
-function StatItem({ value, suffix, label, variant }) {
-  const { count, ref } = useCountUp(value);
+function StatItem({ value, displayValue, suffix, label, variant }) {
+  const { count, ref } = useCountUp(value || 0);
   return (
     <StatCard ref={ref} $variant={variant}>
       <CyberCorners $color={tokens.colors.mint} $size={6} />
       <StatValue $variant={variant}>
-        {count.toLocaleString('de-DE')}
+        {displayValue || count.toLocaleString('de-DE')}
         {suffix && <StatSuffix>{suffix}</StatSuffix>}
       </StatValue>
       <StatLabel $variant={variant}>{label}</StatLabel>

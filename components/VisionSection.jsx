@@ -12,10 +12,15 @@ import PlanetSection from './PlanetSection';
    Chamfered glass cards with corner accents
    ───────────────────────────────────────────── */
 
-const CERTS = [
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', alt: 'Microsoft', w: 120 },
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', alt: 'Google', w: 100 },
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg', alt: 'AWS', w: 90 },
+const CERT_LOGOS = [
+  {
+    label: 'Bundesagentur für Arbeit',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Bundesagentur_f%C3%BCr_Arbeit-Logo.svg',
+  },
+  {
+    label: 'Cert-IT',
+    src: 'https://static.wixstatic.com/media/eef775_2769b02850834903af9ba5bf412e4684~mv2.png/v1/fill/w_158,h_114,al_c,q_85,enc_avif,quality_auto/cert-it%20logo%20dunkelpurpur.png',
+  },
 ];
 
 const Grid = styled.div`
@@ -72,38 +77,29 @@ const CardText = styled.p`
 `;
 
 const CertGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${tokens.spacing['2xl']};
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing.lg};
   align-items: center;
   margin-top: ${tokens.spacing.xl};
 
-  img {
-    height: 26px;
-    width: auto;
-    opacity: 0.4;
-    transition: opacity ${tokens.transitions.fast};
-    filter: grayscale(1);
-    &:hover { opacity: 0.8; filter: none; }
+  ${media.sm} {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 `;
 
-const CertBadgeText = styled.span`
-  display: inline-flex;
+const CertLogo = styled.div`
+  display: flex;
   align-items: center;
-  padding: 6px 14px;
-  font-family: ${tokens.fonts.mono};
-  font-size: ${tokens.fontSizes.xs};
-  font-weight: ${tokens.fontWeights.semi};
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: ${tokens.colors.mint};
-  background: ${tokens.colors.mintBg};
-  border: 1px solid rgba(5, 150, 105, 0.25);
-  ${clipTLBR(CHAMFER.xs)}
-  opacity: 0.75;
-  transition: opacity ${tokens.transitions.fast};
-  &:hover { opacity: 1; }
+  justify-content: center;
+  min-height: 82px;
+  padding: ${tokens.spacing.sm} ${tokens.spacing.md};
+
+  img {
+    max-width: 100%;
+    max-height: 58px;
+    object-fit: contain;
+  }
 `;
 
 const QuoteMark = styled.div`
@@ -126,29 +122,31 @@ export default function VisionSection() {
         <GlassCard $gradient={`linear-gradient(90deg, ${tokens.colors.primary}, ${tokens.colors.primaryMuted})`}>
           <CyberCorners $color={tokens.colors.mint} $size={12} />
           <QuoteMark>&ldquo;</QuoteMark>
-          <CardBadge>Unsere Vision</CardBadge>
-          <CardTitle>KI-Kompetenz für alle</CardTitle>
+          <CardBadge>Warum wir</CardBadge>
+          <CardTitle>Seit 2011 im Innovations-Ökosystem</CardTitle>
           <CardText>
-            Wir glauben, dass künstliche Intelligenz keine Hürde, sondern eine Chance ist.
-            Unser Ziel: Jeden Menschen befähigen, KI sinnvoll einzusetzen – für eine bessere
-            Zukunft in der Arbeitswelt.
+            STARTPLATZ begleitet seit über 15 Jahren Gründer und Unternehmen in NRW.
+            Über 1.000 Absolventen, 500+ KI-Events und Dozenten, die selbst täglich
+            mit KI arbeiten. Das Format-System — OneDay, FortyDays, AfterWork —
+            sortiert nach Lebenssituation, nicht nach Inhalt.
           </CardText>
         </GlassCard>
 
         <GlassCard $gradient={`linear-gradient(90deg, ${tokens.colors.mint}, ${tokens.colors.teal})`}>
           <CyberCorners $color={tokens.colors.mint} $size={12} />
-          <CardBadge>Zertifikate</CardBadge>
-          <CardTitle>Anerkannte Abschlüsse</CardTitle>
+          <CardBadge>Anerkannt &amp; gefördert</CardBadge>
+          <CardTitle>AZAV-zertifiziert. Cert-IT geprüft.</CardTitle>
           <CardText>
-            Unsere Programme sind durch führende Technologieunternehmen zertifiziert,
-            von der Agentur für Arbeit anerkannt (AZAV) und die Personenzertifizierung
-            erfolgt nach <strong>Cert-IT</strong> (DIN EN ISO/IEC 17024).
+            FortyDays und AfterWork sind AZAV-zertifiziert und über Bildungsgutschein
+            bzw. Qualifizierungschancengesetz förderfähig. Personenzertifizierung nach
+            Cert-IT (DIN EN ISO/IEC 17024). 4,98 von 5 Sternen bei 290+ Bewertungen.
           </CardText>
           <CertGrid>
-            {CERTS.map((c) => (
-              <img key={c.alt} src={c.src} alt={c.alt} width={c.w} height="26" loading="lazy" />
+            {CERT_LOGOS.map((logo) => (
+              <CertLogo key={logo.label}>
+                <img src={logo.src} alt={logo.label} loading="lazy" />
+              </CertLogo>
             ))}
-            <CertBadgeText aria-label="Cert-IT zertifiziert">Cert&#8209;IT</CertBadgeText>
           </CertGrid>
         </GlassCard>
       </Grid>

@@ -13,6 +13,7 @@ import {
 } from '../../components/ui';
 import { tokens, media } from '../../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
+import { CALENDLY_URL } from '../../lib/site';
 
 /* ─────────────────────────────────────────────
    ÜBER UNS – Geschichte & Team
@@ -167,8 +168,8 @@ export default function UeberUnsPage() {
     },
     {
       year: '2024',
-      title: '2.000+ Absolventen',
-      text: 'Der AI Hub wächst auf über 2.000 Absolventen, 150+ Dozenten und 50+ Unternehmenspartner. Wir expandieren nach Düsseldorf und bauen unser Online-Angebot massiv aus.',
+      title: '1.000+ Absolventen',
+      text: 'Der AI Hub wächst auf über 1.000 Absolventen, ein starkes Dozenten-Team und 100+ geschulte Unternehmen. Wir expandieren nach Düsseldorf und bauen unser Online-Angebot aus.',
       color: tokens.colors.navy,
       bg: tokens.colors.navyBg,
     },
@@ -182,7 +183,7 @@ export default function UeberUnsPage() {
     {
       year: '2026',
       title: 'NRWs KI-Kompetenzzentrum',
-      text: 'Heute sind wir das offizielle KI-Kompetenzzentrum Nordrhein-Westfalens. Mit Inhouse-Trainings für DAX-Konzerne, geförderten Bootcamps für Quereinsteiger und einem Netzwerk aus 150+ Experten gestalten wir die KI-Zukunft der Region.',
+      text: 'Heute verbinden wir Inhouse-Trainings, geförderte Weiterbildungen und ein Praxisnetzwerk in Köln und Düsseldorf. So entsteht KI-Kompetenz dort, wo sie gebraucht wird: im Arbeitsalltag.',
       color: tokens.colors.orange,
       bg: tokens.colors.orangeBg,
     },
@@ -216,9 +217,9 @@ export default function UeberUnsPage() {
   ];
 
   const stats = [
-    { value: 2000, label: 'Absolventen', suffix: '+' },
-    { value: 150, label: 'Dozenten', suffix: '+' },
-    { value: 50, label: 'Unternehmenspartner', suffix: '+' },
+    { value: 1000, label: 'Absolventen', suffix: '+' },
+    { value: 100, label: 'Unternehmen geschult', suffix: '+' },
+    { displayValue: '4,98/5', label: 'Bewertung' },
     { value: 2, label: 'Standorte', suffix: '' },
   ];
 
@@ -319,8 +320,8 @@ export default function UeberUnsPage() {
       </SectionBlock>
 
       <CTABanner title="Teil unserer <span>Geschichte</span> werden?">
-        <Button href="/#newsletter" variant="primary" size="lg" arrow>
-          Jetzt starten
+        <Button href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" variant="primary" size="lg" arrow>
+          Beratung buchen
         </Button>
         <Button href="/experten" variant="secondary" size="lg">
           Als Dozent bewerben

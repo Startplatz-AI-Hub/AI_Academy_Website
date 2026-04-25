@@ -1,230 +1,126 @@
 'use client';
 
 import React from 'react';
-import styled from 'styled-components';
 import {
   Button,
-  PageHero,
-  SectionBlock,
-  FeatureCard,
   CTABanner,
-  StatsRow,
+  FeatureCard,
+  PageHero,
+  ReflectiveInstructorCard,
+  ResponsiveGrid,
+  SectionBlock,
+  TwoColumn,
+  VisualSlot,
 } from '../../components/ui';
 import SubpageLayout from '../../components/SubpageLayout';
 import { tokens } from '../../styles/tokens';
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(${({ $cols }) => $cols || 3}, 1fr);
-  }
-`;
+import { CALENDLY_URL, COMPANY_EMAIL } from '../../lib/site';
 
 export default function ExpertenPage() {
-  const breadcrumbs = [
-    { label: 'Experten', href: '/experten', active: true },
-  ];
-
-  const whyTeachWithUs = [
+  const profiles = [
     {
-      icon: '⏰',
-      title: 'Flexibles Engagement',
-      description: 'Bestimme selbst, wann und wie viel du unterrichtest. Von einzelnen Workshops bis zu langfristigen Programmen.',
-      features: ['Flexible Zeitplanung', 'Remote & Vor-Ort', 'Selbstbestimmte Auslastung', 'Pausierbar jederzeit'],
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
+      initials: 'JS',
+      name: 'Jakow Smirin',
+      role: 'CEO, AI Academy',
+      signal: 'Strategie',
+      accent: tokens.colors.primary,
+      focus: 'Positionierung, Lernarchitektur und der Transfer von KI-Kompetenz in echte Rollen.',
+      tools: ['AI Strategy', 'Education Design', 'STARTPLATZ Netzwerk'],
+      bio: 'Baut seit 2023 KI-Weiterbildungen in NRW und verbindet Bildungsformate mit dem STARTPLATZ Ökosystem.',
     },
     {
-      icon: '💰',
-      title: 'Attraktive Vergütung',
-      description: 'Konkurrenzfähige Honorare, Leistungsboni und Boni für hochbewertete Kurse.',
-      features: ['Wettbewerbsfähige Raten', 'Performance Bonuses', 'Monatliche Abrechnung', 'Transparente Struktur'],
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
+      initials: 'LG',
+      name: 'Lorenz',
+      role: 'Lead Dozent',
+      signal: 'FortyDays',
+      accent: tokens.colors.mint,
+      focus: 'Vom ersten Prompt bis zum Cert-IT Projekt: strukturiert, ruhig und anwendbar.',
+      tools: ['Prompting', 'KI-Manager', 'Zertifizierung'],
+      bio: 'Leitet den FortyDays KI-Manager:in und übersetzt komplexe KI-Themen in klare Lernpfade.',
     },
     {
-      icon: '🤝',
-      title: 'Starkes Netzwerk',
-      description: 'Verbinde dich mit führenden KI-Experten, Unternehmern und Innovatoren in unserem Ökosystem.',
-      features: ['Networking Events', 'Mentoring Zugang', 'Kooperationen', 'Community Support'],
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
-    },
-  ];
-
-  const expertProfiles = [
-    {
-      icon: '🤖',
-      title: 'KI-Entwickler',
-      description: 'Du baust intelligente Systeme, Machine Learning Modelle und AI-Anwendungen. Gib dein technisches Know-how weiter.',
-      features: ['LLM & ML Expertise', 'Software Engineering', 'Praxiserfahrung', 'Advanced Topics'],
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
-    },
-    {
-      icon: '📊',
-      title: 'Data Scientists',
-      description: 'Deine Expertise in Datenanalyse, Statistik und Modellierung ist wertvoll. Unterrichte angehende Data Profis.',
-      features: ['Data Engineering', 'Statistical Analysis', 'Visualization', 'Business Analytics'],
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
-    },
-    {
-      icon: '💼',
-      title: 'Business Consultants',
-      description: 'Bringe strategisches Geschäftswissen in unsere Kurse. Lehre, wie KI Geschäftsmodelle transformiert.',
-      features: ['Strategy & Digital', 'Change Management', 'Business Cases', 'Executive Training'],
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
-    },
-    {
-      icon: '🏢',
-      title: 'Branchenexperten',
-      description: 'Deine spezifische Branchenerfahrung – egal ob Finance, Healthcare, Manufacturing oder Logistik – ist gefragt.',
-      features: ['Industry Deep Dives', 'Use Case Teaching', 'Domain Expertise', 'Real-World Cases'],
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
+      initials: 'LK',
+      name: 'Lukas',
+      role: 'Lead Dozent',
+      signal: 'Automation',
+      accent: tokens.colors.navy,
+      focus: 'Automationen, die im Alltag wirklich Zeit sparen und sauber dokumentiert sind.',
+      tools: ['n8n', 'GPT APIs', 'Workflows'],
+      bio: 'Leitet den AfterWork AI Automation und fokussiert n8n, GPT-APIs und praktische Business Workflows.',
     },
   ];
 
-  const becomeTeacherSteps = [
-    {
-      step: '1',
-      title: 'Bewerbung',
-      description: 'Fülle unser kurzes Bewerbungsformular aus. Erzähle uns von deiner Expertise und deinen Lehrzielen.',
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
-    },
-    {
-      step: '2',
-      title: 'Kennenlerngespräch',
-      description: 'Tausch dich mit unserem Team aus. Wir besprechen Kursformat, Inhalte und Erwartungen.',
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
-    },
-    {
-      step: '3',
-      title: 'Onboarding',
-      description: 'Du wirst vollständig trainiert: Didaktik, Tools, Plattform und Community-Standards.',
-      accentColor: tokens.colors.primary,
-      accentBg: tokens.colors.primaryLighter,
-      cornerColor: tokens.colors.primary,
-    },
-  ];
-
-  const stats = [
-    { value: 150, label: 'Aktive Dozenten', suffix: '+' },
-    { value: 4.8, label: 'Bewertung', suffix: '/5' },
-    { value: 30, label: 'Themengebiete', suffix: '+' },
+  const trust = [
+    { step: '1', title: 'Praxis statt Lehrbuch', description: 'Unsere Dozenten arbeiten selbst täglich mit KI-Tools, Workflows und echten Projekten.' },
+    { step: '2', title: 'Anerkannte Programme', description: 'FortyDays und AfterWork sind AZAV-zertifiziert und an klare Kompetenznachweise gekoppelt.' },
+    { step: '3', title: 'NRW-Ökosystem', description: 'Köln, Düsseldorf, Events, Startups und Unternehmen bilden den Kontext der Academy.' },
   ];
 
   return (
     <SubpageLayout>
       <PageHero
-        badge="Werde Dozent"
+        badge="Das Team"
         badgeColor={tokens.colors.primary}
         badgeBg={tokens.colors.primaryLighter}
-        title="Teil unseres <span>Experten-Netzwerks</span>"
-        subtitle="Gestalte die KI-Fähigkeiten der nächsten Generation. Unterrichte an der STARTPLATZ AI Academy und verdiene dabei durchschnittlich 2.500-5.000 Euro pro Kurs."
-        breadcrumbs={breadcrumbs}
+        title="Lerne von Menschen, die KI <span>selbst anwenden.</span>"
+        subtitle="Kein Hörsaal, keine Buzzword-Bühne. Unsere Experten bauen, automatisieren und beraten in echten Projekten."
+        breadcrumbs={[{ label: 'Experten', href: '/experten', active: true }]}
         accentColor={tokens.colors.primaryLighter}
-        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_800/v1776469604/ai-hub/website/AI-Academy-Website-Images/experten-networking-event.png"
-      />
+        image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_900/v1776469604/ai-hub/website/AI-Academy-Website-Images/experten-networking-event.png"
+      >
+        <Button href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" variant="primary" size="lg" arrow>
+          Beratung anfragen
+        </Button>
+      </PageHero>
 
       <SectionBlock
-        badge="Warum mit uns?"
-        title="Warum bei uns <span>unterrichten</span>?"
-        subtitle="Ein unterstützendes Ökosystem für Dozenten, die ihr Wissen mit Leidenschaft teilen."
-        variant="light"
+        badge="Steckbriefe"
+        title="Dozenten, die Praxis <span>sichtbar machen.</span>"
+        subtitle="Keine anonymen Kursfolien. Unsere Dozenten stehen für konkrete Anwendung, klare Verantwortung und Lernmomente, die im Arbeitsalltag bleiben."
         accent={tokens.colors.glow}
       >
-        <Grid $cols={3}>
-          {whyTeachWithUs.map((reason, idx) => (
-            <FeatureCard
-              key={idx}
-              icon={reason.icon}
-              title={reason.title}
-              description={reason.description}
-              features={reason.features}
-              accentColor={reason.accentColor}
-              accentBg={reason.accentBg}
-              cornerColor={reason.cornerColor}
-            />
+        <ResponsiveGrid $cols={3}>
+          {profiles.map((profile) => (
+            <ReflectiveInstructorCard key={profile.name} {...profile} />
           ))}
-        </Grid>
+        </ResponsiveGrid>
       </SectionBlock>
 
       <SectionBlock
-        badge="Expertenprofil"
-        title="Wen wir <span>suchen</span>"
-        subtitle="Es gibt viele Wege, Dozent bei uns zu werden. Finde deinen perfekten Fit."
+        badge="Warum das zählt"
+        title="Gute Weiterbildung ist eine <span>Menschenfrage.</span>"
         variant="muted"
         accent={tokens.colors.glow}
       >
-        <Grid $cols={4}>
-          {expertProfiles.map((profile, idx) => (
-            <FeatureCard
-              key={idx}
-              icon={profile.icon}
-              title={profile.title}
-              description={profile.description}
-              features={profile.features}
-              accentColor={profile.accentColor}
-              accentBg={profile.accentBg}
-              cornerColor={profile.cornerColor}
-            />
-          ))}
-        </Grid>
+        <TwoColumn>
+          <ResponsiveGrid $cols={1}>
+            {trust.map((item) => (
+              <FeatureCard
+                key={item.title}
+                step={item.step}
+                title={item.title}
+                description={item.description}
+                accentColor={tokens.colors.primary}
+                accentBg={tokens.colors.primaryLighter}
+                cornerColor={tokens.colors.primary}
+              />
+            ))}
+          </ResponsiveGrid>
+          <VisualSlot
+            title="Dozenten-Netzwerk"
+            image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_900/v1776469608/ai-hub/website/AI-Academy-Website-Images/team-gruppenfoto.png"
+            accentColor={tokens.colors.primary}
+            prompt="Use case: infographic-diagram. Asset type: experts page visual. Abstract network map connecting trainers, learners, startups, companies, and AI tools in NRW; premium editorial style; STARTPLATZ purple/mint palette; no readable tiny text, no logos, no watermark."
+          />
+        </TwoColumn>
       </SectionBlock>
 
-      <SectionBlock
-        badge="Prozess"
-        title="So wirst du <span>Dozent</span>"
-        subtitle="Ein einfacher dreistufiger Prozess vom Bewerbung bis zum ersten Kurs"
-        variant="white"
-        accent={tokens.colors.glow}
+      <CTABanner
+        title="Du bist selbst KI-Experte?"
+        subtitle="Wir suchen punktuell Menschen, die echte Anwendungserfahrung mitbringen und diese respektvoll vermitteln können."
       >
-        <Grid $cols={3}>
-          {becomeTeacherSteps.map((step, idx) => (
-            <FeatureCard
-              key={idx}
-              step={step.step}
-              title={step.title}
-              description={step.description}
-              accentColor={step.accentColor}
-              accentBg={step.accentBg}
-              cornerColor={step.cornerColor}
-            />
-          ))}
-        </Grid>
-      </SectionBlock>
-
-      <SectionBlock
-        title="Nach Zahlen"
-        variant="light"
-        accent={tokens.colors.glow}
-        centered
-      >
-        <StatsRow stats={stats} variant="light" />
-      </SectionBlock>
-
-      <CTABanner title="Bereit dein Wissen zu <span>teilen</span>?">
-        <Button href="/experten/bewerbung" variant="primary" size="lg" arrow>
-          Jetzt Bewerben
+        <Button href={`mailto:${COMPANY_EMAIL}`} variant="primary" size="lg" arrow>
+          Sprich uns an
         </Button>
       </CTABanner>
     </SubpageLayout>

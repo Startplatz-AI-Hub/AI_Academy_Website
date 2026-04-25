@@ -271,7 +271,7 @@ export default function Newsletter() {
               </Benefit>
             ))}
           </BenefitList>
-          <SubNote><strong>5.000+</strong> Abonnenten vertrauen uns bereits</SubNote>
+          <SubNote><strong>AI Academy</strong> Updates direkt aus Köln &amp; Düsseldorf</SubNote>
         </LeftCol>
 
         <FormCard>

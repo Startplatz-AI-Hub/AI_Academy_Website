@@ -13,10 +13,10 @@ import { clipBR, clipTLBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
    ───────────────────────────────────────────── */
 
 const KPIS = [
-  { value: 2000, suffix: '+', label: 'Eventteilnehmer', accent: 'Seit 2023' },
-  { value: 95,   suffix: '%', label: 'Zufriedenheit', accent: 'Kursteilnehmer' },
-  { value: 150,  suffix: '+', label: 'Dozenten & Experten', accent: 'Netzwerk' },
-  { value: 50,   suffix: '+', label: 'Partner-Unternehmen', accent: 'Kooperationen' },
+  { value: 1000, suffix: '+', label: 'Menschen beim KI-Einstieg begleitet', accent: 'Erprobte Lernpfade' },
+  { value: null, displayValue: '4,98/5', label: 'Lernerfahrung, die wirklich hilft', accent: '290+ Bewertungen' },
+  { value: 100, suffix: '+', label: 'Teams in die Anwendung gebracht', accent: 'Praxis statt Theorie' },
+  { value: 15, suffix: '+', label: 'Jahre Netzwerk für deinen nächsten Schritt', accent: 'STARTPLATZ NRW' },
 ];
 
 /* ── Animations ───────────────────────────── */
@@ -87,7 +87,7 @@ const SectionTitle = styled.h2`
   font-weight: ${tokens.fontWeights.bold};
   color: ${tokens.colors.text};
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   
   span {
     background: linear-gradient(135deg, ${tokens.colors.primary}, ${tokens.colors.primaryMuted});
@@ -179,7 +179,7 @@ const Value = styled.span`
   font-size: clamp(${tokens.fontSizes['5xl']}, 7vw, 5.5rem);
   font-weight: ${tokens.fontWeights.black};
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   color: ${tokens.colors.text};
   
   ${media.lg} {
@@ -257,8 +257,8 @@ function useCountUp(end, duration = 2200) {
 
 /* ── KPI Item ──────────────────────────────── */
 
-function KPIItem({ value, suffix, label, accent }) {
-  const { count, ref } = useCountUp(value, 2400);
+function KPIItem({ value, displayValue, suffix, label, accent }) {
+  const { count, ref } = useCountUp(value || 0, 2400);
 
   return (
     <KPICard ref={ref}>
@@ -267,8 +267,8 @@ function KPIItem({ value, suffix, label, accent }) {
       <CyberCorners $color={tokens.colors.mint} $size={8} />
       <AccentTag>{accent}</AccentTag>
       <ValueRow>
-        <Value>{count.toLocaleString('de-DE')}</Value>
-        <Suffix>{suffix}</Suffix>
+        <Value>{displayValue || count.toLocaleString('de-DE')}</Value>
+        {suffix && <Suffix>{suffix}</Suffix>}
       </ValueRow>
       <Label>{label}</Label>
     </KPICard>
@@ -283,8 +283,8 @@ export default function KPISection() {
       <SkewStripe aria-hidden="true" />
       <Inner>
         <SectionHeader>
-          <SectionLabel>Zahlen &amp; Fakten</SectionLabel>
-          <SectionTitle>Was uns <span>antreibt</span></SectionTitle>
+          <SectionLabel>Orientierung &amp; Vertrauen</SectionLabel>
+          <SectionTitle>Erfahrung, die <span>dir Sicherheit gibt</span></SectionTitle>
         </SectionHeader>
         <Grid>
           {KPIS.map((kpi) => (

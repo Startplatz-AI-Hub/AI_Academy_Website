@@ -12,7 +12,7 @@ import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
 
 const Section = styled.section`
   padding: ${tokens.spacing['4xl']} 0;
-  background: ${tokens.colors.pageBg};
+  background: transparent;
   min-height: 60vh;
 `;
 
@@ -160,7 +160,7 @@ export default function DatenschutzPage() {
               Jakow Smirin<br />
               Im Mediapark 5<br />
               50670 Köln<br /><br />
-              E-Mail: <Link href="mailto:hello@ai-hub.startplatz.de">hello@ai-hub.startplatz.de</Link>
+              E-Mail: <Link href="mailto:academy@startplatz.de">academy@startplatz.de</Link>
             </Text>
             <Text>
               Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, E-Mail-Adressen o.Ä.) entscheidet.

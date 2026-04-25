@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styled, { css, keyframes } from 'styled-components';
 import { tokens, media } from '../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
+import { CALENDLY_URL } from '../lib/site';
 
 const LOGO_URL = 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-light-400w.png';
 
@@ -13,14 +14,23 @@ const NAV_LINKS = [
     label: 'Weiterbildungen',
     href: '/arbeitssuchende',
     children: [
-      { label: 'Für Arbeitssuchende', href: '/arbeitssuchende' },
-      { label: 'Für Berufstätige', href: '/berufstaetige' },
+      { label: 'Arbeitssuchend', href: '/arbeitssuchende' },
+      { label: 'Berufstätig', href: '/berufstaetige' },
+      { label: 'OneDay Workshops', href: '/oneday' },
     ],
   },
-  { label: 'Für Unternehmen', href: '/unternehmen' },
+  {
+    label: 'Für Unternehmen',
+    href: '/unternehmen',
+    children: [
+      { label: 'Innovation Day', href: '/unternehmen#innovation-day' },
+      { label: 'Inhouse Schulungen', href: '/unternehmen#inhouse-schulungen' },
+      { label: 'AI-Private Academy', href: '/unternehmen#private-academy' },
+    ],
+  },
   { label: 'Experten', href: '/experten' },
   { label: 'Über Uns', href: '/ueber-uns' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Insights', href: '/insights' },
 ];
 
 const Header = styled.header`
@@ -132,7 +142,8 @@ const DropdownTrigger = styled.span`
   transition: transform ${tokens.transitions.base};
   transform: rotate(0deg);
 
-  ${NavItem}:hover & {
+  ${NavItem}:hover &,
+  ${NavItem}:focus-within & {
     transform: rotate(180deg);
   }
 `;
@@ -143,7 +154,7 @@ const Dropdown = styled.div`
   left: -${tokens.spacing.md};
   padding-top: 4px;
   background: transparent;
-  min-width: 220px;
+  min-width: 260px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-4px);
@@ -151,7 +162,8 @@ const Dropdown = styled.div`
   pointer-events: none;
   z-index: ${tokens.zIndex.overlay};
 
-  ${NavItem}:hover & {
+  ${NavItem}:hover &,
+  ${NavItem}:focus-within & {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -180,6 +192,13 @@ const DropdownLink = styled.a`
   &:hover {
     background: ${tokens.colors.primaryLighter};
     color: ${tokens.colors.primary};
+  }
+
+  &:focus-visible {
+    background: ${tokens.colors.primaryLighter};
+    color: ${tokens.colors.primary};
+    outline: 2px solid ${tokens.colors.primary};
+    outline-offset: -2px;
   }
 `;
 
@@ -291,11 +310,16 @@ const MobileOverlay = styled.div`
   z-index: ${tokens.zIndex.nav + 1};
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 100px ${tokens.spacing['2xl']} ${tokens.spacing['3xl']};
+  justify-content: flex-start;
+  padding: 88px ${tokens.spacing['2xl']} ${tokens.spacing['2xl']};
+  overflow-y: auto;
+  overscroll-behavior: contain;
   opacity: ${({ $open }) => ($open ? 1 : 0)};
   visibility: ${({ $open }) => ($open ? 'visible' : 'hidden')};
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  pointer-events: ${({ $open }) => ($open ? 'auto' : 'none')};
+  transition:
+    opacity 0.4s ease,
+    visibility 0s linear ${({ $open }) => ($open ? '0s' : '0.4s')};
   ${media.lg} { display: none; }
 `;
 
@@ -310,13 +334,13 @@ const MobileLink = styled.a`
   align-items: center;
   justify-content: space-between;
   font-family: ${tokens.fonts.display};
-  font-size: clamp(${tokens.fontSizes['2xl']}, 6vw, ${tokens.fontSizes['4xl']});
+  font-size: clamp(${tokens.fontSizes.lg}, 5vw, ${tokens.fontSizes['2xl']});
   font-weight: ${tokens.fontWeights.bold};
   color: ${tokens.colors.darkText};
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  padding: ${tokens.spacing.lg} 0;
+  padding: ${tokens.spacing.md} 0;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   position: relative;
   opacity: 0;
@@ -342,15 +366,19 @@ const MobileLink = styled.a`
     letter-spacing: 0.1em;
     position: absolute;
     left: 0;
-    top: ${tokens.spacing.md};
+    top: ${tokens.spacing.sm};
   }
 `;
 
 const MobileLinkLabel = styled.span`
-  padding-left: ${tokens.spacing['2xl']};
+  flex: 1;
+  min-width: 0;
+  padding-left: ${tokens.spacing.xl};
+  padding-right: ${tokens.spacing.md};
 `;
 
 const MobileLinkArrow = styled.span`
+  flex-shrink: 0;
   font-size: ${tokens.fontSizes.lg};
   color: ${tokens.colors.darkMuted};
   transition: color 0.2s ease, transform 0.2s ease;
@@ -363,7 +391,7 @@ const MobileLinkArrow = styled.span`
 
 const MobileCTA = styled.a`
   display: block;
-  margin-top: ${tokens.spacing['2xl']};
+  margin-top: ${tokens.spacing.xl};
   padding: 16px 32px;
   font-family: ${tokens.fonts.body};
   font-size: ${tokens.fontSizes.base};
@@ -387,7 +415,7 @@ const MobileCTA = styled.a`
 
 const MobileFooter = styled.div`
   margin-top: auto;
-  padding-top: ${tokens.spacing.xl};
+  padding-top: ${tokens.spacing.lg};
   font-family: ${tokens.fonts.mono};
   font-size: ${tokens.fontSizes.xs};
   color: ${tokens.colors.darkMuted};
@@ -448,14 +476,16 @@ export default function Navigation() {
               <NavItem key={l.href}>
                 {l.children ? (
                   <>
-                    <NavLink as="span">
+                    <Link href={l.href} passHref legacyBehavior>
+                      <NavLink aria-haspopup="true">
                       {l.label}
-                      <DropdownTrigger>▼</DropdownTrigger>
-                    </NavLink>
+                        <DropdownTrigger aria-hidden="true">▼</DropdownTrigger>
+                      </NavLink>
+                    </Link>
                     <Dropdown>
                       <DropdownInner>
                         {l.children.map((child) => (
-                          <Link key={child.href} href={child.href} passHref legacyBehavior>
+                          <Link key={`${l.href}-${child.href}-${child.label}`} href={child.href} passHref legacyBehavior>
                             <DropdownLink>{child.label}</DropdownLink>
                           </Link>
                         ))}
@@ -481,9 +511,9 @@ export default function Navigation() {
           <CTABtnWrap>
             <CTAOffset aria-hidden="true" />
             <CTAButton
-              as="button"
-              onClick={() => handleHashNavigation('/#newsletter')}
-              style={{ border: 'none', cursor: 'pointer', font: 'inherit' }}
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Beratung buchen
             </CTAButton>
@@ -503,16 +533,30 @@ export default function Navigation() {
         </BurgerFixed>
       )}
 
-      <MobileOverlay $open={mobileOpen} aria-hidden={!mobileOpen} role="dialog" aria-label="Navigation">
+      <MobileOverlay
+        $open={mobileOpen}
+        aria-hidden={!mobileOpen}
+        aria-modal={mobileOpen ? 'true' : undefined}
+        role="dialog"
+        aria-label="Navigation"
+      >
         <MobileNav aria-label="Mobile Navigation">
           {(() => {
             /* Flatten nav links for mobile (expand dropdowns) */
             const flat = [];
             NAV_LINKS.forEach((l) => {
               if (l.children) {
-                l.children.forEach((child) => flat.push(child));
+                l.children.forEach((child) => {
+                  flat.push({
+                    ...child,
+                    mobileKey: `${l.href}-${child.href}-${child.label}`,
+                  });
+                });
               } else {
-                flat.push(l);
+                flat.push({
+                  ...l,
+                  mobileKey: `${l.href}-${l.label}`,
+                });
               }
             });
 
@@ -522,7 +566,7 @@ export default function Navigation() {
               if (l.href.startsWith('/#')) {
                 return (
                   <MobileLink
-                    key={l.href}
+                    key={l.mobileKey}
                     as="button"
                     $open={mobileOpen}
                     $delay={delay}
@@ -538,7 +582,7 @@ export default function Navigation() {
               }
 
               return (
-                <Link key={l.href} href={l.href} passHref legacyBehavior>
+                <Link key={l.mobileKey} href={l.href} passHref legacyBehavior>
                   <MobileLink
                     $open={mobileOpen}
                     $delay={delay}
@@ -555,12 +599,13 @@ export default function Navigation() {
           })()}
 
           <MobileCTA
-            as="button"
+            href={CALENDLY_URL}
             $open={mobileOpen}
             $delay={100 + 7 * 70}
-            onClick={() => { handleHashNavigation('/#newsletter'); closeMobile(); }}
+            onClick={closeMobile}
             tabIndex={mobileOpen ? 0 : -1}
-            style={{ cursor: 'pointer', font: 'inherit' }}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Beratung buchen
           </MobileCTA>

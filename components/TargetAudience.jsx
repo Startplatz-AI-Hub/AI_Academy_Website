@@ -25,13 +25,14 @@ const SOFT = {
 
 const AUDIENCES = [
   {
-    badge: '100 % Gefördert',
-    title: 'Arbeitssuchende',
-    description: 'Starte deine Karriere in der KI-Branche mit geförderten Weiterbildungen.',
+    badge: '100% Gefördert',
+    title: 'Arbeitssuchend',
+    titleMeta: 'Dein Neustart',
+    description: 'In 8 Wochen von unsicher zu gefragt. Vollzeit, digital, AZAV-zertifiziert. Mit Bildungsgutschein komplett kostenfrei.',
     features: [
-      '100 % gefördert durch Arbeitsagentur',
-      'Praxisnahe Projekte',
-      'Karriereberatung inklusive',
+      '8 Wochen Vollzeit, Mo-Fr 9-16 Uhr',
+      'Cert-IT Zertifizierung (EU-weit)',
+      'Max. 15 Teilnehmer pro Kohorte',
     ],
     cta: 'Förderung prüfen',
     href: '/arbeitssuchende',
@@ -41,12 +42,13 @@ const AUDIENCES = [
   },
   {
     badge: 'Berufsbegleitend',
-    title: 'Berufstätige',
-    description: 'Erweitere deine Skills und bleibe relevant in der digitalen Transformation.',
+    title: 'Berufstätig',
+    titleMeta: 'Neben dem Job',
+    description: 'Zwei Abende pro Woche. Nach 8 Wochen bist du die Person im Team, die weiß wie es geht.',
     features: [
-      'Flexible Abendkurse',
-      'Zertifizierte Abschlüsse',
-      'Netzwerk mit Experten',
+      'Di & Do, 15-18 Uhr',
+      'n8n, GPT, APIs — sofort einsetzbar',
+      'AZAV, förderfähig über QCG',
     ],
     cta: 'Kurse entdecken',
     href: '/berufstaetige',
@@ -55,13 +57,14 @@ const AUDIENCES = [
     image: 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_600/v1776469600/ai-hub/website/AI-Academy-Website-Images/target-audience-berufstaetige.png',
   },
   {
-    badge: 'Inhouse',
+    badge: 'Individuell',
     title: 'Unternehmen',
-    description: 'Transformiere dein Team mit maßgeschneiderten KI-Trainings.',
+    titleMeta: 'Für Teams',
+    description: 'Euer Team nutzt KI produktiv — nicht nur zum Experimentieren. Vom OneDay Workshop bis zur 12-monatigen Private Academy.',
     features: [
-      'Individuelle Curricula',
-      'Inhouse-Trainings',
-      'Change Management Support',
+      'Innovation Day (1 Tag) bis Private Academy',
+      '100+ Unternehmen bereits geschult',
+      'Kompetenzrahmen nach 3 Säulen',
     ],
     cta: 'Beratung anfragen',
     href: '/unternehmen',
@@ -77,6 +80,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: ${tokens.spacing.xl};
+  align-items: stretch;
   ${media.md} { grid-template-columns: repeat(2, 1fr); }
   ${media.lg} { grid-template-columns: repeat(3, 1fr); }
 `;
@@ -87,6 +91,9 @@ const Card = styled.article`
   border: 1px solid ${tokens.colors.glassBorder};
   ${clipTLBR(CHAMFER.lg)}
   overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   transition: transform ${tokens.transitions.base}, filter ${tokens.transitions.base};
 
   &:hover {
@@ -137,6 +144,9 @@ const CardBadge = styled.span`
 
 const CardBody = styled.div`
   padding: ${tokens.spacing.lg} ${tokens.spacing.xl} ${tokens.spacing.xl};
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 `;
 
 const CardTitle = styled.h3`
@@ -145,6 +155,18 @@ const CardTitle = styled.h3`
   font-weight: ${tokens.fontWeights.bold};
   color: ${tokens.colors.text};
   margin-bottom: ${tokens.spacing.xs};
+  min-height: 0;
+`;
+
+const CardTitleMeta = styled.span`
+  display: block;
+  font-family: ${tokens.fonts.mono};
+  font-size: 10px;
+  font-weight: ${tokens.fontWeights.semi};
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: ${({ $color }) => $color};
+  margin-bottom: ${tokens.spacing.md};
 `;
 
 const CardDesc = styled.p`
@@ -152,6 +174,7 @@ const CardDesc = styled.p`
   color: ${tokens.colors.textMuted};
   line-height: ${tokens.lineHeights.relaxed};
   margin-bottom: ${tokens.spacing.lg};
+  min-height: 72px;
 `;
 
 const FeatureList = styled.ul`
@@ -159,15 +182,17 @@ const FeatureList = styled.ul`
   flex-direction: column;
   gap: ${tokens.spacing.sm};
   margin-bottom: ${tokens.spacing.xl};
+  min-height: 108px;
 `;
 
 const Feature = styled.li`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: ${tokens.spacing.sm};
   font-size: ${tokens.fontSizes.sm};
   color: ${tokens.colors.textSoft};
   position: relative;
+  min-height: 40px;
 
   /* Box with integrated checkmark – single element, checkmark centered inside */
   &::before {
@@ -189,7 +214,9 @@ const Feature = styled.li`
 const CardCTA = styled.a`
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   gap: ${tokens.spacing.sm};
+  margin-top: auto;
   padding: 10px 24px;
   font-size: ${tokens.fontSizes.sm};
   font-weight: ${tokens.fontWeights.semi};
@@ -266,21 +293,22 @@ export default function TargetAudience() {
   return (
     <PlanetSection
       id="weiterbildungen"
-      badge="Für jeden das passende Angebot"
-      title="Dein Weg in die <span>KI-Zukunft</span>"
-      subtitle="Ob Quereinsteiger, Professional oder Enterprise – wir haben das richtige Programm für dich."
+      badge="Weiterbildungen"
+      title="Drei Wege. <span>Ein Ziel.</span>"
+      subtitle="Das Format, das zu deinem Leben passt."
     >
       <Grid>
         {AUDIENCES.map((a, i) => (
-          <Card key={a.title} ref={(el) => { cardsRef.current[i] = el; }} id={a.title === 'Unternehmen' ? 'unternehmen' : undefined}>
+          <Card key={a.title} ref={(el) => { cardsRef.current[i] = el; }} id={a.href === '/unternehmen' ? 'unternehmen' : undefined}>
             <StitchTop $color={a.color} />
             <CyberCorners $color={a.color} $size={10} />
             <CardImage>
-              <img src={a.image} alt={`${a.title} – ${a.badge}`} loading="lazy" width="600" height="400" />
-              <CardBadge $color={a.color} $bg={a.colorBg}>{a.badge}</CardBadge>
+              <img src={a.image} alt={`${a.title} — ${a.badge}`} loading="lazy" width="600" height="400" />
+            <CardBadge $color={a.color} $bg={a.colorBg}>{a.badge}</CardBadge>
             </CardImage>
             <CardBody>
               <CardTitle>{a.title}</CardTitle>
+              <CardTitleMeta $color={a.color}>{a.titleMeta}</CardTitleMeta>
               <CardDesc>{a.description}</CardDesc>
               <FeatureList>
                 {a.features.map((f) => <Feature key={f} $color={a.color}>{f}</Feature>)}

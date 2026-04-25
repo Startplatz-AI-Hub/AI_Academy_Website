@@ -16,10 +16,11 @@ import PlanetSection from './PlanetSection';
 const FAQ_BG = 'https://res.cloudinary.com/startplatz/image/upload/v1767662307/ai-hub/website/website_stock_images/BG-CTA.png';
 
 const QUESTIONS = [
-  { q: 'Was ist ein Bildungsgutschein und wie bekomme ich ihn?', a: 'Ein Bildungsgutschein ist eine Förderung der Agentur für Arbeit, die 100 % der Kosten für eine zertifizierte Weiterbildung übernimmt. Du erhältst ihn, wenn du arbeitssuchend gemeldet bist oder dein Arbeitsplatz gefährdet ist. Sprich einfach mit deinem Arbeitsvermittler – wir unterstützen dich gerne beim Antrag.' },
-  { q: 'Welche Förderungen gibt es für Berufstätige?', a: 'Für Berufstätige gibt es das Qualifizierungschancengesetz (QCG), das bis zu 100 % der Weiterbildungskosten übernimmt. Auch Programme wie WeGebAU oder Bildungsurlaub können genutzt werden. Wir beraten dich individuell zu deinen Möglichkeiten.' },
-  { q: 'Wie lange dauern die Bootcamps?', a: 'Unsere Vollzeit-Bootcamps dauern in der Regel 8–12 Wochen. Berufsbegleitende Programme laufen über 4–6 Monate mit flexiblen Abend- und Wochenendterminen. Nach Abschluss erhältst du ein anerkanntes Zertifikat.' },
-  { q: 'Brauche ich Vorkenntnisse in Programmierung?', a: 'Für die meisten unserer Programme brauchst du keine Programmierkenntnisse. Wir bieten sowohl Kurse für absolute Anfänger als auch für Fortgeschrittene an. In einem kostenlosen Beratungsgespräch finden wir das passende Programm für dich.' },
+  { q: 'Was ist die STARTPLATZ AI Academy?', a: 'Die AI Academy ist das Weiterbildungszentrum von STARTPLATZ — Deutschlands ältestem Startup-Inkubator mit über 15 Jahren Erfahrung. Wir bieten drei Format-Linien: OneDay (Tagesworkshops), FortyDays (8 Wochen Vollzeit) und AfterWork (berufsbegleitend abends). Für Arbeitssuchende, Berufstätige und Unternehmen.' },
+  { q: 'Kann ich mit Bildungsgutschein teilnehmen?', a: 'Ja. Der FortyDays KI-Manager:in ist AZAV-zertifiziert und wird bis zu 100% von der Agentur für Arbeit gefördert. 8 Wochen Vollzeit, Mo-Fr 9-16 Uhr, komplett digital. Sprich mit deinem Arbeitsvermittler oder buche eine kostenlose Beratung bei uns.' },
+  { q: 'Brauche ich Programmierkenntnisse?', a: 'Nein. Unsere Programme sind für Menschen ohne technischen Hintergrund konzipiert. Du arbeitest mit Tools wie n8n, ChatGPT und APIs — kein Code nötig. Über 1.000 Absolventen aus allen Branchen haben das bereits geschafft.' },
+  { q: 'Was unterscheidet euch von anderen KI-Kursen?', a: 'Ein anerkanntes Zertifikat (Cert-IT, EU-weit gültig). Echte Projekte ab Woche 1 statt nur Theorie. Und ein Netzwerk aus 10.000+ Teilnehmern und 100+ geschulten Unternehmen. Unsere Bewertung: 4,98 von 5 Sternen.' },
+  { q: 'Gibt es Angebote für Unternehmen?', a: 'Vom eintägigen Innovation Day über Inhouse-Schulungen (1-5 Tage) bis zur langfristigen AI-Private Academy (3-12 Monate). Unser Kompetenzrahmen deckt drei Bereiche ab: technologische Grundlagen, Anwendung im Unternehmenskontext sowie strategische und ethische Einbettung. 100+ Unternehmen vertrauen uns bereits.' },
 ];
 
 const List = styled.div`
@@ -75,7 +76,7 @@ const Icon = styled.span`
 
 const Panel = styled.div`
   overflow: hidden;
-  max-height: ${({ $open }) => ($open ? '300px' : '0')};
+  max-height: ${({ $open }) => ($open ? '520px' : '0')};
   transition: max-height 0.4s ease;
 `;
 
@@ -87,7 +88,7 @@ const PanelInner = styled.div`
 `;
 
 export default function FAQ() {
-  const [openIdx, setOpenIdx] = useState(null);
+  const [openIdx, setOpenIdx] = useState(0);
   const toggle = (i) => setOpenIdx(openIdx === i ? null : i);
 
   return (
@@ -95,8 +96,8 @@ export default function FAQ() {
       solid
       id="faq"
       badge="Häufige Fragen"
-      title="Alles was du wissen <span>musst</span>"
-      subtitle="Antworten auf die wichtigsten Fragen zu Förderung, Programmen und mehr."
+      title="Was du wissen <span>solltest</span>"
+      subtitle="Kurz, konkret und ohne Fachchinesisch."
       bgImage={FAQ_BG}
       bgImageOpacity={0.18}
     >

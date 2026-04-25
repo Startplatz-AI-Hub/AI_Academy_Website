@@ -321,7 +321,7 @@ const PopupLabel = styled.p`
 /* ── Component ───────────────────────────── */
 
 export default function Testimonials() {
-  const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [hoveredIdx, setHoveredIdx] = useState(0);
   const [popup, setPopup] = useState(null);
 
   const hasActive = hoveredIdx !== null;
@@ -363,9 +363,9 @@ export default function Testimonials() {
               $color={v.color}
               $pos={pos}
               onMouseEnter={() => setHoveredIdx(i)}
-              onMouseLeave={() => setHoveredIdx(null)}
+              onMouseLeave={() => setHoveredIdx(0)}
               onFocus={() => setHoveredIdx(i)}
-              onBlur={() => setHoveredIdx(null)}
+              onBlur={() => setHoveredIdx(0)}
               onClick={() => openPopup(v)}
               tabIndex={0}
               role="button"

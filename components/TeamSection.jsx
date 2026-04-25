@@ -62,7 +62,21 @@ const LocationCard = styled.div`
   ${clipBR(CHAMFER.lg)}
   overflow: hidden;
   height: 180px;
-  box-shadow: ${tokens.shadows.lg};
+  box-shadow:
+    0 18px 44px rgba(15, 15, 15, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.84),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.46),
+      inset 0 -32px 54px rgba(0, 0, 0, 0.18);
+    z-index: 1;
+  }
 
   ${media.md} {
     height: 220px;
@@ -83,6 +97,7 @@ const LocationLabel = styled.div`
   position: absolute;
   bottom: ${tokens.spacing.lg};
   left: ${tokens.spacing.lg};
+  z-index: 2;
 
   span {
     font-family: ${tokens.fonts.display};
@@ -106,12 +121,13 @@ export default function TeamSection() {
         <CyberCorners $color={tokens.colors.mint} $size={12} />
         <GroupImage
           src={GROUP_PHOTO}
-          alt="Das AI Academy Team – Gruppenfoto"
+          alt="Das AI Academy Team — Gruppenfoto"
           loading="eager"
           width="1400"
           height="600"
         />
       </GroupPhotoWrap>
+
       <LocationRow>
         {LOCATIONS.map((l) => (
           <LocationCard key={l.city}>
