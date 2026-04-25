@@ -40,8 +40,10 @@ const EMERGE_MS = 800;
 const PARTNERS = [
   {
     label: 'STARTPLATZ',
-    src: '/partners/startplatz-logo.jpeg',
+    src: 'https://res.cloudinary.com/startplatz/image/upload/v1614775778/logos/STARTPLATZ_Logos/STARTPLATZ_Logo_RGB.png',
   },
+  { label: 'NRW Hub', src: 'https://res.cloudinary.com/startplatz/image/upload/v1751977324/logos/NRW_Hub_Wei%C3%9F.png' },
+  { label: 'MIFCOM', src: 'https://res.cloudinary.com/startplatz/image/upload/v1750242811/logos/mifcom_logo_fin.png' },
   { label: 'Anthropic', src: 'https://cdn.simpleicons.org/anthropic/191919', name: 'Anthropic' },
   { label: 'Claude', src: 'https://cdn.simpleicons.org/claude/D97757', name: 'Claude' },
   { label: 'Microsoft Founders Hub', src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', name: 'Microsoft Founders Hub' },
