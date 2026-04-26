@@ -16,8 +16,9 @@ import { CALENDLY_URL } from '../../lib/site';
 
 const CLAUDE_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777162756/ai-hub/website/AI-Academy-Website-Images/oneday-claude-cowork-hero.png';
 const IMMOBILIEN_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777162756/ai-hub/website/AI-Academy-Website-Images/oneday-immobilien-hero.png';
-const BUSINESS_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1776469603/ai-hub/website/AI-Academy-Website-Images/target-audience-unternehmen.png';
-const PROFESSIONAL_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1776469600/ai-hub/website/AI-Academy-Website-Images/target-audience-berufstaetige.png';
+const CLAUDE_CODE_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777167146/ai-hub/website/AI-Academy-Website-Images/oneday-claude-code-hero.png';
+const KI_KOMPETENZ_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777167151/ai-hub/website/AI-Academy-Website-Images/oneday-ki-kompetenz-hero.png';
+const KI_START_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777167150/ai-hub/website/AI-Academy-Website-Images/oneday-ki-start-hero.png';
 
 const ExplorerGrid = styled.div`
   display: grid;
@@ -369,7 +370,7 @@ export default function OneDayPage() {
       href: CALENDLY_URL,
       cta: 'Termin anfragen',
       external: true,
-      image: CLAUDE_IMAGE,
+      image: CLAUDE_CODE_IMAGE,
       badge: 'AI Coding',
       deliverables: ['Setup', 'Prompts', 'Review'],
       preview:
@@ -382,7 +383,7 @@ export default function OneDayPage() {
       href: CALENDLY_URL,
       cta: 'Platz anfragen',
       external: true,
-      image: BUSINESS_IMAGE,
+      image: KI_KOMPETENZ_IMAGE,
       badge: 'Compliance & Kompetenz',
       deliverables: ['EU AI Act', 'Rollen', 'Nachweis'],
       preview:
@@ -395,7 +396,7 @@ export default function OneDayPage() {
       href: CALENDLY_URL,
       cta: 'Platz anfragen',
       external: true,
-      image: PROFESSIONAL_IMAGE,
+      image: KI_START_IMAGE,
       badge: 'Einstieg',
       deliverables: ['Toolklarheit', 'Prompts', 'Routine'],
       preview:
