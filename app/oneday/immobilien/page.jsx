@@ -2,7 +2,7 @@ import OneDayDetailPage from '../../../components/OneDayDetailPage';
 import { CALENDLY_URL } from '../../../lib/site';
 
 export const metadata = {
-  title: 'OneDay Immobilien | KI-Bootcamp für Makler | STARTPLATZ AI Academy',
+  title: 'OneDay Immobilien | KI-Bootcamp für Makler',
   description:
     'Ein eintägiges KI-Bootcamp für Immobilienmakler: Exposés, Social Content, Eigentümer-Akquise und Kundenkommunikation mit direkt nutzbaren KI-Workflows.',
   alternates: { canonical: '/oneday/immobilien' },

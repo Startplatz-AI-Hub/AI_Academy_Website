@@ -2,7 +2,7 @@ import OneDayDetailPage from '../../../components/OneDayDetailPage';
 import { CALENDLY_URL } from '../../../lib/site';
 
 export const metadata = {
-  title: 'OneDay Claude Cowork | STARTPLATZ AI Academy',
+  title: 'OneDay Claude Cowork | KI-Workshop für den Arbeitsalltag',
   description:
     'Ein intensiver Praxistag für Claude im Arbeitsalltag: Workflows, Prompt-Systeme, Recherche, Schreiben, Analyse und direkte Anwendung an eigenen Aufgaben.',
   alternates: { canonical: '/oneday/claude-cowork' },
