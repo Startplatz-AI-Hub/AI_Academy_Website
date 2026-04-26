@@ -6,12 +6,9 @@ import {
   Button,
   CTABanner,
   DetailTable,
-  FeatureCard,
   MiniFAQ,
   PageHero,
-  ResponsiveGrid,
   SectionBlock,
-  TwoColumn,
   VisualSlot,
 } from './ui';
 import SubpageLayout from './SubpageLayout';
@@ -71,6 +68,228 @@ const MetaLabel = styled.div`
   color: ${tokens.colors.textDim};
   letter-spacing: 0.08em;
   text-transform: uppercase;
+`;
+
+const TakeawayStrip = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: ${tokens.spacing['2xl']};
+  background: ${tokens.colors.surface};
+  border: 1px solid ${tokens.colors.glassBorder};
+  ${clipBR(CHAMFER.lg)}
+  overflow: hidden;
+
+  ${media.md} {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const TakeawayItem = styled.div`
+  position: relative;
+  padding: ${tokens.spacing.xl};
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  ${media.md} {
+    border-bottom: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+`;
+
+const TakeawayLabel = styled.span`
+  display: block;
+  margin-bottom: ${tokens.spacing.sm};
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  color: ${({ $color }) => $color};
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+`;
+
+const TakeawayTitle = styled.h3`
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes.xl};
+  font-weight: ${tokens.fontWeights.bold};
+  color: ${tokens.colors.text};
+  margin-bottom: ${tokens.spacing.sm};
+`;
+
+const TakeawayText = styled.p`
+  color: ${tokens.colors.textMuted};
+  line-height: ${tokens.lineHeights.relaxed};
+`;
+
+const ReasonRail = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing.lg};
+  padding: ${tokens.spacing.sm} ${tokens.spacing.sm} ${tokens.spacing.lg};
+  margin: 0 -${tokens.spacing.sm};
+
+  ${media.md} {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  ${media.xl} {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+`;
+
+const ReasonCard = styled.article`
+  position: relative;
+  min-width: 0;
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: ${tokens.spacing.xl};
+  background:
+    linear-gradient(180deg, ${({ $bg }) => $bg}, rgba(255, 255, 255, 0.84)),
+    ${tokens.colors.surface};
+  border: 1px solid ${({ $color }) => `${$color}33`};
+  ${clipBR(CHAMFER.lg)}
+  box-shadow: ${tokens.shadows.sm};
+`;
+
+const ReasonIndex = styled.span`
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.sm};
+  font-weight: ${tokens.fontWeights.semi};
+  color: ${({ $color }) => $color};
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+`;
+
+const ReasonTitle = styled.h3`
+  margin: ${tokens.spacing.xl} 0 ${tokens.spacing.sm};
+  font-family: ${tokens.fonts.display};
+  font-size: clamp(${tokens.fontSizes.xl}, 1.6vw, ${tokens.fontSizes['2xl']});
+  font-weight: ${tokens.fontWeights.black};
+  line-height: ${tokens.lineHeights.snug};
+  color: ${tokens.colors.text};
+  overflow-wrap: anywhere;
+  hyphens: auto;
+`;
+
+const ReasonText = styled.p`
+  color: ${tokens.colors.textMuted};
+  line-height: ${tokens.lineHeights.relaxed};
+  overflow-wrap: anywhere;
+`;
+
+const ReasonFeatures = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${tokens.spacing.sm};
+  margin-top: ${tokens.spacing.lg};
+`;
+
+const ReasonFeature = styled.li`
+  padding: 5px 9px;
+  font-family: ${tokens.fonts.mono};
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: ${tokens.colors.textSoft};
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  ${clipBR(CHAMFER.xs)}
+`;
+
+const UseCaseShowcase = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing['2xl']};
+  align-items: start;
+
+  ${media.lg} {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+`;
+
+const IndexDeck = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing.lg};
+
+  ${media.md} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const IndexCard = styled.article`
+  position: relative;
+  min-height: 310px;
+  padding: ${tokens.spacing.xl};
+  background: ${tokens.colors.surface};
+  border: 1px solid ${({ $color }) => `${$color}33`};
+  ${clipBR(CHAMFER.md)}
+  box-shadow: ${tokens.shadows.sm};
+  transform: rotate(${({ $tilt }) => $tilt}deg);
+  transition: transform ${tokens.transitions.fast}, box-shadow ${tokens.transitions.fast};
+
+  &:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: ${tokens.shadows.card};
+  }
+`;
+
+const CardTab = styled.div`
+  position: absolute;
+  top: -1px;
+  right: ${tokens.spacing.lg};
+  padding: 7px 10px;
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  color: ${({ $color }) => $color};
+  background: ${({ $bg }) => $bg};
+  border: 1px solid ${({ $color }) => `${$color}33`};
+  border-top: 0;
+  ${clipBR(CHAMFER.xs)}
+`;
+
+const UseCaseTitle = styled.h3`
+  margin-top: ${tokens.spacing.lg};
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes['2xl']};
+  font-weight: ${tokens.fontWeights.black};
+  color: ${tokens.colors.text};
+  line-height: ${tokens.lineHeights.snug};
+`;
+
+const UseCaseText = styled.p`
+  margin-top: ${tokens.spacing.sm};
+  color: ${tokens.colors.textMuted};
+  line-height: ${tokens.lineHeights.relaxed};
+`;
+
+const FeatureList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: ${tokens.spacing.sm};
+  margin-top: ${tokens.spacing.lg};
+`;
+
+const FeatureItem = styled.li`
+  display: flex;
+  gap: ${tokens.spacing.sm};
+  color: ${tokens.colors.textSoft};
+  line-height: ${tokens.lineHeights.relaxed};
+
+  &::before {
+    content: '✓';
+    color: ${({ $color }) => $color};
+    font-weight: ${tokens.fontWeights.bold};
+    flex-shrink: 0;
+  }
 `;
 
 const Schedule = styled.div`
@@ -178,25 +397,11 @@ const PriceSub = styled.p`
   margin-bottom: ${tokens.spacing.xl};
 `;
 
-const FeatureList = styled.ul`
+const PriceFeatureList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.md};
   margin-bottom: ${tokens.spacing.xl};
-`;
-
-const FeatureItem = styled.li`
-  display: flex;
-  gap: ${tokens.spacing.sm};
-  color: ${tokens.colors.textSoft};
-  line-height: ${tokens.lineHeights.relaxed};
-
-  &::before {
-    content: '✓';
-    color: ${({ $color }) => $color};
-    font-weight: ${tokens.fontWeights.bold};
-    flex-shrink: 0;
-  }
 `;
 
 const Note = styled.p`
@@ -206,9 +411,18 @@ const Note = styled.p`
   line-height: ${tokens.lineHeights.relaxed};
 `;
 
+const DetailsPanel = styled.div`
+  padding: ${tokens.spacing['2xl']};
+  background: ${tokens.colors.surface};
+  border: 1px solid ${tokens.colors.glassBorder};
+  ${clipBR(CHAMFER.lg)}
+`;
+
 export default function OneDayDetailPage({ config }) {
   const accent = accentMap[config.accent || 'primary'] || accentMap.primary;
   const ctaHref = config.ctaHref || CALENDLY_URL;
+  const buttonVariant = config.accent === 'orange' ? 'orange' : config.accent === 'mint' ? 'mint' : 'primary';
+  const tilts = [-1.4, 1.1, 0.7, -1];
 
   return (
     <SubpageLayout>
@@ -225,7 +439,7 @@ export default function OneDayDetailPage({ config }) {
         accentColor={accent.bg}
         image={config.heroImage}
       >
-        <Button href={ctaHref} target="_blank" rel="noopener noreferrer" variant="primary" size="lg" arrow>
+        <Button href={ctaHref} target="_blank" rel="noopener noreferrer" variant={buttonVariant} size="lg" arrow>
           {config.primaryCta || 'Platz sichern'}
         </Button>
         <Button href="#programm" variant="secondary" size="lg">
@@ -243,6 +457,18 @@ export default function OneDayDetailPage({ config }) {
             </MetaItem>
           ))}
         </MetaGrid>
+
+        {config.takeaways && (
+          <TakeawayStrip>
+            {config.takeaways.map((item, index) => (
+              <TakeawayItem key={item.title}>
+                <TakeawayLabel $color={accent.color}>{String(index + 1).padStart(2, '0')}</TakeawayLabel>
+                <TakeawayTitle>{item.title}</TakeawayTitle>
+                <TakeawayText>{item.text}</TakeawayText>
+              </TakeawayItem>
+            ))}
+          </TakeawayStrip>
+        )}
       </SectionBlock>
 
       <SectionBlock
@@ -251,20 +477,25 @@ export default function OneDayDetailPage({ config }) {
         subtitle={config.why.subtitle}
         accent={accent.glow}
       >
-        <ResponsiveGrid $cols={4}>
+        <ReasonRail role="list" aria-label={config.why.badge}>
           {config.why.cards.map((card, index) => (
-            <FeatureCard
-              key={card.title}
-              step={String(index + 1).padStart(2, '0')}
-              title={card.title}
-              description={card.description}
-              features={card.features}
-              accentColor={accent.color}
-              accentBg={accent.bg}
-              cornerColor={accent.color}
-            />
+            <ReasonCard key={card.title} role="listitem" $color={accent.color} $bg={accent.bg}>
+              <CyberCorners $color={accent.color} $size={8} />
+              <div>
+                <ReasonIndex $color={accent.color}>{String(index + 1).padStart(2, '0')}</ReasonIndex>
+                <ReasonTitle>{card.title}</ReasonTitle>
+                <ReasonText>{card.description}</ReasonText>
+              </div>
+              {card.features && (
+                <ReasonFeatures>
+                  {card.features.map((feature) => (
+                    <ReasonFeature key={feature}>{feature}</ReasonFeature>
+                  ))}
+                </ReasonFeatures>
+              )}
+            </ReasonCard>
           ))}
-        </ResponsiveGrid>
+        </ReasonRail>
       </SectionBlock>
 
       <SectionBlock
@@ -274,28 +505,33 @@ export default function OneDayDetailPage({ config }) {
         variant="muted"
         accent={accent.glow}
       >
-        <TwoColumn>
-          <ResponsiveGrid $cols={2}>
+        <UseCaseShowcase>
+          <IndexDeck>
             {config.useCases.items.map((item, index) => (
-              <FeatureCard
-                key={item.title}
-                step={String(index + 1).padStart(2, '0')}
-                title={item.title}
-                description={item.description}
-                features={item.features}
-                accentColor={accent.color}
-                accentBg={accent.bg}
-                cornerColor={accent.color}
-              />
+              <IndexCard key={item.title} $color={accent.color} $tilt={tilts[index % tilts.length]}>
+                <CyberCorners $color={accent.color} $size={7} />
+                <CardTab $color={accent.color} $bg={accent.bg}>
+                  Case {String(index + 1).padStart(2, '0')}
+                </CardTab>
+                <UseCaseTitle>{item.title}</UseCaseTitle>
+                <UseCaseText>{item.description}</UseCaseText>
+                {item.features && (
+                  <FeatureList>
+                    {item.features.map((feature) => (
+                      <FeatureItem key={feature} $color={accent.color}>{feature}</FeatureItem>
+                    ))}
+                  </FeatureList>
+                )}
+              </IndexCard>
             ))}
-          </ResponsiveGrid>
+          </IndexDeck>
           <VisualSlot
             title={config.visual.title}
             image={config.visual.image}
             prompt={config.visual.prompt}
             accentColor={accent.color}
           />
-        </TwoColumn>
+        </UseCaseShowcase>
       </SectionBlock>
 
       <SectionBlock
@@ -336,17 +572,19 @@ export default function OneDayDetailPage({ config }) {
             <PriceEyebrow $color={accent.color}>{config.pricing.eyebrow}</PriceEyebrow>
             <Price>{config.pricing.price}</Price>
             <PriceSub>{config.pricing.priceSub}</PriceSub>
-            <FeatureList>
+            <PriceFeatureList>
               {config.pricing.features.map((feature) => (
                 <FeatureItem key={feature} $color={accent.color}>{feature}</FeatureItem>
               ))}
-            </FeatureList>
-            <Button href={ctaHref} target="_blank" rel="noopener noreferrer" variant="primary" size="lg" arrow>
+            </PriceFeatureList>
+            <Button href={ctaHref} target="_blank" rel="noopener noreferrer" variant={buttonVariant} size="lg" arrow>
               {config.pricing.cta || 'Platz sichern'}
             </Button>
             {config.pricing.note && <Note>{config.pricing.note}</Note>}
           </PricingCard>
-          <DetailTable items={config.details} />
+          <DetailsPanel>
+            <DetailTable items={config.details} />
+          </DetailsPanel>
         </PricingGrid>
       </SectionBlock>
 
@@ -355,7 +593,7 @@ export default function OneDayDetailPage({ config }) {
       </SectionBlock>
 
       <CTABanner title={config.finalCta.title} subtitle={config.finalCta.subtitle}>
-        <Button href={ctaHref} target="_blank" rel="noopener noreferrer" variant="primary" size="lg" arrow>
+        <Button href={ctaHref} target="_blank" rel="noopener noreferrer" variant={buttonVariant} size="lg" arrow>
           {config.finalCta.button}
         </Button>
       </CTABanner>

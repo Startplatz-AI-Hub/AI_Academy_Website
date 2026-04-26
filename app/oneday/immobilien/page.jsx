@@ -25,6 +25,20 @@ const config = {
     { value: 'Max. 12', label: 'Teilnehmer' },
     { value: '449 EUR', label: 'Pilotplatz' },
   ],
+  takeaways: [
+    {
+      title: 'Exposé-System',
+      text: 'Aus Objektinfos, Zielgruppe und Tonalität entstehen bessere Texte und Varianten.',
+    },
+    {
+      title: 'Akquise-Routine',
+      text: 'Anschreiben, Gesprächsleitfaden und Einwandlogik für Eigentümerkontakte.',
+    },
+    {
+      title: 'Content-Motor',
+      text: 'Aus einem Objekt werden Posts, Captions, Stories und Follow-ups für mehrere Kanäle.',
+    },
+  ],
   why: {
     badge: 'Warum dieses Format',
     title: 'Immobilien-KI, die <span>im Alltag funktioniert.</span>',
@@ -35,21 +49,25 @@ const config = {
         title: 'Branchenspezifisch',
         description:
           'Alle Übungen arbeiten mit Immobilienlogik: Objekte, Zielgruppen, Eigentümer, Interessenten und Vermarktung.',
+        features: ['Objekte', 'Zielgruppen', 'Vermarktung'],
       },
       {
         title: 'Direkt anwendbar',
         description:
           'Du gehst mit Prompt-Vorlagen und Workflows raus, die du am nächsten Tag einsetzen kannst.',
+        features: ['Vorlagen', 'Workflows', 'Sofortstart'],
       },
       {
         title: 'Eigene Fälle',
         description:
           'Bring ein Objekt, Exposé, Akquiseproblem oder Kommunikationsbeispiel mit. Wir arbeiten konkret daran.',
+        features: ['Eigene Objekte', 'Akquise', 'Follow-up'],
       },
       {
         title: 'Weiterbildungsnachweis',
         description:
           'Du erhältst ein Zertifikat der STARTPLATZ AI Academy zur Dokumentation deiner Teilnahme.',
+        features: ['Zertifikat', 'Dokumentation', 'Teamfähig'],
       },
     ],
   },
@@ -183,6 +201,14 @@ const config = {
     {
       q: 'Bekomme ich Vorlagen?',
       a: 'Ja. Du erhältst ein Toolkit mit Prompt-Vorlagen für Exposé, Social Content, Akquise und Kundenkommunikation.',
+    },
+    {
+      q: 'Ist das Rechts- oder Datenschutzberatung?',
+      a: 'Nein. Wir zeigen verantwortungsbewusste Anwendung, typische Risiken und gute Arbeitsroutinen, ersetzen aber keine Rechts- oder Datenschutzberatung.',
+    },
+    {
+      q: 'Können Maklerbüros das als Teamformat buchen?',
+      a: 'Ja. Für Büros und Vertriebs- oder Marketingteams bieten wir Inhouse-Termine mit euren Objekten, Prozessen und Tonalitäten an.',
     },
   ],
   finalCta: {

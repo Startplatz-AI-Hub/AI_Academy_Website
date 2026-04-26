@@ -25,6 +25,20 @@ const config = {
     { value: '790 EUR', label: 'Regulär' },
     { value: 'Köln', label: 'STARTPLATZ' },
   ],
+  takeaways: [
+    {
+      title: 'Dein Claude Setup',
+      text: 'Ein wiederverwendbarer Arbeitsmodus mit Rollen, Kontext, Dateien und Output-Regeln.',
+    },
+    {
+      title: 'Prompt Library',
+      text: 'Vorlagen für Recherche, Schreiben, Analyse und wiederkehrende operative Aufgaben.',
+    },
+    {
+      title: 'Transferplan',
+      text: 'Die nächsten konkreten Anwendungen für deine Woche, nicht nur Seminar-Notizen.',
+    },
+  ],
   why: {
     badge: 'Warum Claude Cowork',
     title: 'Vom Chatten zum <span>Arbeitsmodus.</span>',
@@ -35,21 +49,25 @@ const config = {
         title: 'Eigene Aufgaben statt Demo',
         description:
           'Du bringst echte Texte, Entscheidungen, Recherchen oder Prozessaufgaben mit und arbeitest direkt daran.',
+        features: ['Echte Cases', 'Sparring', 'Sofort verwertbar'],
       },
       {
         title: 'Prompt-Systeme statt Einzelprompts',
         description:
           'Du baust wiederverwendbare Arbeitsvorlagen, die jeden Tag schneller und konsistenter machen.',
+        features: ['Master-Prompts', 'Output-Standards', 'Review-Checks'],
       },
       {
         title: 'Claude richtig nutzen',
         description:
           'Du lernst, wie du Kontextfenster, Dateien, Artefakte und Iterationen sinnvoll steuerst.',
+        features: ['Dateien', 'Artefakte', 'Iterationen'],
       },
       {
         title: 'Direkt produktiv',
         description:
           'Am Ende hast du dein eigenes Claude-Setup, nicht nur Notizen aus einem Seminar.',
+        features: ['Setup', 'Routinen', 'Nächste Schritte'],
       },
     ],
   },
@@ -183,6 +201,14 @@ const config = {
     {
       q: 'Kann ich eigene Dokumente mitbringen?',
       a: 'Ja. Genau dafür ist der Tag gedacht. Bitte keine vertraulichen Daten einbringen, die du nicht in ein KI-Tool laden darfst.',
+    },
+    {
+      q: 'Was passiert nach dem Workshop?',
+      a: 'Du gehst mit Prompt-Bibliothek, Claude-Setup und einem klaren Transferplan raus. Wenn du weiter vertiefen willst, können AfterWork, OneDay-Folgetermine oder Inhouse-Formate anschließen.',
+    },
+    {
+      q: 'Kann mein Team gemeinsam teilnehmen?',
+      a: 'Ja. Für Teams passen wir Aufgaben, Rollen und Beispiele auf eure Prozesse an und bieten separate Inhouse-Termine an.',
     },
   ],
   finalCta: {

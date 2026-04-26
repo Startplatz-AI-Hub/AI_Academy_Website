@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import {
   BeforeAfter,
   Button,
@@ -13,7 +13,6 @@ import {
   ResponsiveGrid,
   SectionBlock,
   StatsRow,
-  TestimonialCard,
   TwoColumn,
   VisualSlot,
 } from '../../components/ui';
@@ -30,21 +29,73 @@ const Panel = styled.div`
   ${clipBR(CHAMFER.md)}
 `;
 
-const NameRail = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${tokens.spacing.sm};
-  margin-top: ${tokens.spacing.xl};
+const quoteMarquee = keyframes`
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 `;
 
-const NameChip = styled.span`
-  padding: 7px 12px;
+const QuoteViewport = styled.div`
+  overflow: hidden;
+  margin-top: ${tokens.spacing.lg};
+  padding: ${tokens.spacing.sm} 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+
+  &:hover div,
+  &:focus-within div {
+    animation-play-state: paused;
+  }
+`;
+
+const QuoteTrack = styled.div`
+  display: flex;
+  gap: ${tokens.spacing.lg};
+  width: max-content;
+  animation: ${quoteMarquee} 42s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+`;
+
+const QuoteCard = styled.figure`
+  position: relative;
+  flex: 0 0 clamp(260px, 31vw, 420px);
+  min-height: 148px;
+  margin: 0;
+  padding: ${tokens.spacing.lg};
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(20, 184, 166, 0.18);
+  ${clipBR(CHAMFER.md)}
+  box-shadow: ${tokens.shadows.sm};
+`;
+
+const QuoteMark = styled.span`
+  display: block;
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes['2xl']};
+  font-weight: ${tokens.fontWeights.black};
+  color: ${tokens.colors.mint};
+  line-height: 1;
+  margin-bottom: ${tokens.spacing.sm};
+`;
+
+const QuoteText = styled.blockquote`
+  margin: 0;
+  color: ${tokens.colors.textSoft};
+  font-size: ${tokens.fontSizes.lg};
+  line-height: ${tokens.lineHeights.snug};
+`;
+
+const QuoteSource = styled.figcaption`
+  margin-top: ${tokens.spacing.md};
   font-family: ${tokens.fonts.mono};
   font-size: ${tokens.fontSizes.xs};
-  color: ${tokens.colors.mint};
-  background: ${tokens.colors.mintBg};
-  border: 1px solid rgba(20, 184, 166, 0.22);
-  ${clipBR(CHAMFER.xs)}
+  color: ${tokens.colors.textDim};
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 `;
 
 export default function ArbeitssuchendePage() {
@@ -56,7 +107,7 @@ export default function ArbeitssuchendePage() {
 
   const after = [
     'Du verstehst KI und kannst es belegen.',
-    'Du setzt KI-Tools sicher ein — täglich.',
+    'Du setzt KI-Tools sicher ein - täglich.',
     'Du hast ein Cert-IT Zertifikat und echte Projekte.',
   ];
 
@@ -115,6 +166,17 @@ export default function ArbeitssuchendePage() {
     { displayValue: '4,98/5', label: 'Bewertung' },
     { value: 100, label: 'Förderquote', suffix: '%' },
     { displayValue: '60.000', label: 'Offene KI-Stellen in Deutschland' },
+  ];
+
+  const testimonials = [
+    { quote: 'Ich habe wahnsinnig viel gelernt.', source: 'Tobias, FortyDays Absolvent' },
+    { quote: 'Ein Must Know für uns alle.', source: 'Olga, Absolventin' },
+    { quote: 'Mehr gelernt als je zuvor.', source: 'Oskar, Absolvent' },
+    { quote: 'Ich habe KI endlich verstanden und direkt angewendet.', source: 'Catharina, Kursfeedback' },
+    { quote: 'Die Mischung aus Praxis und Struktur war genau richtig.', source: 'Alex, Kursfeedback' },
+    { quote: 'Das Zertifikat gibt mir Rückenwind in Bewerbungen.', source: 'Aline, Kursfeedback' },
+    { quote: 'Ich bin mit einem echten Projekt aus dem Kurs gegangen.', source: 'Peter, Kursfeedback' },
+    { quote: 'Vorher Respekt vor Tools, jetzt nutze ich sie täglich.', source: 'Birgit, Kursfeedback' },
   ];
 
   const faq = [
@@ -224,20 +286,22 @@ export default function ArbeitssuchendePage() {
       <SectionBlock
         badge="Absolventen"
         title="Echte Stimmen aus dem <span>Kursalltag.</span>"
-        subtitle="Für die finale Version sollten hier die geschnittenen Video-Testimonials eingebunden werden."
+        subtitle="Kurze Stimmen aus dem Kurs statt großer Karten: mehr Eindruck, weniger Leerlauf."
         variant="muted"
         accent={tokens.colors.glowMint}
       >
-        <ResponsiveGrid $cols={3}>
-          <TestimonialCard quote="Ich hab wahnsinnig viel gelernt." name="Tobias" role="FortyDays Absolvent" accentColor={tokens.colors.mint} />
-          <TestimonialCard quote="Ein Must Know für uns alle." name="Olga" role="Absolventin" accentColor={tokens.colors.mint} />
-          <TestimonialCard quote="Mehr gelernt als je zuvor." name="Oskar" role="Absolvent" accentColor={tokens.colors.mint} />
-        </ResponsiveGrid>
-        <NameRail>
-          {['Tobias', 'Catharina', 'Oskar', 'Alex', 'Peter', 'Olga', 'Florian', 'Oliver', 'Birgit', 'Aline'].map((name) => (
-            <NameChip key={name}>{name}</NameChip>
-          ))}
-        </NameRail>
+        <QuoteViewport aria-label="Stimmen aus dem FortyDays Kurs">
+          <QuoteTrack role="list">
+            {[...testimonials, ...testimonials].map((item, index) => (
+              <QuoteCard key={`${item.source}-${index}`} role="listitem">
+                <CyberCorners $color={tokens.colors.mint} $size={7} />
+                <QuoteMark aria-hidden="true">"</QuoteMark>
+                <QuoteText>{item.quote}</QuoteText>
+                <QuoteSource>{item.source}</QuoteSource>
+              </QuoteCard>
+            ))}
+          </QuoteTrack>
+        </QuoteViewport>
       </SectionBlock>
 
       <SectionBlock

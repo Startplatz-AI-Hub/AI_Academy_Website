@@ -1,35 +1,187 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   Button,
   CTABanner,
-  FeatureCard,
   MiniFAQ,
   PageHero,
-  ResponsiveGrid,
   SectionBlock,
-  StatsRow,
-  TwoColumn,
-  VisualSlot,
 } from '../../components/ui';
 import SubpageLayout from '../../components/SubpageLayout';
-import { tokens } from '../../styles/tokens';
+import { tokens, media } from '../../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
 import { CALENDLY_URL } from '../../lib/site';
 
-const ProductCard = styled.article`
-  position: relative;
-  padding: ${tokens.spacing['2xl']};
-  background: ${tokens.colors.surface};
-  border: 1px solid ${tokens.colors.glassBorder};
-  ${clipBR(CHAMFER.md)}
+const CLAUDE_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777162756/ai-hub/website/AI-Academy-Website-Images/oneday-claude-cowork-hero.png';
+const IMMOBILIEN_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777162756/ai-hub/website/AI-Academy-Website-Images/oneday-immobilien-hero.png';
+const BUSINESS_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1776469603/ai-hub/website/AI-Academy-Website-Images/target-audience-unternehmen.png';
+const PROFESSIONAL_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1776469600/ai-hub/website/AI-Academy-Website-Images/target-audience-berufstaetige.png';
+
+const ExplorerGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing['2xl']};
+  align-items: start;
+
+  ${media.lg} {
+    grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
+  }
 `;
 
-const Price = styled.span`
-  display: inline-block;
-  margin-bottom: ${tokens.spacing.md};
+const PreviewPanel = styled.article`
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  background: ${tokens.colors.dark};
+  border: 1px solid rgba(124, 58, 237, 0.22);
+  ${clipBR(CHAMFER.lg)}
+  box-shadow: ${tokens.shadows.card};
+
+  ${media.lg} {
+    position: sticky;
+    top: 112px;
+  }
+`;
+
+const PreviewImage = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: opacity ${tokens.transitions.base}, transform ${tokens.transitions.smooth};
+`;
+
+const PreviewShade = styled.div`
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 10, 10, 0.08) 0%, rgba(10, 10, 10, 0.28) 48%, rgba(10, 10, 10, 0.84) 100%),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.2), transparent 45%);
+`;
+
+const PreviewCopy = styled.div`
+  position: absolute;
+  inset: auto ${tokens.spacing.xl} ${tokens.spacing.xl};
+  color: ${tokens.colors.darkText};
+`;
+
+const PreviewKicker = styled.div`
+  display: inline-flex;
+  margin-bottom: ${tokens.spacing.sm};
+  padding: 5px 10px;
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  font-weight: ${tokens.fontWeights.semi};
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${tokens.colors.primaryLight};
+  background: rgba(124, 58, 237, 0.22);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  ${clipBR(CHAMFER.xs)}
+`;
+
+const PreviewTitle = styled.h3`
+  max-width: 680px;
+  font-family: ${tokens.fonts.display};
+  font-size: clamp(${tokens.fontSizes['3xl']}, 5vw, ${tokens.fontSizes['5xl']});
+  font-weight: ${tokens.fontWeights.black};
+  line-height: ${tokens.lineHeights.tight};
+  color: ${tokens.colors.darkText};
+  margin-bottom: ${tokens.spacing.sm};
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.34);
+`;
+
+const PreviewText = styled.p`
+  max-width: 620px;
+  color: rgba(245, 245, 245, 0.82);
+  line-height: ${tokens.lineHeights.relaxed};
+`;
+
+const PreviewFacts = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${tokens.spacing.sm};
+  margin-top: ${tokens.spacing.lg};
+`;
+
+const PreviewFact = styled.span`
+  padding: 7px 10px;
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  color: ${tokens.colors.darkText};
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  ${clipBR(CHAMFER.xs)}
+`;
+
+const WorkshopList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${tokens.spacing.sm};
+`;
+
+const WorkshopItem = styled.article`
+  position: relative;
+  background: ${({ $active }) => ($active ? tokens.colors.surface : 'rgba(255, 255, 255, 0.58)')};
+  border: 1px solid ${({ $active }) => ($active ? 'rgba(124, 58, 237, 0.32)' : tokens.colors.glassBorder)};
+  ${clipBR(CHAMFER.md)}
+  transition: transform ${tokens.transitions.fast}, border-color ${tokens.transitions.fast}, background ${tokens.transitions.fast};
+
+  &:hover {
+    transform: translateX(4px);
+    border-color: rgba(124, 58, 237, 0.32);
+    background: ${tokens.colors.surface};
+  }
+`;
+
+const WorkshopButton = styled.button`
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: ${tokens.spacing.md};
+  align-items: start;
+  padding: ${tokens.spacing.lg};
+  color: inherit;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+`;
+
+const WorkshopIndex = styled.span`
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  font-weight: ${tokens.fontWeights.semi};
+  color: ${({ $active }) => ($active ? tokens.colors.primary : tokens.colors.textDim)};
+  background: ${({ $active }) => ($active ? tokens.colors.primaryLighter : tokens.colors.surfaceAlt)};
+  border: 1px solid ${({ $active }) => ($active ? 'rgba(124, 58, 237, 0.2)' : tokens.colors.glassBorder)};
+  ${clipBR(CHAMFER.xs)}
+`;
+
+const WorkshopTitleRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: ${tokens.spacing.sm};
+  margin-bottom: ${tokens.spacing.xs};
+`;
+
+const WorkshopTitle = styled.h3`
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes.xl};
+  font-weight: ${tokens.fontWeights.bold};
+  color: ${tokens.colors.text};
+`;
+
+const WorkshopPrice = styled.span`
   font-family: ${tokens.fonts.mono};
   font-size: ${tokens.fontSizes.xs};
   font-weight: ${tokens.fontWeights.semi};
@@ -38,36 +190,262 @@ const Price = styled.span`
   letter-spacing: 0.08em;
 `;
 
-const ProductTitle = styled.h3`
+const WorkshopText = styled.p`
+  color: ${tokens.colors.textMuted};
+  line-height: ${tokens.lineHeights.relaxed};
+`;
+
+const WorkshopDeliverables = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${tokens.spacing.sm};
+  margin-top: ${tokens.spacing.md};
+`;
+
+const WorkshopDeliverable = styled.li`
+  padding: 5px 9px;
+  font-family: ${tokens.fonts.mono};
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: ${tokens.colors.textSoft};
+  background: ${tokens.colors.surfaceAlt};
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  ${clipBR(CHAMFER.xs)}
+`;
+
+const ProductActions = styled.div`
+  padding: 0 ${tokens.spacing.lg} ${tokens.spacing.lg} calc(${tokens.spacing.lg} + 50px);
+`;
+
+const DeliverableBoard = styled.div`
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing.xl};
+  padding: ${tokens.spacing['2xl']};
+  background:
+    linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(255, 255, 255, 0.72)),
+    ${tokens.colors.surface};
+  border: 1px solid rgba(124, 58, 237, 0.16);
+  ${clipBR(CHAMFER.lg)}
+  box-shadow: ${tokens.shadows.card};
+
+  ${media.lg} {
+    grid-template-columns: 0.88fr 1.12fr;
+    align-items: center;
+  }
+`;
+
+const BoardHeadline = styled.div`
+  max-width: 440px;
+`;
+
+const BoardKicker = styled.span`
+  display: inline-flex;
+  margin-bottom: ${tokens.spacing.md};
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  color: ${tokens.colors.primary};
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+`;
+
+const BoardTitle = styled.h3`
   font-family: ${tokens.fonts.display};
-  font-size: ${tokens.fontSizes['2xl']};
+  font-size: clamp(${tokens.fontSizes['3xl']}, 4vw, ${tokens.fontSizes['5xl']});
+  font-weight: ${tokens.fontWeights.black};
+  line-height: ${tokens.lineHeights.tight};
+  color: ${tokens.colors.text};
+  margin-bottom: ${tokens.spacing.md};
+`;
+
+const BoardText = styled.p`
+  color: ${tokens.colors.textMuted};
+  line-height: ${tokens.lineHeights.relaxed};
+`;
+
+const DeliverableGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing.md};
+
+  ${media.md} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const DeliverableStep = styled.div`
+  position: relative;
+  min-height: 178px;
+  padding: ${tokens.spacing.lg};
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  ${clipBR(CHAMFER.md)}
+`;
+
+const StepLabel = styled.span`
+  display: block;
+  margin-bottom: ${tokens.spacing.md};
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  font-weight: ${tokens.fontWeights.semi};
+  color: ${tokens.colors.primary};
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+`;
+
+const StepTitle = styled.h4`
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes.xl};
   font-weight: ${tokens.fontWeights.bold};
   color: ${tokens.colors.text};
   margin-bottom: ${tokens.spacing.sm};
 `;
 
-const ProductText = styled.p`
+const StepText = styled.p`
   color: ${tokens.colors.textMuted};
   line-height: ${tokens.lineHeights.relaxed};
 `;
 
-const ProductActions = styled.div`
-  margin-top: ${tokens.spacing.xl};
+const BenefitGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing.md};
+
+  ${media.md} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  ${media.lg} {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
+const BenefitItem = styled.article`
+  position: relative;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: ${tokens.spacing.xl};
+  background: ${tokens.colors.surface};
+  border: 1px solid ${tokens.colors.glassBorder};
+  ${clipBR(CHAMFER.md)}
+`;
+
+const BenefitValue = styled.div`
+  font-family: ${tokens.fonts.display};
+  font-size: clamp(${tokens.fontSizes['3xl']}, 4vw, ${tokens.fontSizes['5xl']});
+  font-weight: ${tokens.fontWeights.black};
+  line-height: 1;
+  color: ${tokens.colors.text};
+`;
+
+const BenefitLabel = styled.p`
+  margin-top: ${tokens.spacing.lg};
+  color: ${tokens.colors.textMuted};
+  line-height: ${tokens.lineHeights.relaxed};
 `;
 
 export default function OneDayPage() {
   const products = [
-    { title: 'OneDay Claude Cowork', subline: 'Ab morgen bist du Viele.', price: '590 EUR Early Bird / 790 EUR', href: '/oneday/claude-cowork', cta: 'Details ansehen' },
-    { title: 'OneDay Claude Code', subline: 'Road to Thousand Commits.', price: '590 EUR Early Bird / 790 EUR', href: CALENDLY_URL, cta: 'Termin anfragen', external: true },
-    { title: 'OneDay KI-Kompetenz', subline: 'EU-Zertifizierung an einem Tag.', price: '890 EUR' },
-    { title: 'OneDay KI-Start', subline: 'Der kompakte Einstieg in KI.', price: '250 EUR', href: CALENDLY_URL, cta: 'Platz anfragen', external: true },
-    { title: 'OneDay Immobilien', subline: 'KI-Workflows für Makleralltag, Exposés und Akquise.', price: '449 EUR Pilotplatz', href: '/oneday/immobilien', cta: 'Details ansehen' },
+    {
+      title: 'OneDay Claude Cowork',
+      subline: 'Ab morgen bist du Viele.',
+      price: '590 EUR Early Bird / 790 EUR',
+      href: '/oneday/claude-cowork',
+      cta: 'Details ansehen',
+      image: CLAUDE_IMAGE,
+      badge: 'Claude Workflows',
+      deliverables: ['Research', 'Writing', 'Analyse'],
+      preview:
+        'Du baust deinen persönlichen Claude-Arbeitsmodus für Recherche, Schreiben, Analyse und operative Aufgaben.',
+    },
+    {
+      title: 'OneDay Claude Code',
+      subline: 'Road to Thousand Commits.',
+      price: '590 EUR Early Bird / 790 EUR',
+      href: CALENDLY_URL,
+      cta: 'Termin anfragen',
+      external: true,
+      image: CLAUDE_IMAGE,
+      badge: 'AI Coding',
+      deliverables: ['Setup', 'Prompts', 'Review'],
+      preview:
+        'Ein kompakter Coding-Sprint für Teams und Builder, die Claude Code in echte Entwicklungsabläufe bringen wollen.',
+    },
+    {
+      title: 'OneDay KI-Kompetenz',
+      subline: 'EU-Zertifizierung an einem Tag.',
+      price: '890 EUR',
+      href: CALENDLY_URL,
+      cta: 'Platz anfragen',
+      external: true,
+      image: BUSINESS_IMAGE,
+      badge: 'Compliance & Kompetenz',
+      deliverables: ['EU AI Act', 'Rollen', 'Nachweis'],
+      preview:
+        'Ein strukturierter Tag für Teams, die KI-Kompetenz nicht nur behaupten, sondern sauber dokumentieren wollen.',
+    },
+    {
+      title: 'OneDay KI-Start',
+      subline: 'Der kompakte Einstieg in KI.',
+      price: '250 EUR',
+      href: CALENDLY_URL,
+      cta: 'Platz anfragen',
+      external: true,
+      image: PROFESSIONAL_IMAGE,
+      badge: 'Einstieg',
+      deliverables: ['Toolklarheit', 'Prompts', 'Routine'],
+      preview:
+        'Der schnelle Einstieg für alle, die KI endlich produktiv testen und erste wiederholbare Routinen aufbauen wollen.',
+    },
+    {
+      title: 'OneDay Immobilien',
+      subline: 'KI-Workflows für Makleralltag, Exposés und Akquise.',
+      price: '449 EUR Pilotplatz',
+      href: '/oneday/immobilien',
+      cta: 'Details ansehen',
+      image: IMMOBILIEN_IMAGE,
+      badge: 'Immobilien',
+      deliverables: ['Exposé', 'Content', 'Akquise'],
+      preview:
+        'Branchenspezifische Workflows für Exposés, Social Content, Eigentümer-Akquise und Kundenkommunikation.',
+    },
   ];
 
-  const stats = [
-    { displayValue: '1 Tag', label: '09-17 Uhr, intensiv' },
-    { value: 1000, label: 'Absolventen gesamt', suffix: '+' },
-    { displayValue: '4,98/5', label: 'Bewertung' },
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeProduct = products[activeIndex];
+
+  const deliverables = [
+    {
+      label: 'Input',
+      title: 'Dein echter Fall',
+      text: 'Du bringst Aufgabe, Ziel oder Teamfrage mit. Wir arbeiten nicht im Demo-Modus.',
+    },
+    {
+      label: 'System',
+      title: 'Workflow statt Einzelprompt',
+      text: 'Aus Kontext, Rollen, Qualitätscheck und Output-Format entsteht ein wiederholbarer Ablauf.',
+    },
+    {
+      label: 'Output',
+      title: 'Ergebnis zum Mitnehmen',
+      text: 'Briefing, Prompt-Toolkit, Prototyp, Zertifizierung oder konkrete Entscheidungsgrundlage.',
+    },
+    {
+      label: 'Transfer',
+      title: 'Nächste Woche nutzbar',
+      text: 'Du gehst mit den nächsten Schritten raus und weißt, wie der Workflow in deinen Alltag kommt.',
+    },
+  ];
+
+  const benefits = [
+    { value: '3-5 Std.', label: 'pro Woche einsparen, wenn ein wiederkehrender Workflow sauber sitzt.' },
+    { value: '1 Toolkit', label: 'Prompts, Checklisten und nächste Schritte statt einer losen Mitschrift.' },
+    { value: '0 Vorwissen', label: 'du kannst starten, ohne technischen Hintergrund oder Tool-Overload.' },
+    { value: '1 Ergebnis', label: 'am Ende steht ein nutzbarer Workflow, Prototyp oder Kompetenznachweis.' },
   ];
 
   const faq = [
@@ -100,80 +478,120 @@ export default function OneDayPage() {
 
       <SectionBlock
         badge="Produkte"
-        title="Fünf Einstiege. <span>Ein Arbeitstag.</span>"
-        subtitle="Jeder OneDay hat ein klares Thema und ein Ergebnis, das du direkt weiterverwenden kannst."
+        title="Wähle deinen <span>OneDay.</span>"
+        subtitle="Links das Gefühl, rechts die Entscheidung: Fahre über einen Workshop und sieh sofort, was du mitnimmst."
         accent={tokens.colors.glow}
       >
-        <ResponsiveGrid $cols={4}>
-          {products.map((product) => (
-            <ProductCard key={product.title}>
-              <CyberCorners $color={tokens.colors.primary} $size={8} />
-              <Price>{product.price}</Price>
-              <ProductTitle>{product.title}</ProductTitle>
-              <ProductText>{product.subline}</ProductText>
-              {product.href && (
-                <ProductActions>
-                  <Button
-                    href={product.href}
-                    target={product.external ? '_blank' : undefined}
-                    rel={product.external ? 'noopener noreferrer' : undefined}
-                    variant="secondary"
-                    size="sm"
-                    arrow
+        <ExplorerGrid>
+          <PreviewPanel aria-live="polite">
+            <CyberCorners $color={tokens.colors.primary} $size={14} />
+            <PreviewImage key={activeProduct.image} src={activeProduct.image} alt="" loading="eager" />
+            <PreviewShade />
+            <PreviewCopy>
+              <PreviewKicker>{activeProduct.badge}</PreviewKicker>
+              <PreviewTitle>{activeProduct.title}</PreviewTitle>
+              <PreviewText>{activeProduct.preview}</PreviewText>
+              <PreviewFacts>
+                <PreviewFact>{activeProduct.price}</PreviewFact>
+                {activeProduct.deliverables.map((deliverable) => (
+                  <PreviewFact key={deliverable}>{deliverable}</PreviewFact>
+                ))}
+              </PreviewFacts>
+            </PreviewCopy>
+          </PreviewPanel>
+
+          <WorkshopList>
+            {products.map((product, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <WorkshopItem key={product.title} $active={isActive}>
+                  <CyberCorners $color={isActive ? tokens.colors.primary : tokens.colors.textDim} $size={7} />
+                  <WorkshopButton
+                    type="button"
+                    aria-pressed={isActive}
+                    onClick={() => setActiveIndex(index)}
+                    onFocus={() => setActiveIndex(index)}
+                    onMouseEnter={() => setActiveIndex(index)}
                   >
-                    {product.cta}
-                  </Button>
-                </ProductActions>
-              )}
-            </ProductCard>
-          ))}
-        </ResponsiveGrid>
+                    <WorkshopIndex $active={isActive}>{String(index + 1).padStart(2, '0')}</WorkshopIndex>
+                    <div>
+                      <WorkshopTitleRow>
+                        <WorkshopTitle>{product.title}</WorkshopTitle>
+                        <WorkshopPrice>{product.price}</WorkshopPrice>
+                      </WorkshopTitleRow>
+                      <WorkshopText>{product.subline}</WorkshopText>
+                      <WorkshopDeliverables>
+                        {product.deliverables.map((deliverable) => (
+                          <WorkshopDeliverable key={deliverable}>{deliverable}</WorkshopDeliverable>
+                        ))}
+                      </WorkshopDeliverables>
+                    </div>
+                  </WorkshopButton>
+                  {isActive && product.href && (
+                    <ProductActions>
+                      <Button
+                        href={product.href}
+                        target={product.external ? '_blank' : undefined}
+                        rel={product.external ? 'noopener noreferrer' : undefined}
+                        variant="secondary"
+                        size="sm"
+                        arrow
+                      >
+                        {product.cta}
+                      </Button>
+                    </ProductActions>
+                  )}
+                </WorkshopItem>
+              );
+            })}
+          </WorkshopList>
+        </ExplorerGrid>
       </SectionBlock>
 
       <SectionBlock
-        badge="Visualisierung"
-        title="Ein Tag, ein klares <span>Deliverable.</span>"
+        badge="Deliverable"
+        title="Ein Tag, ein klares <span>Ergebnis.</span>"
         variant="muted"
         accent={tokens.colors.glow}
       >
-        <TwoColumn>
-          <ResponsiveGrid $cols={1}>
-            <FeatureCard
-              step="09"
-              title="Orientieren"
-              description="Du verstehst das Thema, die Tools und die wichtigsten Entscheidungen."
-              accentColor={tokens.colors.primary}
-              accentBg={tokens.colors.primaryLighter}
-              cornerColor={tokens.colors.primary}
-            />
-            <FeatureCard
-              step="13"
-              title="Bauen"
-              description="Du setzt das Gelernte direkt in einem Workflow, Prompt-System oder Prototyp um."
-              accentColor={tokens.colors.primary}
-              accentBg={tokens.colors.primaryLighter}
-              cornerColor={tokens.colors.primary}
-            />
-            <FeatureCard
-              step="17"
-              title="Mitnehmen"
-              description="Du gehst mit einem konkreten Ergebnis und den nächsten Schritten raus."
-              accentColor={tokens.colors.primary}
-              accentBg={tokens.colors.primaryLighter}
-              cornerColor={tokens.colors.primary}
-            />
-          </ResponsiveGrid>
-          <VisualSlot
-            title="OneDay Workshop Board"
-            image="https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_900/v1776469603/ai-hub/website/AI-Academy-Website-Images/target-audience-unternehmen.png"
-            accentColor={tokens.colors.primary}
-            prompt="Use case: infographic-diagram. Asset type: OneDay workshop visual. Premium workshop board showing one-day progression from idea to workflow deliverable, abstract UI panels, no readable tiny text, purple/mint palette, no logos, no watermark."
-          />
-        </TwoColumn>
+        <DeliverableBoard>
+          <CyberCorners $color={tokens.colors.primary} $size={14} />
+          <BoardHeadline>
+            <BoardKicker>Workshop Operating System</BoardKicker>
+            <BoardTitle>Vom offenen Thema zum nutzbaren Arbeitsablauf.</BoardTitle>
+            <BoardText>
+              OneDay ist bewusst kein Folienmarathon. Jede Einheit ist so gebaut, dass aus einem echten Fall ein
+              verwertbarer Output entsteht.
+            </BoardText>
+          </BoardHeadline>
+          <DeliverableGrid>
+            {deliverables.map((item) => (
+              <DeliverableStep key={item.label}>
+                <CyberCorners $color={tokens.colors.primary} $size={6} />
+                <StepLabel>{item.label}</StepLabel>
+                <StepTitle>{item.title}</StepTitle>
+                <StepText>{item.text}</StepText>
+              </DeliverableStep>
+            ))}
+          </DeliverableGrid>
+        </DeliverableBoard>
       </SectionBlock>
 
-      <SectionBlock title="Nach Zahlen" centered accent={tokens.colors.glow}>
-        <StatsRow stats={stats} />
+      <SectionBlock
+        badge="Benefit"
+        title="Was sich nach einem Tag <span>verändert.</span>"
+        subtitle="Die Zahlen sind kein Selbstzweck. Sie beschreiben, was der Workshop im Alltag leichter machen soll."
+        accent={tokens.colors.glow}
+      >
+        <BenefitGrid>
+          {benefits.map((item) => (
+            <BenefitItem key={item.value}>
+              <CyberCorners $color={tokens.colors.primary} $size={7} />
+              <BenefitValue>{item.value}</BenefitValue>
+              <BenefitLabel>{item.label}</BenefitLabel>
+            </BenefitItem>
+          ))}
+        </BenefitGrid>
       </SectionBlock>
 
       <SectionBlock badge="FAQ" title="Fragen zu <span>OneDay.</span>" accent={tokens.colors.glow}>
