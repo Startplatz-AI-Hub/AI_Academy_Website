@@ -4,13 +4,13 @@ import CalendlyWidget from '../components/CalendlyWidget';
 
 export const metadata = {
   title: {
-    default: 'KI-Weiterbildung Köln & Düsseldorf | STARTPLATZ AI Academy',
+    default: 'Geförderte KI-Weiterbildung — praxisnah & zertifiziert',
     template: '%s | STARTPLATZ AI Academy',
   },
   description:
-    'KI-Weiterbildung in Köln & Düsseldorf. AZAV-zertifiziert, bis zu 100% gefördert mit Bildungsgutschein. FortyDays, AfterWork & OneDay Workshops. 4,98/5 Sterne bei 290+ Bewertungen.',
+    'KI-Weiterbildung mit AZAV-Zertifizierung. Bis zu 100% gefördert mit Bildungsgutschein. FortyDays Bootcamp, AfterWork AI Automation & OneDay Workshops. 4,98/5 Sterne bei 290+ Bewertungen. Bundesweit digital verfügbar.',
   keywords:
-    'KI Weiterbildung, KI Weiterbildung Köln, KI Weiterbildung NRW, Bildungsgutschein KI, KI Manager Weiterbildung, AZAV KI Kurs, AI Bootcamp, Künstliche Intelligenz Kurs, STARTPLATZ, Köln, Düsseldorf, n8n Kurs, Prompt Engineering, KI Schulung Unternehmen, geförderte Weiterbildung, Cert-IT Zertifizierung',
+    'KI Weiterbildung, KI Weiterbildung Deutschland, KI Weiterbildung gefördert, Bildungsgutschein KI, KI Manager Weiterbildung, KI Manager Zertifikat, AZAV KI Kurs, AI Bootcamp, KI Kurs online, Künstliche Intelligenz Kurs, STARTPLATZ, n8n Kurs, Prompt Engineering, KI Schulung Unternehmen, geförderte Weiterbildung, Cert-IT Zertifizierung, KI Weiterbildung berufsbegleitend',
   authors: [{ name: 'STARTPLATZ AI Academy' }],
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   metadataBase: new URL('https://startplatz-ai-academy.de'),
@@ -22,9 +22,9 @@ export const metadata = {
   openGraph: {
     type: 'website',
     siteName: 'STARTPLATZ AI Academy',
-    title: 'KI-Weiterbildung Köln & Düsseldorf | STARTPLATZ AI Academy',
+    title: 'KI-Weiterbildung mit Zertifikat | STARTPLATZ AI Academy',
     description:
-      'KI-Weiterbildung in NRW. AZAV-zertifiziert, bis zu 100% gefördert. FortyDays, AfterWork & OneDay Workshops. 4,98/5 Sterne.',
+      'KI-Weiterbildung mit Zertifikat. AZAV-zertifiziert, bis zu 100% gefördert. FortyDays, AfterWork & OneDay Workshops. 4,98/5 Sterne.',
     url: 'https://startplatz-ai-academy.de/',
     images: [
       {
@@ -38,9 +38,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KI-Weiterbildung Köln & Düsseldorf | STARTPLATZ AI Academy',
+    title: 'KI-Weiterbildung mit Zertifikat | STARTPLATZ AI Academy',
     description:
-      'KI-Weiterbildung in NRW. AZAV-zertifiziert, bis zu 100% gefördert. 4,98/5 Sterne bei 290+ Bewertungen.',
+      'KI-Weiterbildung mit Zertifikat. AZAV-zertifiziert, bis zu 100% gefördert. 4,98/5 Sterne bei 290+ Bewertungen.',
     images: [
       {
         url: 'https://res.cloudinary.com/startplatz/image/upload/v1776469608/ai-hub/website/AI-Academy-Website-Images/team-gruppenfoto.png',
@@ -62,7 +62,7 @@ const jsonLd = [
     url: 'https://startplatz-ai-academy.de/',
     logo: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-light-800w.png',
     description:
-      'Geförderte KI-Weiterbildungen, praxisnahe Bootcamps und anerkannte Zertifizierungen in Köln und Düsseldorf.',
+      'Geförderte KI-Weiterbildungen, praxisnahe Bootcamps und anerkannte Zertifizierungen. Bundesweit digital verfügbar.',
     address: [
       {
         '@type': 'PostalAddress',

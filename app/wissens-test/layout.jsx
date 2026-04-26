@@ -1,12 +1,12 @@
 export const metadata = {
-  title: 'KI Wissens-Test | Teste dein KI-Level',
+  title: 'Wo stehst du mit KI? Finde es in 2 Minuten heraus.',
   description:
-    'Finde in 2 Minuten heraus, wo du im Bereich KI stehst. 10 Fragen, sofortiges Ergebnis und eine persönliche Empfehlung für deinen nächsten Schritt.',
+    '10 Fragen, sofortiges Ergebnis, eine persönliche Empfehlung. Kein Account nötig — einfach starten und sehen, wo du stehst.',
   alternates: { canonical: '/wissens-test' },
   openGraph: {
-    title: 'KI Wissens-Test | Wo stehst du?',
+    title: 'Wo stehst du mit KI? Finde es in 2 Minuten heraus.',
     description:
-      'Teste dein KI-Wissen in 2 Minuten. Sofortiges Ergebnis mit Kursempfehlung.',
+      '10 Fragen, sofortiges Ergebnis, eine persönliche Empfehlung für deinen nächsten Schritt.',
     url: 'https://startplatz-ai-academy.de/wissens-test',
   },
 };

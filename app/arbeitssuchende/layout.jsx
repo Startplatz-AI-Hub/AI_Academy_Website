@@ -1,12 +1,12 @@
 export const metadata = {
-  title: 'KI-Manager Weiterbildung mit Bildungsgutschein | AZAV-zertifiziert',
+  title: 'In 8 Wochen zum KI-Manager — 100 % gefördert',
   description:
-    'In 8 Wochen zum KI-Manager:in. FortyDays Vollzeit-Bootcamp, 100% über Bildungsgutschein gefördert. AZAV & Cert-IT zertifiziert (DIN EN ISO/IEC 17024). Köln & Düsseldorf.',
+    'FortyDays Bootcamp: 8 Wochen Vollzeit, komplett über Bildungsgutschein finanzierbar. AZAV- & Cert-IT-zertifiziert. Du lernst Prompting, Automatisierung und KI-Strategie — und gehst mit einem anerkannten Zertifikat.',
   alternates: { canonical: '/arbeitssuchende' },
   openGraph: {
-    title: 'KI-Manager Weiterbildung mit Bildungsgutschein | FortyDays',
+    title: 'In 8 Wochen zum KI-Manager — 100 % gefördert',
     description:
-      'In 8 Wochen zum KI-Manager:in. Vollzeit, digital, 100% gefördert mit Bildungsgutschein. AZAV & Cert-IT zertifiziert.',
+      'FortyDays Bootcamp: Vollzeit, digital, komplett über Bildungsgutschein finanzierbar. Du gehst mit einem Cert-IT-Zertifikat.',
     url: 'https://startplatz-ai-academy.de/arbeitssuchende',
   },
 };

@@ -1,12 +1,12 @@
 export const metadata = {
-  title: 'KI-Wissen: Artikel, Tutorials & Interviews',
+  title: 'Wissen, das du morgen anwenden kannst',
   description:
-    'Artikel, Tutorials und Interviews zu KI-Weiterbildung, Prompt Engineering, Automatisierung und Karrierewegen in NRW. Kostenlos lesen.',
+    'Artikel, Tutorials und Interviews zu KI im Arbeitsalltag — von Prompting über Automatisierung bis Karriere mit KI. Geschrieben von Leuten, die es selbst machen.',
   alternates: { canonical: '/insights' },
   openGraph: {
-    title: 'Insights | KI-Wissen & Tutorials',
+    title: 'Wissen, das du morgen anwenden kannst',
     description:
-      'Artikel, Tutorials und Interviews rund um KI, Karriere und Innovation.',
+      'Artikel, Tutorials und Interviews zu KI im Arbeitsalltag. Von Leuten, die es selbst machen.',
     url: 'https://startplatz-ai-academy.de/insights',
   },
 };

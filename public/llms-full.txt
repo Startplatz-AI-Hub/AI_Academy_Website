@@ -1,0 +1,122 @@
+# STARTPLATZ AI Academy — Vollständige Übersicht
+
+> STARTPLATZ AI Academy ist Deutschlands praxisnahester Anbieter für KI-Weiterbildungen. Wir bilden Menschen und Unternehmen im Umgang mit Künstlicher Intelligenz aus — von Einsteigern bis zu Führungskräften. AZAV-zertifiziert, Cert-IT-zertifiziert (DIN EN ISO/IEC 17024). Über 1.000 Absolventen, 4,98/5 Sterne bei 290+ Bewertungen.
+
+## Warum STARTPLATZ AI Academy?
+
+Die AI Academy ist Teil des STARTPLATZ Ökosystems — dem größten Startup-Inkubator und Accelerator in Nordrhein-Westfalen, gegründet 2011. Dieses Ökosystem verbindet die Academy mit über 1.000 Startups, 100+ Unternehmenspartnern und einem Netzwerk aus Investoren, Gründern und Technologie-Experten.
+
+Was uns unterscheidet:
+- Praxisnah: Unsere Dozenten arbeiten selbst täglich mit KI
+- Zertifiziert: AZAV für Bildungsgutschein, Cert-IT für Personenzertifizierung
+- Bewährt: 4,98/5 Sterne bei 290+ Bewertungen
+- Ökosystem: Zugang zum STARTPLATZ Netzwerk mit Startups, Events und Unternehmen
+- Bundesweit: Programme digital verfügbar, Standorte in Köln und Düsseldorf
+
+## Programmübersicht
+
+### 1. FortyDays KI-Manager:in (Vollzeit-Bootcamp)
+Für Arbeitssuchende und Karrierewechsler, die sich in 8 Wochen zur KI-Fachkraft qualifizieren möchten.
+
+- Dauer: 8 Wochen Vollzeit (Mo-Fr)
+- Format: Digital (mit optionaler Präsenz in Köln/Düsseldorf)
+- Preis: 3.552,00 EUR
+- Förderung: 100% über Bildungsgutschein (AZAV-zertifiziert) — Teilnehmende zahlen 0 EUR
+- Zertifikat: Cert-IT Personenzertifizierung KI-Manager:in (DIN EN ISO/IEC 17024)
+- Inhalte: KI-Grundlagen, Prompt Engineering, Datenanalyse, KI-Strategie, Projektarbeit, Zertifizierungsprüfung
+- Ergebnis: Anerkanntes KI-Zertifikat, Portfolio-Projekt, Zugang zum Alumni-Netzwerk
+- URL: https://startplatz-ai-academy.de/arbeitssuchende
+- Nächster Start: Laufende Termine auf der Website
+
+### 2. AfterWork AI Automation (Teilzeit, berufsbegleitend)
+Für Berufstätige, die KI-Automatisierung neben dem Job lernen möchten.
+
+- Dauer: 8 Wochen, Di & Do 15:00-18:00 Uhr
+- Format: Digital
+- Preis: 1.022,08 EUR
+- Förderung: AZAV-zertifiziert, QCG-förderfähig (Qualifizierungschancengesetz über Arbeitgeber)
+- Inhalte: n8n Workflow-Automatisierung, GPT-APIs, AI Agents, Business Automation, praktische Projekte
+- Ergebnis: Eigene funktionierende KI-Workflows, die sofort im Arbeitsalltag eingesetzt werden können
+- URL: https://startplatz-ai-academy.de/berufstaetige
+
+### 3. OneDay Workshops (Tagesworkshops)
+Intensive Praxistage zu spezifischen KI-Themen.
+
+- Dauer: 1 Tag (ca. 8 Stunden)
+- Format: Digital oder Präsenz
+- Preis: 590 EUR (Early Bird) / 790 EUR (regulär)
+- Keine Förderung nötig (Privatpersonen und Unternehmen)
+- Verfügbare Workshops:
+  - Claude Cowork: Einen Tag mit Claude arbeiten — Recherche, Schreiben, Analyse
+  - KI-Kompetenz: Grundlagen für den beruflichen Einsatz von KI
+  - KI-Start: Einstieg in die Welt der KI für Anfänger
+  - KI für Immobilien: KI-Workflows für Makler und Immobilienunternehmen
+- Ergebnis: Konkretes Deliverable, das sofort einsetzbar ist
+- URL: https://startplatz-ai-academy.de/oneday
+
+### 4. Für Unternehmen
+Maßgeschneiderte KI-Schulungen für Teams und Organisationen.
+
+- Innovation Day: 1 Tag, Impulsvortrag + Workshop für Teams (auf Anfrage)
+- Inhouse Schulungen: 1-5 Tage, maßgeschneidert auf die Bedürfnisse des Unternehmens (auf Anfrage)
+- AI-Private Academy: 3-12 Monate Langzeitbegleitung mit dediziertem KI-Coach (auf Anfrage)
+- Referenzen: 100+ Unternehmenskunden
+- URL: https://startplatz-ai-academy.de/unternehmen
+
+## Förderungsmöglichkeiten
+
+### Bildungsgutschein (für Arbeitssuchende)
+- Fördert: FortyDays KI-Manager:in
+- Kostenübernahme: 100%
+- Voraussetzung: AZAV-Zertifizierung (vorhanden)
+- Beantragung: Über die Agentur für Arbeit oder das Jobcenter
+
+### Qualifizierungschancengesetz (für Berufstätige)
+- Fördert: AfterWork AI Automation
+- Kostenübernahme: Bis zu 100% über den Arbeitgeber
+- Voraussetzung: Antrag über den Arbeitgeber bei der Agentur für Arbeit
+
+### Bildungsscheck NRW
+- Fördert: Alle Programme
+- Zuschuss: Bis zu 500 EUR
+- Voraussetzung: Wohnsitz oder Arbeitsplatz in NRW
+
+## Kennzahlen
+- 1.000+ Absolventen seit Gründung
+- 4,98/5 Sterne Durchschnittsbewertung (290+ Bewertungen)
+- 100+ Unternehmenskunden
+- 15+ Jahre Ökosystem-Erfahrung (STARTPLATZ seit 2011)
+- Standorte in Köln (Im Mediapark 5) und Düsseldorf
+
+## Team & Dozenten
+- Jakow Smirin: CEO, baut seit 2023 KI-Weiterbildungen in NRW
+- Lorenz: Lead Dozent FortyDays KI-Manager:in
+- Lukas: Lead Dozent AfterWork AI Automation, Fokus n8n & GPT-APIs
+- Alle Dozenten arbeiten selbst täglich mit KI in echten Projekten
+
+## Kontakt & Beratung
+- Website: https://startplatz-ai-academy.de
+- E-Mail: academy@startplatz.de
+- Telefon: +49 221 650 824 90
+- Adresse: Im Mediapark 5, 50670 Köln
+- Kostenlose Beratung buchen: https://calendly.com/d/cxtf-hhx-929
+- LinkedIn: https://www.linkedin.com/company/startplatz
+- Instagram: https://www.instagram.com/startplatz
+- YouTube: https://www.youtube.com/@startplatz
+
+## Häufig gestellte Fragen
+
+### Brauche ich Vorkenntnisse?
+Nein. FortyDays und AfterWork starten bei null. Die OneDay Workshops variieren je nach Thema.
+
+### Ist die Weiterbildung anerkannt?
+Ja. FortyDays und AfterWork sind AZAV-zertifiziert. Die KI-Manager:in Zertifizierung erfolgt über Cert-IT nach DIN EN ISO/IEC 17024 — ein international anerkannter Standard.
+
+### Kann ich mit Bildungsgutschein teilnehmen?
+Ja, das FortyDays Programm ist zu 100% über den Bildungsgutschein finanzierbar. Die Agentur für Arbeit oder das Jobcenter übernimmt die gesamten Kosten.
+
+### Sind die Programme nur in NRW verfügbar?
+Nein. Alle Programme sind digital verfügbar und bundesweit zugänglich. Präsenzoptionen gibt es in Köln und Düsseldorf.
+
+### Was unterscheidet euch von anderen Anbietern?
+Praxisnähe (Dozenten arbeiten selbst mit KI), das STARTPLATZ Startup-Ökosystem, die Cert-IT Personenzertifizierung, und die Kombination aus geförderter Weiterbildung und starkem Netzwerk.

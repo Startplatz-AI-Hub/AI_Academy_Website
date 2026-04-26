@@ -1,11 +1,11 @@
 export const metadata = {
   title: 'Presse & Medien',
   description:
-    'Pressematerial, Medienberichte und Kontakt für Journalisten. STARTPLATZ AI Academy — KI-Weiterbildung in Köln & Düsseldorf.',
+    'Logos, Fotos, Factsheet und Ansprechpartner für Journalisten. Alles, was du für eine Story über die AI Academy brauchst.',
   alternates: { canonical: '/presse' },
   openGraph: {
-    title: 'Presse & Medien | STARTPLATZ AI Academy',
-    description: 'Pressematerial und Medienberichte der STARTPLATZ AI Academy.',
+    title: 'Presse & Medien',
+    description: 'Logos, Fotos, Factsheet und Ansprechpartner für Journalisten.',
     url: 'https://startplatz-ai-academy.de/presse',
   },
 };

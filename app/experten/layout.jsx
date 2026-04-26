@@ -1,12 +1,12 @@
 export const metadata = {
-  title: 'KI-Dozenten & Experten aus der Praxis',
+  title: 'Dozenten, die KI jeden Tag selbst nutzen',
   description:
-    'Unsere KI-Dozenten arbeiten selbst täglich mit KI. Praxisnahe Weiterbildung durch Experten aus dem STARTPLATZ Ökosystem in Köln & Düsseldorf.',
+    'Kein Hörsaal, keine Buzzword-Bühne. Unsere Dozenten bauen KI-Produkte, automatisieren Prozesse und bringen dir bei, was sie selbst täglich anwenden.',
   alternates: { canonical: '/experten' },
   openGraph: {
-    title: 'KI-Dozenten & Experten | STARTPLATZ AI Academy',
+    title: 'Dozenten, die KI jeden Tag selbst nutzen',
     description:
-      'Lerne von Menschen, die KI selbst anwenden. Kein Hörsaal, keine Buzzword-Bühne.',
+      'Kein Hörsaal, keine Buzzword-Bühne. Unsere Dozenten bringen dir bei, was sie selbst täglich anwenden.',
     url: 'https://startplatz-ai-academy.de/experten',
   },
 };

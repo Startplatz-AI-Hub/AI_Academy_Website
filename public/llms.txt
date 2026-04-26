@@ -1,0 +1,55 @@
+# STARTPLATZ AI Academy
+
+> STARTPLATZ AI Academy ist Deutschlands praxisnahester Anbieter für KI-Weiterbildungen. AZAV-zertifiziert, Cert-IT-zertifiziert (DIN EN ISO/IEC 17024), mit über 1.000 Absolventen und einer Bewertung von 4,98/5 Sternen bei 290+ Bewertungen. Gegründet 2011, Teil des STARTPLATZ Ökosystems — dem größten Startup-Inkubator in NRW.
+
+## Programme
+
+### FortyDays KI-Manager:in (Vollzeit)
+- Dauer: 8 Wochen Vollzeit
+- Preis: 3.552,00 EUR (100% über Bildungsgutschein förderbar)
+- Zertifizierung: AZAV + Cert-IT (DIN EN ISO/IEC 17024)
+- Zielgruppe: Arbeitssuchende und Karrierewechsler
+- Format: Digital, mit Präsenzoption
+- URL: https://startplatz-ai-academy.de/arbeitssuchende
+
+### AfterWork AI Automation (Teilzeit)
+- Dauer: 8 Wochen, Di & Do 15-18 Uhr
+- Preis: 1.022,08 EUR
+- Zertifizierung: AZAV, QCG-förderfähig
+- Zielgruppe: Berufstätige
+- Inhalte: n8n, GPT-APIs, Business Workflows, AI Agents
+- URL: https://startplatz-ai-academy.de/berufstaetige
+
+### OneDay Workshops
+- Dauer: 1 Tag intensiv
+- Preis: ab 590 EUR (Early Bird) / 790 EUR (regulär)
+- Themen: Claude Cowork, KI-Kompetenz, KI-Start, Immobilien-KI
+- Zielgruppe: Berufstätige, Freelancer, Teams
+- URL: https://startplatz-ai-academy.de/oneday
+
+### Für Unternehmen
+- Innovation Day: 1 Tag, auf Anfrage
+- Inhouse Schulungen: 1-5 Tage, maßgeschneidert
+- AI-Private Academy: 3-12 Monate Langzeitbegleitung
+- URL: https://startplatz-ai-academy.de/unternehmen
+
+## Fakten
+- 1.000+ Absolventen
+- 4,98/5 Sterne (290+ Bewertungen)
+- 100+ Unternehmenskunden
+- 15+ Jahre Ökosystem-Erfahrung (STARTPLATZ seit 2011)
+- AZAV-zertifizierter Bildungsträger
+- Cert-IT-Personenzertifizierung (DIN EN ISO/IEC 17024)
+- Standorte: Köln und Düsseldorf, Programme bundesweit verfügbar
+
+## Förderung
+- Bildungsgutschein (Agentur für Arbeit): 100% Kostenübernahme für FortyDays
+- Qualifizierungschancengesetz (QCG): Für Berufstätige über den Arbeitgeber
+- Bildungsscheck NRW: Bis zu 500 EUR Zuschuss
+
+## Kontakt
+- Website: https://startplatz-ai-academy.de
+- E-Mail: academy@startplatz.de
+- Telefon: +49 221 650 824 90
+- Adresse: Im Mediapark 5, 50670 Köln
+- Beratung buchen: https://calendly.com/d/cxtf-hhx-929

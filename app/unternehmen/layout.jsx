@@ -1,12 +1,12 @@
 export const metadata = {
-  title: 'KI-Schulung für Unternehmen | Innovation Day & Inhouse Training',
+  title: 'KI ins Team bringen — Wirkung ab Tag eins',
   description:
-    'KI-Schulungen für Teams: Innovation Day (1 Tag), Inhouse-Training (1-5 Tage) oder AI-Private Academy (3-12 Monate). 100+ Unternehmen geschult. Erstgespräch buchen.',
+    'Von einem Innovation Day bis zur Private Academy über 3–12 Monate. 100+ Unternehmen haben mit uns gestartet. Wir passen Inhalt, Tempo und Tiefe an euer Team an.',
   alternates: { canonical: '/unternehmen' },
   openGraph: {
-    title: 'KI-Schulung für Unternehmen | STARTPLATZ AI Academy',
+    title: 'KI ins Team bringen — Wirkung ab Tag eins',
     description:
-      'Vom Innovation Day bis zur Private Academy. 100+ Unternehmen vertrauen uns. Maßgeschneiderte KI-Trainings.',
+      'Innovation Day, Inhouse-Training oder Private Academy. 100+ Unternehmen haben mit uns gestartet.',
     url: 'https://startplatz-ai-academy.de/unternehmen',
   },
 };

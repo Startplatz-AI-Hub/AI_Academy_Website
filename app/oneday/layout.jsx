@@ -1,12 +1,12 @@
 export const metadata = {
-  title: 'KI-Workshop an einem Tag | OneDay Workshops',
+  title: 'Ein Tag. Ein konkretes Ergebnis.',
   description:
-    'Intensive KI-Tagesworkshops: Claude Cowork, Claude Code, KI-Kompetenz, KI-Start. Praxisnah, mit konkretem Deliverable. Ab 250 EUR. Kein Vorwissen nötig.',
+    'OneDay Workshops: Claude Cowork, Claude Code, KI-Kompetenz oder KI-Start. Du kommst morgens und gehst abends mit etwas, das du sofort nutzen kannst. Ab 250 €.',
   alternates: { canonical: '/oneday' },
   openGraph: {
-    title: 'OneDay KI-Workshops | Ein Tag, ein klares Ergebnis',
+    title: 'Ein Tag. Ein konkretes Ergebnis.',
     description:
-      'Intensive Tagesworkshops zu Claude, Prompt Engineering, KI-Kompetenz. Praxisnah, mit konkretem Deliverable.',
+      'OneDay KI-Workshops: Du kommst morgens und gehst abends mit etwas, das du sofort nutzen kannst.',
     url: 'https://startplatz-ai-academy.de/oneday',
   },
 };
