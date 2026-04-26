@@ -7,6 +7,8 @@
 # testing
 /coverage
 .playwright-mcp/
+output/imagegen/
+public/oneday/
 
 # next.js
 /.next/

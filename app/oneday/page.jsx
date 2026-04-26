@@ -51,12 +51,17 @@ const ProductText = styled.p`
   line-height: ${tokens.lineHeights.relaxed};
 `;
 
+const ProductActions = styled.div`
+  margin-top: ${tokens.spacing.xl};
+`;
+
 export default function OneDayPage() {
   const products = [
-    { title: 'OneDay Claude Cowork', subline: 'Ab morgen bist du Viele.', price: '590 EUR Early Bird / 790 EUR' },
-    { title: 'OneDay Claude Code', subline: 'Road to Thousand Commits.', price: 'Preis tbd' },
+    { title: 'OneDay Claude Cowork', subline: 'Ab morgen bist du Viele.', price: '590 EUR Early Bird / 790 EUR', href: '/oneday/claude-cowork', cta: 'Details ansehen' },
+    { title: 'OneDay Claude Code', subline: 'Road to Thousand Commits.', price: '590 EUR Early Bird / 790 EUR', href: CALENDLY_URL, cta: 'Termin anfragen', external: true },
     { title: 'OneDay KI-Kompetenz', subline: 'EU-Zertifizierung an einem Tag.', price: '890 EUR' },
-    { title: 'OneDay KI-Start', subline: 'Der kompakte Einstieg in KI.', price: 'Preis tbd' },
+    { title: 'OneDay KI-Start', subline: 'Der kompakte Einstieg in KI.', price: '250 EUR', href: CALENDLY_URL, cta: 'Platz anfragen', external: true },
+    { title: 'OneDay Immobilien', subline: 'KI-Workflows für Makleralltag, Exposés und Akquise.', price: '449 EUR Pilotplatz', href: '/oneday/immobilien', cta: 'Details ansehen' },
   ];
 
   const stats = [
@@ -95,7 +100,7 @@ export default function OneDayPage() {
 
       <SectionBlock
         badge="Produkte"
-        title="Vier Einstiege. <span>Ein Arbeitstag.</span>"
+        title="Fünf Einstiege. <span>Ein Arbeitstag.</span>"
         subtitle="Jeder OneDay hat ein klares Thema und ein Ergebnis, das du direkt weiterverwenden kannst."
         accent={tokens.colors.glow}
       >
@@ -106,6 +111,20 @@ export default function OneDayPage() {
               <Price>{product.price}</Price>
               <ProductTitle>{product.title}</ProductTitle>
               <ProductText>{product.subline}</ProductText>
+              {product.href && (
+                <ProductActions>
+                  <Button
+                    href={product.href}
+                    target={product.external ? '_blank' : undefined}
+                    rel={product.external ? 'noopener noreferrer' : undefined}
+                    variant="secondary"
+                    size="sm"
+                    arrow
+                  >
+                    {product.cta}
+                  </Button>
+                </ProductActions>
+              )}
             </ProductCard>
           ))}
         </ResponsiveGrid>

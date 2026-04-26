@@ -10,7 +10,7 @@ export const metadata = {
     'KI Weiterbildung, AI Bootcamp, Bildungsgutschein, Künstliche Intelligenz Kurs, STARTPLATZ, Köln, Düsseldorf, Machine Learning, Prompt Engineering, ChatGPT, KI-Manager, geförderte Weiterbildung, AZAV zertifiziert',
   authors: [{ name: 'STARTPLATZ AI Academy' }],
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  metadataBase: new URL('https://ai-hub.startplatz.de'),
+  metadataBase: new URL('https://startplatz-ai-academy.de'),
   alternates: { canonical: '/' },
   icons: {
     icon: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/favicon/favicon-512x512.png',
@@ -22,7 +22,7 @@ export const metadata = {
     title: 'STARTPLATZ AI Academy | KI-Weiterbildung & Bootcamps',
     description:
       'Geförderte Bootcamps, praxisnahe Kurse und eine starke Community für KI-Kompetenz in NRW. 100 % förderfähig mit Bildungsgutschein.',
-    url: 'https://ai-hub.startplatz.de/',
+    url: 'https://startplatz-ai-academy.de/',
     images: [
       {
         url: 'https://res.cloudinary.com/startplatz/image/upload/v1776469608/ai-hub/website/AI-Academy-Website-Images/team-gruppenfoto.png',
@@ -56,7 +56,7 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
     name: 'STARTPLATZ AI Academy',
-    url: 'https://ai-hub.startplatz.de/',
+    url: 'https://startplatz-ai-academy.de/',
     logo: 'https://res.cloudinary.com/startplatz/image/upload/ai-hub/website/AI-Academy%20Logos/png/logo-full-color-on-light-800w.png',
     description:
       'Geförderte KI-Weiterbildungen, praxisnahe Bootcamps und anerkannte Zertifizierungen in Köln und Düsseldorf.',
@@ -95,7 +95,7 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'STARTPLATZ AI Academy',
-    url: 'https://ai-hub.startplatz.de/',
+    url: 'https://startplatz-ai-academy.de/',
   },
 ];
 
