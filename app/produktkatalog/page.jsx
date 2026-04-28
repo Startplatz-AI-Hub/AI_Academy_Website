@@ -581,7 +581,7 @@ export default function ProduktkatalogPage() {
         badge="Preisliste 2026"
         badgeColor={tokens.colors.primary}
         badgeBg={tokens.colors.primaryLighter}
-        title="Alle Formate. <span>Ein Überblick.</span>"
+        title="Alle Formate.<br /><span>Ein Überblick.</span>"
         subtitle="Alle Preise netto, zzgl. 19 % MwSt. OneDay, FortyDays, AfterWork und Corporate Inhouse auf einen Blick."
         breadcrumbs={[{ label: 'Produktkatalog', href: '/produktkatalog', active: true }]}
         accentColor={tokens.colors.primaryLighter}
