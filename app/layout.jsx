@@ -1,4 +1,5 @@
 import Script from 'next/script';
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 import StyledComponentsRegistry from '../lib/registry';
 import CalendlyWidget from '../components/CalendlyWidget';
 
@@ -105,6 +106,8 @@ const jsonLd = [
 export default function RootLayout({ children }) {
   return (
     <html lang="de" suppressHydrationWarning>
+      <GoogleTagManager gtmId="GTM-MJCL3ZS9" />
+      <GoogleAnalytics gaId="G-20XFNS5WZY" />
       <head>
         {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -102,7 +102,7 @@ export default function ImpressumPage() {
 
             <SectionTitle>Angaben gemäß § 5 TMG</SectionTitle>
             <Text>
-              <strong>STARTPLATZ AI Academy</strong><br />
+              <strong>STARTPLATZ AI Academy GmbH</strong><br />
               ein Angebot der STARTPLATZ GmbH &amp; Co. KG<br />
               Im Mediapark 5<br />
               50670 Köln<br />
@@ -111,7 +111,7 @@ export default function ImpressumPage() {
 
             <SectionTitle>Vertreten durch</SectionTitle>
             <Text>
-              Geschäftsführer: Lorenz Gräf, Jakow Smirin<br />
+              Geschäftsführer: Dr. Lorenz Gräf, Jakow Smirin<br />
               Persönlich haftende Gesellschafterin: STARTPLATZ Verwaltungs GmbH<br />
               Sitz der Gesellschaft: Köln
             </Text>
