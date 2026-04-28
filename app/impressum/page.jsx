@@ -103,7 +103,6 @@ export default function ImpressumPage() {
             <SectionTitle>Angaben gemäß § 5 TMG</SectionTitle>
             <Text>
               <strong>STARTPLATZ AI Academy GmbH</strong><br />
-              ein Angebot der STARTPLATZ GmbH &amp; Co. KG<br />
               Im Mediapark 5<br />
               50670 Köln<br />
               Deutschland
