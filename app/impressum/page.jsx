@@ -111,7 +111,7 @@ export default function ImpressumPage() {
 
             <SectionTitle>Vertreten durch</SectionTitle>
             <Text>
-              Geschäftsführer: Lorenz Gräf, Jakow Smirin<br />
+              Geschäftsführer: Dr. Lorenz Gräf, Jakow Smirin<br />
               Persönlich haftende Gesellschafterin: STARTPLATZ Verwaltungs GmbH<br />
               Sitz der Gesellschaft: Köln
             </Text>
