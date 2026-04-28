@@ -20,6 +20,7 @@ import SubpageLayout from '../../components/SubpageLayout';
 import { tokens } from '../../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
 import { CALENDLY_URL } from '../../lib/site';
+import { PRODUCT_CATALOG_URL } from '../../lib/productCatalog';
 
 const Panel = styled.div`
   position: relative;
@@ -104,6 +105,9 @@ export default function BerufstaetigePage() {
         <Button href="/wissens-test" variant="secondary" size="lg">
           Wissens-Test machen
         </Button>
+        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
+          Produktkatalog
+        </Button>
       </PageHero>
 
       <SectionBlock
@@ -174,6 +178,9 @@ export default function BerufstaetigePage() {
       >
         <Button href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" variant="navy" size="lg" arrow>
           Kostenlos beraten lassen
+        </Button>
+        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
+          Produktkatalog ansehen
         </Button>
       </CTABanner>
     </SubpageLayout>

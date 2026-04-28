@@ -19,6 +19,7 @@ import SubpageLayout from '../../components/SubpageLayout';
 import { tokens, media } from '../../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
 import { CALENDLY_URL } from '../../lib/site';
+import { PRODUCT_CATALOG_URL } from '../../lib/productCatalog';
 
 const OfferCard = styled.article`
   position: relative;
@@ -255,6 +256,9 @@ export default function UnternehmenPage() {
         <Button href="/oneday" variant="secondary" size="lg">
           OneDay ansehen
         </Button>
+        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
+          Produktkatalog
+        </Button>
       </PageHero>
 
       <SectionBlock
@@ -375,6 +379,9 @@ export default function UnternehmenPage() {
       >
         <Button href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" variant="orange" size="lg" arrow>
           Gespräch buchen
+        </Button>
+        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
+          Produktkatalog ansehen
         </Button>
       </CTABanner>
     </SubpageLayout>

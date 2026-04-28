@@ -15,6 +15,7 @@ import SubpageLayout from './SubpageLayout';
 import { tokens, media } from '../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../styles/cyberpunk';
 import { CALENDLY_URL } from '../lib/site';
+import { PRODUCT_CATALOG_URL } from '../lib/productCatalog';
 
 const accentMap = {
   primary: {
@@ -404,6 +405,12 @@ const PriceFeatureList = styled.ul`
   margin-bottom: ${tokens.spacing.xl};
 `;
 
+const PriceActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${tokens.spacing.md};
+`;
+
 const Note = styled.p`
   margin-top: ${tokens.spacing.lg};
   color: ${tokens.colors.textMuted};
@@ -444,6 +451,9 @@ export default function OneDayDetailPage({ config }) {
         </Button>
         <Button href="#programm" variant="secondary" size="lg">
           Programm ansehen
+        </Button>
+        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
+          Produktkatalog
         </Button>
       </PageHero>
 
@@ -577,9 +587,14 @@ export default function OneDayDetailPage({ config }) {
                 <FeatureItem key={feature} $color={accent.color}>{feature}</FeatureItem>
               ))}
             </PriceFeatureList>
-            <Button href={ctaHref} target="_blank" rel="noopener noreferrer" variant={buttonVariant} size="lg" arrow>
-              {config.pricing.cta || 'Platz sichern'}
-            </Button>
+            <PriceActions>
+              <Button href={ctaHref} target="_blank" rel="noopener noreferrer" variant={buttonVariant} size="lg" arrow>
+                {config.pricing.cta || 'Platz sichern'}
+              </Button>
+              <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
+                Produktkatalog ansehen
+              </Button>
+            </PriceActions>
             {config.pricing.note && <Note>{config.pricing.note}</Note>}
           </PricingCard>
           <DetailsPanel>
@@ -595,6 +610,9 @@ export default function OneDayDetailPage({ config }) {
       <CTABanner title={config.finalCta.title} subtitle={config.finalCta.subtitle}>
         <Button href={ctaHref} target="_blank" rel="noopener noreferrer" variant={buttonVariant} size="lg" arrow>
           {config.finalCta.button}
+        </Button>
+        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
+          Produktkatalog ansehen
         </Button>
       </CTABanner>
     </SubpageLayout>

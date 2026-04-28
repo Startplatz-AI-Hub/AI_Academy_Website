@@ -19,6 +19,7 @@ const LINK_GROUPS = [
     { label: 'Für Berufstätige', href: '/berufstaetige' },
     { label: 'Für Unternehmen', href: '/unternehmen' },
     { label: 'OneDay Workshops', href: '/oneday' },
+    { label: 'Produktkatalog', href: '/produktkatalog' },
     { label: 'Experten & Dozenten', href: '/experten' },
   ]},
   { title: 'Ressourcen', links: [

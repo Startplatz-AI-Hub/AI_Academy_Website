@@ -13,12 +13,7 @@ import SubpageLayout from '../../components/SubpageLayout';
 import { tokens, media } from '../../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
 import { CALENDLY_URL } from '../../lib/site';
-
-const CLAUDE_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777162756/ai-hub/website/AI-Academy-Website-Images/oneday-claude-cowork-hero.png';
-const IMMOBILIEN_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777162756/ai-hub/website/AI-Academy-Website-Images/oneday-immobilien-hero.png';
-const CLAUDE_CODE_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777167146/ai-hub/website/AI-Academy-Website-Images/oneday-claude-code-hero.png';
-const KI_KOMPETENZ_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777167151/ai-hub/website/AI-Academy-Website-Images/oneday-ki-kompetenz-hero.png';
-const KI_START_IMAGE = 'https://res.cloudinary.com/startplatz/image/upload/f_auto,q_auto,w_1200/v1777167150/ai-hub/website/AI-Academy-Website-Images/oneday-ki-start-hero.png';
+import { ONE_DAY_PRODUCTS, PRODUCT_CATALOG_URL } from '../../lib/productCatalog';
 
 const ExplorerGrid = styled.div`
   display: grid;
@@ -350,71 +345,7 @@ const BenefitLabel = styled.p`
 `;
 
 export default function OneDayPage() {
-  const products = [
-    {
-      title: 'OneDay Claude Cowork',
-      subline: 'Ab morgen bist du Viele.',
-      price: '590 EUR Early Bird / 790 EUR',
-      href: '/oneday/claude-cowork',
-      cta: 'Details ansehen',
-      image: CLAUDE_IMAGE,
-      badge: 'Claude Workflows',
-      deliverables: ['Research', 'Writing', 'Analyse'],
-      preview:
-        'Du baust deinen persönlichen Claude-Arbeitsmodus für Recherche, Schreiben, Analyse und operative Aufgaben.',
-    },
-    {
-      title: 'OneDay Claude Code',
-      subline: 'Road to Thousand Commits.',
-      price: '590 EUR Early Bird / 790 EUR',
-      href: CALENDLY_URL,
-      cta: 'Termin anfragen',
-      external: true,
-      image: CLAUDE_CODE_IMAGE,
-      badge: 'AI Coding',
-      deliverables: ['Setup', 'Prompts', 'Review'],
-      preview:
-        'Ein kompakter Coding-Sprint für Teams und Builder, die Claude Code in echte Entwicklungsabläufe bringen wollen.',
-    },
-    {
-      title: 'OneDay KI-Kompetenz',
-      subline: 'EU-Zertifizierung an einem Tag.',
-      price: '890 EUR',
-      href: CALENDLY_URL,
-      cta: 'Platz anfragen',
-      external: true,
-      image: KI_KOMPETENZ_IMAGE,
-      badge: 'Compliance & Kompetenz',
-      deliverables: ['EU AI Act', 'Rollen', 'Nachweis'],
-      preview:
-        'Ein strukturierter Tag für Teams, die KI-Kompetenz nicht nur behaupten, sondern sauber dokumentieren wollen.',
-    },
-    {
-      title: 'OneDay KI-Start',
-      subline: 'Der kompakte Einstieg in KI.',
-      price: '250 EUR',
-      href: CALENDLY_URL,
-      cta: 'Platz anfragen',
-      external: true,
-      image: KI_START_IMAGE,
-      badge: 'Einstieg',
-      deliverables: ['Toolklarheit', 'Prompts', 'Routine'],
-      preview:
-        'Der schnelle Einstieg für alle, die KI endlich produktiv testen und erste wiederholbare Routinen aufbauen wollen.',
-    },
-    {
-      title: 'OneDay Immobilien',
-      subline: 'KI-Workflows für Makleralltag, Exposés und Akquise.',
-      price: '449 EUR Pilotplatz',
-      href: '/oneday/immobilien',
-      cta: 'Details ansehen',
-      image: IMMOBILIEN_IMAGE,
-      badge: 'Immobilien',
-      deliverables: ['Exposé', 'Content', 'Akquise'],
-      preview:
-        'Branchenspezifische Workflows für Exposés, Social Content, Eigentümer-Akquise und Kundenkommunikation.',
-    },
-  ];
+  const products = ONE_DAY_PRODUCTS;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const activeProduct = products[activeIndex];
@@ -474,6 +405,9 @@ export default function OneDayPage() {
         </Button>
         <Button href="/wissens-test" variant="secondary" size="lg">
           Format finden
+        </Button>
+        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
+          Produktkatalog
         </Button>
       </PageHero>
 
@@ -605,6 +539,9 @@ export default function OneDayPage() {
       >
         <Button href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" variant="primary" size="lg" arrow>
           Platz sichern
+        </Button>
+        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
+          Produktkatalog ansehen
         </Button>
       </CTABanner>
     </SubpageLayout>
