@@ -256,9 +256,6 @@ export default function UnternehmenPage() {
         <Button href="/oneday" variant="secondary" size="lg">
           OneDay ansehen
         </Button>
-        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
-          Produktkatalog
-        </Button>
       </PageHero>
 
       <SectionBlock

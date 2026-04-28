@@ -1,10 +1,10 @@
 export const metadata = {
-  title: 'Produktkatalog & Preise | STARTPLATZ AI Academy',
+  title: 'Preisliste 2026 & Produktkatalog | STARTPLATZ AI Academy',
   description:
-    'Alle Programme, OneDay Workshops und KI-Formate der STARTPLATZ AI Academy auf einen Blick: Preise, Zielgruppen, Dauer und nächste Schritte.',
+    'Preisliste 2026 und Produktkatalog der STARTPLATZ AI Academy: OneDay, FortyDays, AfterWork und Corporate Inhouse.',
   alternates: { canonical: '/produktkatalog' },
   openGraph: {
-    title: 'Produktkatalog & Preise | STARTPLATZ AI Academy',
+    title: 'Preisliste 2026 & Produktkatalog | STARTPLATZ AI Academy',
     description:
       'Programme, OneDay Workshops und Teamformate der STARTPLATZ AI Academy mit Preisen und Formatüberblick.',
     url: 'https://startplatz-ai-academy.de/produktkatalog',

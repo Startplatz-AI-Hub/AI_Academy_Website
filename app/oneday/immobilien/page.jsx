@@ -23,7 +23,7 @@ const config = {
     { value: '1 Tag', label: '09-17 Uhr' },
     { value: '4', label: 'Use Cases' },
     { value: 'Max. 12', label: 'Teilnehmer' },
-    { value: '449 EUR', label: 'Pilotplatz' },
+    { value: '449 €', label: 'Pilotplatz' },
   ],
   takeaways: [
     {
@@ -170,8 +170,8 @@ const config = {
     subtitle:
       'Ein Tag, klare Workflows, kleines Teilnehmerfeld und konkrete Vorlagen zum Mitnehmen.',
     eyebrow: 'Pilotplatz',
-    price: '449 EUR',
-    priceSub: 'pro Person · eintägiger Workshop · inkl. Zertifikat',
+    price: '449 €',
+    priceSub: 'pro Person · eintägiger Workshop · netto zzgl. 19% MwSt. · inkl. Zertifikat',
     features: [
       'Ganztages-Bootcamp von 09:00 bis 17:00 Uhr',
       'Vier KI-Use-Cases für den Makleralltag',

@@ -13,9 +13,9 @@ import { tokens, media } from '../../styles/tokens';
 import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
 import { CALENDLY_URL } from '../../lib/site';
 import {
-  COMPANY_PRODUCTS,
   FLAGSHIP_PRODUCTS,
   ONE_DAY_PRODUCTS,
+  PRICE_LIST_2026,
   PRODUCT_IMAGES,
 } from '../../lib/productCatalog';
 
@@ -135,6 +135,243 @@ const NoteList = styled.ul`
   display: grid;
   gap: ${tokens.spacing.md};
   color: ${tokens.colors.textSoft};
+  line-height: ${tokens.lineHeights.relaxed};
+`;
+
+const PriceSheet = styled.div`
+  position: relative;
+  display: grid;
+  gap: ${tokens.spacing.xl};
+  padding: ${tokens.spacing.lg};
+  background: ${tokens.colors.surface};
+  border: 1px solid rgba(124, 58, 237, 0.16);
+  ${clipBR(CHAMFER.lg)}
+  box-shadow: ${tokens.shadows.card};
+
+  ${media.md} {
+    padding: ${tokens.spacing['2xl']};
+  }
+`;
+
+const PriceSheetHeader = styled.div`
+  display: grid;
+  gap: ${tokens.spacing.sm};
+
+  ${media.md} {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+`;
+
+const PriceSheetTitle = styled.h3`
+  font-family: ${tokens.fonts.display};
+  font-size: clamp(${tokens.fontSizes['2xl']}, 3vw, ${tokens.fontSizes['4xl']});
+  font-weight: ${tokens.fontWeights.black};
+  color: ${tokens.colors.text};
+  line-height: ${tokens.lineHeights.tight};
+`;
+
+const PriceSheetNote = styled.p`
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  color: ${tokens.colors.primary};
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+`;
+
+const PriceGroupGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing.lg};
+`;
+
+const PriceGroup = styled.article`
+  position: relative;
+  min-width: 0;
+  padding: ${tokens.spacing.md};
+  background: ${tokens.colors.surfaceAlt};
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  ${clipBR(CHAMFER.md)}
+
+  ${media.md} {
+    padding: ${tokens.spacing.lg};
+  }
+`;
+
+const PriceGroupHeader = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${tokens.spacing.sm};
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: ${tokens.spacing.md};
+`;
+
+const PriceGroupTitle = styled.h4`
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes.xl};
+  font-weight: ${tokens.fontWeights.black};
+  color: ${tokens.colors.text};
+`;
+
+const PriceGroupSub = styled.span`
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  color: ${tokens.colors.textDim};
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+`;
+
+const TableWrap = styled.div`
+  overflow: visible;
+
+  ${media.md} {
+    overflow-x: auto;
+  }
+`;
+
+const PriceTable = styled.table`
+  width: 100%;
+  min-width: 0;
+  border-collapse: collapse;
+
+  ${media.md} {
+    min-width: 620px;
+  }
+
+  th,
+  td {
+    padding: ${tokens.spacing.md};
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    font-family: ${tokens.fonts.mono};
+    font-size: ${tokens.fontSizes.xs};
+    color: ${tokens.colors.textDim};
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  td {
+    color: ${tokens.colors.textSoft};
+    line-height: ${tokens.lineHeights.relaxed};
+  }
+
+  td:not(:first-child) {
+    font-family: ${tokens.fonts.display};
+    font-weight: ${tokens.fontWeights.black};
+    color: ${tokens.colors.text};
+    white-space: nowrap;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  @media (max-width: 767px) {
+    display: block;
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: grid;
+      gap: ${tokens.spacing.md};
+    }
+
+    tr {
+      display: grid;
+      gap: ${tokens.spacing.sm};
+      padding: ${tokens.spacing.md};
+      background: ${tokens.colors.surface};
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      ${clipBR(CHAMFER.sm)}
+    }
+
+    th,
+    td {
+      padding: 0;
+      border-bottom: 0;
+    }
+
+    td {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: ${tokens.spacing.sm};
+      align-items: baseline;
+      color: ${tokens.colors.text};
+    }
+
+    td::before {
+      content: attr(data-label);
+      font-family: ${tokens.fonts.mono};
+      font-size: 10px;
+      color: ${tokens.colors.textDim};
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    td:first-child {
+      display: block;
+      padding-bottom: ${tokens.spacing.sm};
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      font-family: ${tokens.fonts.display};
+      font-size: ${tokens.fontSizes.base};
+      font-weight: ${tokens.fontWeights.black};
+      color: ${tokens.colors.text};
+    }
+
+    td:first-child::before {
+      display: block;
+      margin-bottom: 2px;
+    }
+  }
+`;
+
+const PriceAsideGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${tokens.spacing.md};
+
+  ${media.md} {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const PriceAside = styled.article`
+  position: relative;
+  min-height: 170px;
+  padding: ${tokens.spacing.lg};
+  background: ${({ $bg }) => $bg};
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  ${clipBR(CHAMFER.md)}
+`;
+
+const PriceAsideLabel = styled.span`
+  display: block;
+  margin-bottom: ${tokens.spacing.sm};
+  font-family: ${tokens.fonts.mono};
+  font-size: ${tokens.fontSizes.xs};
+  color: ${({ $color }) => $color};
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+`;
+
+const PriceAsideValue = styled.div`
+  font-family: ${tokens.fonts.display};
+  font-size: ${tokens.fontSizes['2xl']};
+  font-weight: ${tokens.fontWeights.black};
+  color: ${tokens.colors.text};
+  line-height: ${tokens.lineHeights.tight};
+`;
+
+const PriceAsideText = styled.p`
+  margin-top: ${tokens.spacing.sm};
+  color: ${tokens.colors.textMuted};
   line-height: ${tokens.lineHeights.relaxed};
 `;
 
@@ -333,19 +570,19 @@ function ProductTile({ product, compact = false }) {
 
 export default function ProduktkatalogPage() {
   const facts = [
-    { value: 'ab 250 EUR', label: 'OneDay Einstieg', color: tokens.colors.primary },
+    { value: 'ab 250 €', label: 'OneDay Einstieg', color: tokens.colors.primary },
     { value: '100%', label: 'Förderung möglich', color: tokens.colors.mint },
-    { value: '1 Tag-12 Monate', label: 'Formatspanne', color: tokens.colors.orange },
+    { value: '7.900 €', label: 'Corporate Inhouse', color: tokens.colors.orange },
   ];
 
   return (
     <SubpageLayout>
       <PageHero
-        badge="Produktkatalog & Preise"
+        badge="Preisliste 2026"
         badgeColor={tokens.colors.primary}
         badgeBg={tokens.colors.primaryLighter}
         title="Alle Formate. <span>Ein Überblick.</span>"
-        subtitle="Programme, OneDay Workshops und Teamformate der STARTPLATZ AI Academy mit Preisankern, Zielgruppe und nächstem Schritt."
+        subtitle="Alle Preise netto, zzgl. 19 % MwSt. OneDay, FortyDays, AfterWork und Corporate Inhouse auf einen Blick."
         breadcrumbs={[{ label: 'Produktkatalog', href: '/produktkatalog', active: true }]}
         accentColor={tokens.colors.primaryLighter}
         image={PRODUCT_IMAGES.claudeCowork}
@@ -382,12 +619,82 @@ export default function ProduktkatalogPage() {
             <NoteKicker>Preislogik</NoteKicker>
             <NoteList>
               <li>OneDay Workshops haben feste Preisanker und eignen sich für schnelle Entscheidungen.</li>
-              <li>Geförderte Programme werden individuell auf Förderfähigkeit und Situation geprüft.</li>
-              <li>Unternehmensformate kalkulieren wir nach Ziel, Teilnehmerzahl, Tiefe und Laufzeit.</li>
-              <li>Alle Preise verstehen sich zzgl. gesetzlicher Umsatzsteuer, sofern nicht anders angegeben.</li>
+              <li>FortyDays und AfterWork sind AZAV-zertifiziert und bei passender Voraussetzung voll förderfähig.</li>
+              <li>Corporate Inhouse ist für geschlossene Gruppen bis 10 Teilnehmer:innen pauschal kalkuliert.</li>
+              <li>{PRICE_LIST_2026.note}</li>
             </NoteList>
           </NotePanel>
         </IntroGrid>
+      </SectionBlock>
+
+      <SectionBlock
+        badge="Preisliste 2026"
+        title="Preise, die man <span>schnell versteht.</span>"
+        subtitle="Die offizielle Preisliste als Referenz: netto, klar nach Format getrennt und ohne versteckte Download-Hürde."
+        accent={tokens.colors.glow}
+      >
+        <PriceSheet>
+          <CyberCorners $color={tokens.colors.primary} $size={12} />
+          <PriceSheetHeader>
+            <PriceSheetTitle>{PRICE_LIST_2026.title}</PriceSheetTitle>
+            <PriceSheetNote>{PRICE_LIST_2026.note}</PriceSheetNote>
+          </PriceSheetHeader>
+
+          <PriceGroupGrid>
+            {PRICE_LIST_2026.groups.map((group) => (
+              <PriceGroup key={group.title}>
+                <CyberCorners $color={tokens.colors.primary} $size={7} />
+                <PriceGroupHeader>
+                  <PriceGroupTitle>{group.title}</PriceGroupTitle>
+                  <PriceGroupSub>{group.subtitle}</PriceGroupSub>
+                </PriceGroupHeader>
+                <TableWrap>
+                  <PriceTable>
+                    <thead>
+                      <tr>
+                        {group.columns.map((column) => (
+                          <th key={column}>{column}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {group.rows.map((row) => (
+                        <tr key={row.join('-')}>
+                          {row.map((cell, cellIndex) => (
+                            <td key={`${cell}-${cellIndex}`} data-label={group.columns[cellIndex]}>
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </PriceTable>
+                </TableWrap>
+              </PriceGroup>
+            ))}
+          </PriceGroupGrid>
+
+          <PriceAsideGrid>
+            <PriceAside $bg={tokens.colors.orangeBg}>
+              <CyberCorners $color={tokens.colors.orange} $size={7} />
+              <PriceAsideLabel $color={tokens.colors.orange}>{PRICE_LIST_2026.corporate.subtitle}</PriceAsideLabel>
+              <PriceAsideValue>{PRICE_LIST_2026.corporate.price}</PriceAsideValue>
+              <PriceAsideText>{PRICE_LIST_2026.corporate.description}</PriceAsideText>
+            </PriceAside>
+            <PriceAside $bg={tokens.colors.primaryLighter}>
+              <CyberCorners $color={tokens.colors.primary} $size={7} />
+              <PriceAsideLabel $color={tokens.colors.primary}>{PRICE_LIST_2026.addon.title}</PriceAsideLabel>
+              <PriceAsideValue>{PRICE_LIST_2026.addon.price}</PriceAsideValue>
+              <PriceAsideText>{PRICE_LIST_2026.addon.description}</PriceAsideText>
+            </PriceAside>
+            <PriceAside $bg={tokens.colors.surfaceAlt}>
+              <CyberCorners $color={tokens.colors.textDim} $size={7} />
+              <PriceAsideLabel $color={tokens.colors.textDim}>{PRICE_LIST_2026.summerWeek.title}</PriceAsideLabel>
+              <PriceAsideValue>{PRICE_LIST_2026.summerWeek.status}</PriceAsideValue>
+              <PriceAsideText>Das Format bleibt im Portfolio, wird aktuell aber nicht aktiv angeboten.</PriceAsideText>
+            </PriceAside>
+          </PriceAsideGrid>
+        </PriceSheet>
       </SectionBlock>
 
       <SectionBlock
@@ -411,23 +718,10 @@ export default function ProduktkatalogPage() {
         accent={tokens.colors.glow}
       >
         <OneDayGrid>
-          {ONE_DAY_PRODUCTS.map((product) => (
+          {ONE_DAY_PRODUCTS.filter((product) => product.title !== 'OneDay Immobilien').map((product) => (
             <ProductTile key={product.title} product={product} compact />
           ))}
         </OneDayGrid>
-      </SectionBlock>
-
-      <SectionBlock
-        badge="Für Unternehmen"
-        title="Wenn es um Teams geht, <span>bauen wir passend.</span>"
-        subtitle="Diese Formate sind bewusst nicht als Standardpreis gedacht, weil Umfang, Rollen und Transferziel den Wert bestimmen."
-        accent={tokens.colors.glowOrange}
-      >
-        <ProductGrid>
-          {COMPANY_PRODUCTS.map((product) => (
-            <ProductTile key={product.title} product={{ ...product, accent: 'orange' }} />
-          ))}
-        </ProductGrid>
       </SectionBlock>
 
       <CTABanner

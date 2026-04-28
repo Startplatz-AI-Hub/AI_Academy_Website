@@ -21,8 +21,8 @@ const config = {
   primaryCta: 'Platz sichern',
   meta: [
     { value: '1 Tag', label: '09-17 Uhr' },
-    { value: '590 EUR', label: 'Early Bird' },
-    { value: '790 EUR', label: 'Regulär' },
+    { value: '590 €', label: 'Early Bird' },
+    { value: '790 €', label: 'Regular' },
     { value: 'Köln', label: 'STARTPLATZ' },
   ],
   takeaways: [
@@ -170,8 +170,8 @@ const config = {
     subtitle:
       'Claude Cowork ist als intensives OneDay-Format gebaut: klarer Fokus, kleine Gruppe, direkt nutzbare Ergebnisse.',
     eyebrow: 'Early Bird',
-    price: '590 EUR',
-    priceSub: 'Regulär 790 EUR · pro Person · eintägiger Workshop',
+    price: '590 €',
+    priceSub: 'Regular 790 € · pro Person · netto zzgl. 19% MwSt.',
     features: [
       'Ganztages-Workshop von 09:00 bis 17:00 Uhr',
       'Eigene Aufgaben und Materialien willkommen',

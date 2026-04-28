@@ -105,9 +105,6 @@ export default function BerufstaetigePage() {
         <Button href="/wissens-test" variant="secondary" size="lg">
           Wissens-Test machen
         </Button>
-        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
-          Produktkatalog
-        </Button>
       </PageHero>
 
       <SectionBlock

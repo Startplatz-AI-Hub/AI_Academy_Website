@@ -17,7 +17,6 @@ const NAV_LINKS = [
       { label: 'Arbeitssuchend', href: '/arbeitssuchende' },
       { label: 'Berufstätig', href: '/berufstaetige' },
       { label: 'OneDay Workshops', href: '/oneday' },
-      { label: 'Produktkatalog', href: '/produktkatalog' },
     ],
   },
   {

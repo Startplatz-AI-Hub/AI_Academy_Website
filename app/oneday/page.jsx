@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import {
   Button,
   CTABanner,
@@ -15,6 +15,11 @@ import { clipBR, CHAMFER, CyberCorners } from '../../styles/cyberpunk';
 import { CALENDLY_URL } from '../../lib/site';
 import { ONE_DAY_PRODUCTS, PRODUCT_CATALOG_URL } from '../../lib/productCatalog';
 
+const previewDrift = keyframes`
+  from { transform: scale(1.08) translateX(-2.2%); }
+  to { transform: scale(1.08) translateX(2.2%); }
+`;
+
 const ExplorerGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -23,6 +28,7 @@ const ExplorerGrid = styled.div`
 
   ${media.lg} {
     grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
+    align-items: stretch;
   }
 `;
 
@@ -38,17 +44,29 @@ const PreviewPanel = styled.article`
   ${media.lg} {
     position: sticky;
     top: 112px;
+    align-self: stretch;
+    height: 100%;
+    min-height: 100%;
   }
 `;
 
 const PreviewImage = styled.img`
   position: absolute;
-  inset: 0;
-  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: -4%;
+  width: 108%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.02);
-  transition: opacity ${tokens.transitions.base}, transform ${tokens.transitions.smooth};
+  transform: scale(1.08);
+  animation: ${previewDrift} 9s ease-in-out infinite alternate;
+  animation-direction: ${({ $reverse }) => ($reverse ? 'alternate-reverse' : 'alternate')};
+  transition: opacity ${tokens.transitions.base};
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    transform: scale(1.04);
+  }
 `;
 
 const PreviewShade = styled.div`
@@ -122,15 +140,32 @@ const WorkshopList = styled.div`
 
 const WorkshopItem = styled.article`
   position: relative;
+  overflow: hidden;
   background: ${({ $active }) => ($active ? tokens.colors.surface : 'rgba(255, 255, 255, 0.58)')};
   border: 1px solid ${({ $active }) => ($active ? 'rgba(124, 58, 237, 0.32)' : tokens.colors.glassBorder)};
   ${clipBR(CHAMFER.md)}
-  transition: transform ${tokens.transitions.fast}, border-color ${tokens.transitions.fast}, background ${tokens.transitions.fast};
+  transition:
+    transform ${tokens.transitions.fast},
+    border-color ${tokens.transitions.fast},
+    background ${tokens.transitions.fast},
+    box-shadow ${tokens.transitions.fast};
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: ${({ $active }) => ($active ? tokens.colors.primary : 'transparent')};
+    transition: background ${tokens.transitions.base};
+  }
 
   &:hover {
     transform: translateX(4px);
     border-color: rgba(124, 58, 237, 0.32);
     background: ${tokens.colors.surface};
+    box-shadow: ${tokens.shadows.sm};
   }
 `;
 
@@ -189,6 +224,30 @@ const WorkshopPrice = styled.span`
 const WorkshopText = styled.p`
   color: ${tokens.colors.textMuted};
   line-height: ${tokens.lineHeights.relaxed};
+  transition: color ${tokens.transitions.fast};
+
+  ${({ $active }) => !$active && css`
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  `}
+`;
+
+const WorkshopReveal = styled.div`
+  display: grid;
+  grid-template-rows: ${({ $active }) => ($active ? '1fr' : '0fr')};
+  opacity: ${({ $active }) => ($active ? 1 : 0)};
+  transform: translateY(${({ $active }) => ($active ? '0' : '-6px')});
+  transition:
+    grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity ${tokens.transitions.base},
+    transform ${tokens.transitions.base};
+
+  > div {
+    min-height: 0;
+    overflow: hidden;
+  }
 `;
 
 const WorkshopDeliverables = styled.ul`
@@ -219,13 +278,17 @@ const DeliverableBoard = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: ${tokens.spacing.xl};
-  padding: ${tokens.spacing['2xl']};
+  padding: ${tokens.spacing.lg};
   background:
     linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(255, 255, 255, 0.72)),
     ${tokens.colors.surface};
   border: 1px solid rgba(124, 58, 237, 0.16);
   ${clipBR(CHAMFER.lg)}
   box-shadow: ${tokens.shadows.card};
+
+  ${media.md} {
+    padding: ${tokens.spacing['2xl']};
+  }
 
   ${media.lg} {
     grid-template-columns: 0.88fr 1.12fr;
@@ -273,11 +336,14 @@ const DeliverableGrid = styled.div`
 
 const DeliverableStep = styled.div`
   position: relative;
-  min-height: 178px;
   padding: ${tokens.spacing.lg};
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(0, 0, 0, 0.07);
   ${clipBR(CHAMFER.md)}
+
+  ${media.md} {
+    min-height: 178px;
+  }
 `;
 
 const StepLabel = styled.span`
@@ -320,14 +386,21 @@ const BenefitGrid = styled.div`
 
 const BenefitItem = styled.article`
   position: relative;
-  min-height: 210px;
+  min-height: 156px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: ${tokens.spacing.lg};
   padding: ${tokens.spacing.xl};
   background: ${tokens.colors.surface};
   border: 1px solid ${tokens.colors.glassBorder};
   ${clipBR(CHAMFER.md)}
+
+  ${media.md} {
+    min-height: 210px;
+    justify-content: space-between;
+    gap: ${tokens.spacing.xl};
+  }
 `;
 
 const BenefitValue = styled.div`
@@ -339,7 +412,6 @@ const BenefitValue = styled.div`
 `;
 
 const BenefitLabel = styled.p`
-  margin-top: ${tokens.spacing.lg};
   color: ${tokens.colors.textMuted};
   line-height: ${tokens.lineHeights.relaxed};
 `;
@@ -406,9 +478,6 @@ export default function OneDayPage() {
         <Button href="/wissens-test" variant="secondary" size="lg">
           Format finden
         </Button>
-        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
-          Produktkatalog
-        </Button>
       </PageHero>
 
       <SectionBlock
@@ -420,7 +489,13 @@ export default function OneDayPage() {
         <ExplorerGrid>
           <PreviewPanel aria-live="polite">
             <CyberCorners $color={tokens.colors.primary} $size={14} />
-            <PreviewImage key={activeProduct.image} src={activeProduct.image} alt="" loading="eager" />
+            <PreviewImage
+              key={activeProduct.image}
+              src={activeProduct.image}
+              alt=""
+              loading="eager"
+              $reverse={activeIndex % 2 === 1}
+            />
             <PreviewShade />
             <PreviewCopy>
               <PreviewKicker>{activeProduct.badge}</PreviewKicker>
@@ -454,12 +529,16 @@ export default function OneDayPage() {
                         <WorkshopTitle>{product.title}</WorkshopTitle>
                         <WorkshopPrice>{product.price}</WorkshopPrice>
                       </WorkshopTitleRow>
-                      <WorkshopText>{product.subline}</WorkshopText>
-                      <WorkshopDeliverables>
-                        {product.deliverables.map((deliverable) => (
-                          <WorkshopDeliverable key={deliverable}>{deliverable}</WorkshopDeliverable>
-                        ))}
-                      </WorkshopDeliverables>
+                      <WorkshopText $active={isActive}>{product.subline}</WorkshopText>
+                      <WorkshopReveal $active={isActive}>
+                        <div>
+                          <WorkshopDeliverables>
+                            {product.deliverables.map((deliverable) => (
+                              <WorkshopDeliverable key={deliverable}>{deliverable}</WorkshopDeliverable>
+                            ))}
+                          </WorkshopDeliverables>
+                        </div>
+                      </WorkshopReveal>
                     </div>
                   </WorkshopButton>
                   {isActive && product.href && (

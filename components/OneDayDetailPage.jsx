@@ -452,9 +452,6 @@ export default function OneDayDetailPage({ config }) {
         <Button href="#programm" variant="secondary" size="lg">
           Programm ansehen
         </Button>
-        <Button href={PRODUCT_CATALOG_URL} variant="secondary" size="lg">
-          Produktkatalog
-        </Button>
       </PageHero>
 
       <SectionBlock variant="white" accent={accent.glow}>
