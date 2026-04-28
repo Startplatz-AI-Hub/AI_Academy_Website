@@ -123,8 +123,7 @@ export default function ImpressumPage() {
             <SectionTitle>Kontakt</SectionTitle>
             <Text>
               E-Mail: <Link href="mailto:academy@startplatz.de">academy@startplatz.de</Link><br />
-              Telefon: <Link href="tel:+4922165082490">+49 221 650 824 90</Link><br />
-              Website: <Link href="https://ai-academy.startplatz.de">ai-academy.startplatz.de</Link>
+              Telefon: <Link href="tel:+4922165082490">+49 221 650 824 90</Link>
             </Text>
 
             <SectionTitle>Handelsregister</SectionTitle>
@@ -139,13 +138,7 @@ export default function ImpressumPage() {
               <Pending>DE… wird ergänzt</Pending>
             </Text>
 
-            <SectionTitle>Zuständige Aufsichtsbehörde (AZAV)</SectionTitle>
-            <Text>
-              Unsere Weiterbildungsmaßnahmen sind AZAV-zertifiziert. Fachkundige Stelle: <Pending>Zertifizierer wird ergänzt</Pending>.
-              Zuständige Aufsichtsbehörde nach § 36 GewO: Industrie- und Handelskammer zu Köln, Unter Sachsenhausen 10–26, 50667 Köln.
-            </Text>
-
-            <SectionTitle>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</SectionTitle>
+<SectionTitle>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</SectionTitle>
             <Text>
               Jakow Smirin<br />
               c/o STARTPLATZ GmbH &amp; Co. KG<br />
